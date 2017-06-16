@@ -1,16 +1,18 @@
 package model;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class ImageWarehouse {
 
-    private HashMap<String,String>  imageHashMap= new HashMap<>();
+   ArrayList<Image> images = new ArrayList<>();
 
-    public HashMap<String,String> imageData(){
-        imageHashMap.put("Picture","Arizona");
-        imageHashMap.put("Photo","New York");
+   public void addImage(String imageLink, String location, String description){
+       Image newImage = new Image(imageLink, location, description);
+       images.add(newImage);
+   }
 
+   public ArrayList getImages(){
+       return images;
+   }
 
-        return imageHashMap;
-    }
 }
