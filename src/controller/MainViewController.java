@@ -14,10 +14,8 @@ import model.ImageWarehouse;
 import model.Main;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class MainViewController implements Initializable{
 
@@ -26,37 +24,25 @@ public class MainViewController implements Initializable{
     @FXML
     private TableView<Image> imageTable;
     @FXML
-    private TableColumn<Image, String> imageLinkColumn;
+    private TableColumn imageDescriptionColumn;
     @FXML
-    private TableColumn<Image, String> locationColumn;
+    private TableColumn locationColumn;
     @FXML
     private TextField searchField;
 
-    private HashMap<String, String> imageHashMap = new HashMap<>();
     private final ObservableList<Image>imageData = FXCollections.observableArrayList();
-
-
+    private ArrayList<Image> imagesCollection = new ArrayList<>();
+    ImageWarehouse images = new ImageWarehouse();
 
     public void setMain(Main main) {
         this.main= main;
     }
 
     public void fillImageTable(){
-        ImageWarehouse imageWarehouse = new ImageWarehouse();
-        imageHashMap = imageWarehouse.imageData();
-        Set<String> imageKeys = imageHashMap.keySet();
-        Iterator<String> imageIterator = imageKeys.iterator();
-
-        String key;
-        String value;
-        while(imageIterator.hasNext()){
-            key = imageIterator.next();
-            value = imageHashMap.get(key);
-            Image entry = new Image(key,value);
-            imageData.add(entry);
+        imagesCollection = images.getImages();
+        for (Image image: imagesCollection){
+            imageData.add(image);
         }
-        imageTable.setItems(imageData);
-
     }
 
     public void searchForLocation(){
@@ -71,8 +57,11 @@ public class MainViewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        imageLinkColumn.setCellValueFactory(new PropertyValueFactory<>("model.Image"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        locationColumn.setCellFactory(new PropertyValueFactory("location"));
+        imageDescriptionColumn.setCellFactory(new PropertyValueFactory("description"));
+        images.addImage("waffles", "Arizona", "GREAT SKIES");
+        images.addImage("pancakes", "California", "Dinosaurs");
+        fillImageTable();
         imageTable.setItems(imageData);
     }
 }
