@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="628.0" style="-fx-background-color: bcebf2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainViewController">
+   <children>
+      <Region prefHeight="63.0" prefWidth="628.0" style="-fx-background-color: edeff2;" />
+      <Label layoutX="201.0" layoutY="11.0" text="Sky Searcher">
+         <font>
+            <Font name="Bookman Old Style" size="35.0" />
+         </font>
+      </Label>
+      <Button layoutX="20.0" layoutY="11.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="52.0" text="Back" />
+      <ImageView fitHeight="306.0" fitWidth="467.0" layoutX="77.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+
+      </ImageView>
+      <ListView layoutX="81.0" layoutY="508.0" prefHeight="225.0" prefWidth="467.0" />
+      <ImageView fitHeight="42.0" fitWidth="70.0" layoutX="166.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="252.0" layoutY="424.0" text="Label" />
+      <ImageView fitHeight="42.0" fitWidth="70.0" layoutX="311.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="400.0" layoutY="425.0" text="Label" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="628.0" style="-fx-background-color: bcebf2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewController">
+   <children>
+      <Label layoutX="158.0" layoutY="37.0" text="Sky Searcher">
+         <font>
+            <Font name="Bookman Old Style" size="45.0" />
+         </font>
+      </Label>
+      <TextField fx:id="searchField" layoutX="158.0" layoutY="100.0" prefHeight="25.0" prefWidth="230.0" promptText="Location...(ex. Indiana)" />
+      <Button layoutX="398.0" layoutY="100.0" mnemonicParsing="false" onAction="#searchForLocation" text="Search" />
+      <TableView fx:id="imageTable" layoutX="85.0" layoutY="157.0" onMouseClicked="#handleClickedImage" prefHeight="679.0" prefWidth="459.0">
+        <columns>
+          <TableColumn fx:id="imageLinkColumn" prefWidth="229.0" text="Images" />
+          <TableColumn fx:id="locationColumn" minWidth="0.0" prefWidth="229.0" text="Location" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
