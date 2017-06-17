@@ -1,35 +1,49 @@
 package model;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Image {
 
-    private SimpleStringProperty imageLink;
-    private SimpleStringProperty location;
-    private SimpleStringProperty description;
+    private String title;
+    private String imageLink;
+    private String location;
+    private String description;
     ArrayList<Rating> ratings = new ArrayList<>();
-    ArrayList<Comment> comments = new ArrayList<>();
+    ObservableList<Comment> comments = FXCollections.observableArrayList();
 
-    public Image(String imageLink, String location, String description){
-        this.imageLink = new SimpleStringProperty(imageLink);
-        this.location = new SimpleStringProperty(location);
-        this.description = new SimpleStringProperty(description);
+
+    public Image(String title,String imageLink, String location, String description){
+        this.title = title;
+        this.imageLink = imageLink;
+        this.location = location;
+        this.description = description;
     }
 
-    public SimpleStringProperty getImageLink() {
+
+    public String getImageLink() {
         return imageLink;
     }
 
-    public SimpleStringProperty getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public SimpleStringProperty getDescription(){
+    public String getDescription(){
         return description;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String titleProperty() {
+        return title;
+    }
 
     public void addRating(String user, String rating){
         Rating newRating = new Rating(user, rating);
@@ -45,7 +59,8 @@ public class Image {
         return ratings;
     }
 
-    public ArrayList returnComments(){
+    public ObservableList returnComments(){
         return comments;
     }
+
 }

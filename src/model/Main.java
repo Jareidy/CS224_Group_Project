@@ -1,5 +1,6 @@
 package model;
 
+import controller.ImageViewController;
 import controller.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,18 +21,16 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         showMainWindow();
-        MainViewController mainViewController = new MainViewController();
-        mainViewController.fillImageTable();
     }
 
-    private void showMainWindow(){
+    public void showMainWindow(){
 
         try{
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MainView.fxml"));
             AnchorPane pane = loader.load();
 
-            MainViewController mainMenuController = loader.getController();
-            mainMenuController.setMain(this);
+            MainViewController mainViewController = loader.getController();
+            mainViewController.setMain(this);
 
             Scene scene = new Scene(pane);
 
@@ -42,7 +41,25 @@ public class Main extends Application {
         }
     }
 
-    void close(){
+    public void showImageWindow(){
+
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ImageView.fxml"));
+            AnchorPane pane = loader.load();
+
+            ImageViewController imageController = loader.getController();
+            imageController.setMain(this);
+
+            Scene scene = new Scene(pane);
+
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void close(){
         primaryStage.close();
     }
 }
