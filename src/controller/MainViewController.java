@@ -31,24 +31,15 @@ public class MainViewController implements Initializable{
     private TextField searchField;
 
     private final ObservableList<Image> imageData = FXCollections.observableArrayList();
-    private HashMap<String, String> imagesCollection = new HashMap<>();
     private ImageWarehouse images = new ImageWarehouse();
+    public static Image selectedImage;
 
     public void setMain(Main main) {
         this.main= main;
     }
 
     public void fillImageTable(){
-        imagesCollection = images.getImageInfo();
-        Set<String> imageKeys = imagesCollection.keySet();
-        Iterator<String> imageIterator = imageKeys.iterator();
 
-        String key;
-        String value;
-        while(imageIterator.hasNext()){
-            key=imageIterator.next();
-            value = imagesCollection.get(key);
-        }
         for(int i = 0; i < images.getImages().size(); i++) {
            imageData.add(images.getImages().get(i));
        }
@@ -57,18 +48,27 @@ public class MainViewController implements Initializable{
     }
 
     public void searchForLocation(){
-
+        imageTable.getItems().clear();
+        String location = searchField.getText();
+        ArrayList<Image> searchedImages = new ArrayList<>();
+        searchedImages = ImageWarehouse.searchImages(location);
+        imageData.removeAll();
+        for(Image image: searchedImages){
+            imageData.add(image);
+        }
+        imageTable.setItems(imageData);
     }
 
     @FXML
     public void handleClickedImage(MouseEvent event){
+        selectedImage = imageTable.getSelectionModel().getSelectedItem();
         main.showImageWindow();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        imageDescriptionColumn.setCellValueFactory(new PropertyValueFactory("Images"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory("Location"));
+        imageDescriptionColumn.setCellValueFactory(new PropertyValueFactory("description"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory("location"));
         images.addImage("title","waffles", "Arizona", "GREAT SKIES");
         images.addImage("title2","pancakes", "California", "Dinosaurs");
         fillImageTable();
