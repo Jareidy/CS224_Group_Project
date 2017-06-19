@@ -4,8 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
-import java.util.ArrayList;
-
 public class Picture {
 
     private String title;
@@ -23,7 +21,6 @@ public class Picture {
         this.location = location;
         this.description = description;
     }
-
 
     public Image getImageLink() {
         return imageLink;
@@ -45,13 +42,10 @@ public class Picture {
         return title;
     }
 
-    
-
     public void addComment(String user, String comment){
         Comment newComment = new Comment(user, comment);
         comments.add(newComment);
     }
-
 
     public ObservableList returnComments(){
         return comments;

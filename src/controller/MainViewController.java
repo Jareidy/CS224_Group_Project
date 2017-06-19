@@ -39,11 +39,9 @@ public class MainViewController implements Initializable{
     }
 
     public void fillImageTable(){
-
         for(int i = 0; i < images.getImages().size(); i++) {
            imageData.add(images.getImages().get(i));
-       }
-
+        }
        imageTable.setItems(imageData);
     }
 
@@ -52,8 +50,7 @@ public class MainViewController implements Initializable{
         String location = searchField.getText();
         if(location.equals("")){
             fillImageTable();
-        }
-        else{
+        }else{
             fillTableWithSearchedItems(location);
         }
     }
