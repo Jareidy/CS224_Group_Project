@@ -5,8 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import model.Comment;
 import model.Main;
-import model.Image;
+import model.Picture;
 
 public class ImageViewController {
 
@@ -15,27 +16,34 @@ public class ImageViewController {
     @FXML private Label like;
     @FXML private Label imageTitle;
     @FXML private TextArea inputComment;
-    @FXML private TextArea imageDescription;
     @FXML private ListView commentsList;
+    @FXML private ListView userList;
 
     public Main main;
-    public Image image;
+    public Picture picture;
 
     public void setMain(Main main){
         this.main=main;
     }
-    public void setImage(Image image){
-        this.image=image;
+
+    public void setImage(Picture picture){
+        this.picture=picture;
     }
 
     public void setText(){
-        this.image=image;
-        imageTitle.setText(String.valueOf(image.getTitle()));
-        like.setText(String.valueOf(image.returnRatings()));
-        dislike.setText(String.valueOf(image.returnRatings()));
-        imageDescription.setText(String.valueOf(image.getDescription()));
-        commentsList.setItems(image.returnComments());
+
+        imageView.setImage(picture.getImageLink());
+        imageTitle.setText(String.valueOf(picture.getTitle()));
+        like.setText(String.valueOf(picture.getLikes()));
+        dislike.setText(String.valueOf(picture.getDislikes()));
+        setComments();
     }
+
+    public void setComments(){
+        commentsList.setItems(picture.getCommentsText());
+        userList.setItems(picture.getCommentsUser());
+    }
+
 
     public void handleBackButton(){
         main.showMainWindow();
@@ -45,8 +53,12 @@ public class ImageViewController {
     }
     public void handleSubmitButton(){
         String newComment = inputComment.getText();
-        image.addComment("Anonymous",newComment);
-        inputComment.clear();
+        if(newComment.equals("")){
+        }else {
+            picture.addComment("Anonymous", newComment);
+            inputComment.clear();
+            setComments();
+        }
     }
 
 
