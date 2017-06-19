@@ -21,7 +21,7 @@
 
       </ImageView>
       <ListView fx:id="userList" layoutX="81.0" layoutY="508.0" prefHeight="225.0" prefWidth="162.0" />
-      <ImageView fitHeight="63.0" fitWidth="59.0" layoutX="172.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="59.0" layoutX="172.0" layoutY="440.0" onMouseClicked="#handleLikeClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../res/happycloud.png" />
          </image></ImageView>
@@ -29,7 +29,7 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-      <ImageView fitHeight="57.0" fitWidth="62.0" layoutX="315.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="57.0" fitWidth="62.0" layoutX="315.0" layoutY="447.0" onMouseClicked="#handleDislikeClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../res/sadcloud.png" />
          </image></ImageView>

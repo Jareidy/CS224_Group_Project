@@ -34,9 +34,13 @@ public class ImageViewController {
 
         imageView.setImage(picture.getImageLink());
         imageTitle.setText(String.valueOf(picture.getTitle()));
+        setLikesAndDislikes();
+        setComments();
+    }
+
+    public void setLikesAndDislikes(){
         like.setText(String.valueOf(picture.getLikes()));
         dislike.setText(String.valueOf(picture.getDislikes()));
-        setComments();
     }
 
     public void setComments(){
@@ -50,6 +54,14 @@ public class ImageViewController {
     }
     public void handleCloseButton(){
         main.close();
+    }
+    public void handleLikeClick(){
+        picture.addLike();
+        setLikesAndDislikes();
+    }
+    public void handleDislikeClick(){
+        picture.addDislike();
+        setLikesAndDislikes();
     }
     public void handleSubmitButton(){
         String newComment = inputComment.getText();
