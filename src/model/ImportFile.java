@@ -8,7 +8,6 @@ import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 
-
 public class ImportFile {
 
     FileChooser fileChooser = new FileChooser();
@@ -63,5 +62,4 @@ public class ImportFile {
     public String getFileExtension(){
         return fileExtension;
     }
-
 }

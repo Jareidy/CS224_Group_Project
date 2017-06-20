@@ -1,8 +1,10 @@
 package model;
 
+import com.sun.xml.internal.ws.wsdl.writer.document.Import;
 import controller.ImageViewController;
 import controller.ImportDetailsViewController;
 import controller.MainViewController;
+import controller.MapViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,7 +27,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        showMainWindow();
+        showMapWindow();
     }
 
     public void setSceneDefault(){
@@ -40,6 +42,18 @@ public class Main extends Application {
         primaryStage.setMinHeight(580);
         primaryStage.setMaxHeight(700);
         primaryStage.setMaxWidth(1000);
+    }
+
+    public void showMapWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MapView.fxml"));
+            pane = loader.load();
+            MapViewController mapViewController = loader.getController();
+            mapViewController.setMain(this);
+            setSceneDefault();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void showMainWindow(){
@@ -75,6 +89,17 @@ public class Main extends Application {
             ImportDetailsViewController importDetailsViewController = loader.getController();
             importDetailsViewController.setMain(this);
             setSceneDefault();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showLogInWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/LogInView.fxml"));
+            pane = loader.load();
+
+
         }catch (IOException e){
             e.printStackTrace();
         }
