@@ -21,14 +21,10 @@ public class MainViewController implements Initializable{
 
     private Main main;
 
-    @FXML
-    private TableView<Picture> imageTable;
-    @FXML
-    private TableColumn<Picture, String> imageDescriptionColumn;
-    @FXML
-    private TableColumn<Picture, String> locationColumn;
-    @FXML
-    private TextField searchField;
+    @FXML private TableView<Picture> imageTable;
+    @FXML private TableColumn<Picture, String> imageDescriptionColumn;
+    @FXML private TableColumn<Picture, String> locationColumn;
+    @FXML private TextField searchField;
 
     private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
     private ImageWarehouse images = new ImageWarehouse();

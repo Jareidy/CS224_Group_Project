@@ -14,7 +14,6 @@ public class Picture {
     private Integer likes=0;
     private Integer dislikes=0;
 
-
     public Picture(String title, Image imageLink, String location, String description){
         this.title = title;
         this.imageLink = imageLink;
