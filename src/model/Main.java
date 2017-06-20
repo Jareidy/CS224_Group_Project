@@ -8,12 +8,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.omg.SendingContext.RunTime;
 
 import java.io.IOException;
 
 public class Main extends Application {
 
+
     public static void main(String[] args) {
+        PictureDataParser pictureDataParser= new PictureDataParser();
+        pictureDataParser.parsePictureData();
         launch(args);
     }
 
@@ -65,6 +69,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
 
     public void showImportDetailsWindow(){
         try{

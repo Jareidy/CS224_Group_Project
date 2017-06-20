@@ -1,6 +1,6 @@
 package model;
 
-import org.w3c.dom.Attr;
+import javafx.collections.ObservableList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -13,10 +13,14 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.util.ArrayList;
 
 public class XMLHandler {
 
-    public static void xmlWriter(){
+    public void XMLWriter(){
+
+        ImageManager imageManager = PictureDataParser.imageManager;
+        ArrayList<Picture> importedPictures = imageManager.getImages();
 
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -26,33 +30,39 @@ public class XMLHandler {
             Element rootElement = doc.createElement("pictures");
             doc.appendChild(rootElement);
 
-            Element pictures = doc.createElement("picture");
-            rootElement.appendChild(pictures);
-            pictures.setAttribute("pictureName", "0");
+            for (Picture importedPicture: importedPictures) {
+                Element pictures = doc.createElement("picture");
+                rootElement.appendChild(pictures);
+                pictures.setAttribute("pictureName", importedPicture.getTitle());
 
-            Element fileName = doc.createElement("fileName");
-            fileName.appendChild((doc.createTextNode("0")));
-            pictures.appendChild(fileName);
+                Element fileName = doc.createElement("fileName");
+                fileName.appendChild((doc.createTextNode(importedPicture.getImageLink().toString())));
+                pictures.appendChild(fileName);
 
-            Element location = doc.createElement("location");
-            location.appendChild(doc.createTextNode("0"));
-            pictures.appendChild(location);
+                Element location = doc.createElement("location");
+                location.appendChild(doc.createTextNode(importedPicture.getLocation()));
+                pictures.appendChild(location);
 
-            Element positiveRatings = doc.createElement("positiveRatings");
-            positiveRatings.appendChild(doc.createTextNode("0"));
-            pictures.appendChild(positiveRatings);
+                Element positiveRatings = doc.createElement("positiveRatings");
+                positiveRatings.appendChild(doc.createTextNode(importedPicture.getLikes().toString()));
+                pictures.appendChild(positiveRatings);
 
-            Element negativeRatings = doc.createElement("negativeRatings");
-            negativeRatings.appendChild(doc.createTextNode("0"));
-            pictures.appendChild(negativeRatings);
+                Element negativeRatings = doc.createElement("negativeRatings");
+                negativeRatings.appendChild(doc.createTextNode(importedPicture.getDislikes().toString()));
+                pictures.appendChild(negativeRatings);
 
-            Element comments = doc.createElement("comments");
-            pictures.appendChild(comments);
-            comments.setAttribute("user", "bleh");
+                ObservableList<String> importComments = importedPicture.returnComments();
+                int userCount = 0;
+                for (String importComment: importComments) {
+                        Element comments = doc.createElement("comments");
+                        pictures.appendChild(comments);
+                        comments.setAttribute(importComment, String.valueOf(userCount));
 
-            Element comment = doc.createElement("comment");
-            comment.appendChild(doc.createTextNode("good"));
-            comments.appendChild(comment);
+                        Element comment = doc.createElement("comment");
+                        comment.appendChild(doc.createTextNode(importComment));
+                        comments.appendChild(comment);
+                    }
+            }
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();

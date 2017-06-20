@@ -48,7 +48,7 @@ public class ImageViewController {
     }
 
     public void handleBackButton(){
-        main.showMainWindow();
+       main.showMainWindow();
     }
 
     public void handleCloseButton(){

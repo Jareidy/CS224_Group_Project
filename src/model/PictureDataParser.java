@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class PictureDataParser {
 
-    ImageManager imageManager = new ImageManager();
+    public static ImageManager imageManager = new ImageManager();
     Document document;
 
     public void parsePictureData() {

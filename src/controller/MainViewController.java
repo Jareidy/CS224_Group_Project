@@ -10,10 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import model.Picture;
-import model.ImageManager;
-import model.Main;
-import model.PictureDataParser;
+import model.*;
 
 import java.net.URL;
 import java.util.*;
@@ -32,7 +29,7 @@ public class MainViewController implements Initializable{
     private TextField searchField;
 
     private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
-    private ImageManager imageManager = new ImageManager();
+    ImageManager imageManager = PictureDataParser.imageManager;
     PictureDataParser pictureDataParser = new PictureDataParser();
     public static Picture selectedImage;
 
@@ -83,8 +80,6 @@ public class MainViewController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         imageDescriptionColumn.setCellValueFactory(new PropertyValueFactory("description"));
         locationColumn.setCellValueFactory(new PropertyValueFactory("location"));
-        PictureDataParser pictureDataParser= new PictureDataParser();
-        pictureDataParser.parsePictureData();
         fillImageTable();
     }
 
