@@ -64,7 +64,6 @@ public class ImportDetailsViewController {
         String location = imageLocationField.getText();
         String description = imageDescriptionField.getText();
         String path = "file:///"+System.getProperty("user.dir")+"/src/res/"+title+importPhoto.getFileExtension();
-        System.out.println(path);
         Image image = new Image(path);
         ImageManager imageManager = new ImageManager();
         imageManager.addImage(title,image,location,description);

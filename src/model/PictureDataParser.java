@@ -19,10 +19,6 @@ public class PictureDataParser {
     ImageManager imageManager = new ImageManager();
     Document document;
 
-    public void writeToXMLFile(){
-
-    }
-
     public void parsePictureData() {
         try{
             readXMLFile();
@@ -35,7 +31,6 @@ public class PictureDataParser {
             e.printStackTrace();
         }
     }
-
 
     private void readXMLFile() throws IOException, SAXException, ParserConfigurationException {
         File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
