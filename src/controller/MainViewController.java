@@ -11,8 +11,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import model.Picture;
-import model.ImageWarehouse;
+import model.ImageManager;
 import model.Main;
+import model.PictureDataParser;
 
 import java.net.URL;
 import java.util.*;
@@ -31,7 +32,8 @@ public class MainViewController implements Initializable{
     private TextField searchField;
 
     private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
-    private ImageWarehouse images = new ImageWarehouse();
+    private ImageManager imageManager = new ImageManager();
+    PictureDataParser pictureDataParser = new PictureDataParser();
     public static Picture selectedImage;
 
     public void setMain(Main main) {
@@ -39,11 +41,12 @@ public class MainViewController implements Initializable{
     }
 
     public void fillImageTable(){
+        for(int i = 0; i < pictureDataParser.getImages().size(); i++) {
+            ArrayList<Picture> images=pictureDataParser.getImages();
 
-        for(int i = 0; i < images.getImages().size(); i++) {
-           imageData.add(images.getImages().get(i));
-       }
-
+            imageData.add(images.get(i));
+            //imageData.add(imageManager.getImages().get(i));
+        }
        imageTable.setItems(imageData);
     }
 
@@ -52,20 +55,24 @@ public class MainViewController implements Initializable{
         String location = searchField.getText();
         if(location.equals("")){
             fillImageTable();
-        }
-        else{
+        }else{
             fillTableWithSearchedItems(location);
         }
     }
 
     public void fillTableWithSearchedItems(String location){
         ArrayList<Picture> searchedImages;
-        searchedImages = images.searchImages(location);
+        searchedImages = imageManager.searchImages(location);
         imageData.removeAll();
         for(Picture image: searchedImages){
             imageData.add(image);
         }
         imageTable.setItems(imageData);
+    }
+
+    @FXML
+    public void handleImportPhoto(){
+       main.showImportDetailsWindow();
     }
 
     @FXML
@@ -78,22 +85,10 @@ public class MainViewController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         imageDescriptionColumn.setCellValueFactory(new PropertyValueFactory("description"));
         locationColumn.setCellValueFactory(new PropertyValueFactory("location"));
-        setDefaultPictures();
+        PictureDataParser pictureDataParser= new PictureDataParser();
+        pictureDataParser.parsePictureData();
         fillImageTable();
     }
 
-    public void setDefaultPictures() {
-        Image image1 = new Image("/res/blue-clouds-day-fluffy-53594.jpeg");
-        images.addImage("Fluffy Clouds",image1, "Arizona", "Today the skies were blue and filled with giant fluffy clouds.");
-        images.addImage("Blue Skies Today",image1, "California", "Today the skies were blue and filled with giant fluffy clouds.");
-    }
 
-    public void setDefaultComments(Picture newImage) {
-        newImage.addComment("Anonymous","Wow! What a beautiful sky!");
-        newImage.addComment("Anonymous","Love it!");
-        newImage.addComment("Anonymous","Take more pictures");
-        newImage.addComment("Anonymous","Wow! What a beautiful sky!");
-        newImage.addComment("Anonymous","Wow! What a beautiful sky!");
-        newImage.addComment("Anonymous","Wow! What a beautiful sky!");
-    }
 }

@@ -7,25 +7,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class ImageWarehouse {
-
+public class ImageManager {
 
     HashMap<String,String> imageInfo = new HashMap<>();
 
-   ArrayList<Picture> images = new ArrayList<>();
+    ArrayList<Picture> images = new ArrayList<>();
 
-   public void addImage(String title, Image imageLink, String location, String description){
+    public void addImage(String title, Image imageLink, String location, String description){
        Picture newImage = new Picture(title,imageLink, location, description);
        images.add(newImage);
        imageInfo.put(title,description);
-       MainViewController mainViewController = new MainViewController();
-       mainViewController.setDefaultComments(newImage);
-   }
+       System.out.println(images);
+    }
 
-
-   public ArrayList<Picture> getImages(){
-       return images;
-   }
+    public ArrayList<Picture> getImages(){
+        System.out.println("2"+images);
+        return images;
+    }
 
     public ArrayList<Picture> searchImages(String location) {
         ArrayList<Picture> searchImagesArrayList = new ArrayList<>();
