@@ -61,7 +61,7 @@ public class ImportDetailsViewController {
     }
 
     private void collectUserInput() {
-        Image image = new Image("/teamB/"+title+importPhoto.getFileExtension());
+        Image image = new Image("/res/"+title+importPhoto.getFileExtension());
         String location = imageLocationField.getText();
         String description = imageDescriptionField.getText();
         Picture newPicture = new Picture(title,image,location,description);

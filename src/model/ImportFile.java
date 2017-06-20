@@ -37,7 +37,7 @@ public class ImportFile {
         return file;
     }
 
-    public void saveFile(BufferedImage importedFile, File file,String title) throws FileNotFoundException {
+    public void saveFile(BufferedImage importedFile, File file,String title) {
         try{
             File saved = new File(title+findFileExtension(file));
             ImageIO.write(importedFile,"jpg",saved);
