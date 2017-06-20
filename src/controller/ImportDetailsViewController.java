@@ -12,6 +12,7 @@ import model.Main;
 import javafx.scene.image.Image;
 import model.Picture;
 
+import java.util.Timer;
 
 
 public class ImportDetailsViewController {
@@ -23,6 +24,7 @@ public class ImportDetailsViewController {
     @FXML private TextField imageLocationField;
     @FXML private TextArea imageDescriptionField;
     @FXML private Label filePathLabel;
+    @FXML private Label errorLabel;
     @FXML private ImageView imageView;
 
 
@@ -41,10 +43,11 @@ public class ImportDetailsViewController {
         displayChosenImage();
     }
     @FXML
-    public void handleImportPhoto(){
+    public void handleImportPhoto() throws InterruptedException {
         collectTitleInput();
         importPhoto.saveFile(importPhoto.getBufferedImage(),importPhoto.getFile(),title);
         collectUserInput();
+        main.showMainWindow();
     }
 
     private void setFilePathLabel(){
@@ -60,13 +63,18 @@ public class ImportDetailsViewController {
         title = imageTitleField.getText();
     }
 
-    private void collectUserInput() {
-        Image image = new Image("/res/"+title+importPhoto.getFileExtension());
+    private void collectUserInput() throws InterruptedException {
         String location = imageLocationField.getText();
         String description = imageDescriptionField.getText();
+        String path = "file:///"+System.getProperty("user.dir")+"/src/res/"+title+importPhoto.getFileExtension();
+        System.out.println(path);
+        Image image = new Image(path);
         Picture newPicture = new Picture(title,image,location,description);
         ImageWarehouse imageWarehouse = new ImageWarehouse();
         imageWarehouse.addImage(title,image,location,description);
     }
 
+    public void displayErrorFileAlreadyExists() {
+        errorLabel.setText("Title is already in use.");
+    }
 }

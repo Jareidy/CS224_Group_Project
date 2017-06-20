@@ -1,9 +1,12 @@
 package model;
 
+import controller.ImportDetailsViewController;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
 
 
 public class ImportFile {
@@ -39,14 +42,19 @@ public class ImportFile {
 
     public void saveFile(BufferedImage importedFile, File file,String title) {
         try{
-            File saved = new File(title+findFileExtension(file));
-            ImageIO.write(importedFile,"jpg",saved);
+            String path = System.getProperty("user.dir")+"/src/res/"+title+findFileExtension(file);
+            System.out.println(path);
+            File saved = new File(path);
+            Files.copy(file.toPath(),saved.toPath());
+        }catch(FileAlreadyExistsException e){
+            ImportDetailsViewController importDetailsViewController = new ImportDetailsViewController();
+            importDetailsViewController.displayErrorFileAlreadyExists();
         }catch(IOException e){
             e.printStackTrace();
         }
     }
 
-    private String findFileExtension(File file) {
+    public String findFileExtension(File file) {
         String fileName = file.getName();
         fileExtension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
         return fileExtension;
