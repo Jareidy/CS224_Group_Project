@@ -98,4 +98,8 @@ public class MainViewController implements Initializable{
         newImage.addComment("Anonymous","Wow! What a beautiful sky!");
         newImage.addComment("Anonymous","Wow! What a beautiful sky!");
     }
+
+
+
+
 }
