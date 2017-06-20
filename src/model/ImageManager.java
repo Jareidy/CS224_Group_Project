@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class ImageWarehouse {
+public class ImageManager {
 
     HashMap<String,String> imageInfo = new HashMap<>();
 
@@ -17,13 +17,13 @@ public class ImageWarehouse {
        Picture newImage = new Picture(title,imageLink, location, description);
        images.add(newImage);
        imageInfo.put(title,description);
-       MainViewController mainViewController = new MainViewController();
-       mainViewController.setDefaultComments(newImage);
+       System.out.println(images);
     }
 
     public ArrayList<Picture> getImages(){
-       return images;
-   }
+        System.out.println("2"+images);
+        return images;
+    }
 
     public ArrayList<Picture> searchImages(String location) {
         ArrayList<Picture> searchImagesArrayList = new ArrayList<>();

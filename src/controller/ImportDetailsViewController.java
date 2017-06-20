@@ -6,13 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import model.ImageWarehouse;
+import model.ImageManager;
 import model.ImportFile;
 import model.Main;
 import javafx.scene.image.Image;
-import model.Picture;
-
-import java.util.Timer;
 
 
 public class ImportDetailsViewController {
@@ -69,9 +66,8 @@ public class ImportDetailsViewController {
         String path = "file:///"+System.getProperty("user.dir")+"/src/res/"+title+importPhoto.getFileExtension();
         System.out.println(path);
         Image image = new Image(path);
-        Picture newPicture = new Picture(title,image,location,description);
-        ImageWarehouse imageWarehouse = new ImageWarehouse();
-        imageWarehouse.addImage(title,image,location,description);
+        ImageManager imageManager = new ImageManager();
+        imageManager.addImage(title,image,location,description);
     }
 
     public void displayErrorFileAlreadyExists() {
