@@ -41,9 +41,9 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="296.0" prefWidth="509.0">
                      <children>
-                        <ImageView fx:id="imageView" fitHeight="274.0" fitWidth="509.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageView" fitHeight="288.0" fitWidth="509.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
-                              <Insets top="40.0" />
+                              <Insets />
                            </HBox.margin>
                         </ImageView>
                      </children>
@@ -86,7 +86,7 @@
                   </HBox>
                </children>
                <HBox.margin>
-                  <Insets />
+                  <Insets top="5.0" />
                </HBox.margin>
             </VBox>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="457.0" prefWidth="444.0">

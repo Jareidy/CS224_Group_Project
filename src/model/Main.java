@@ -1,6 +1,7 @@
 package model;
 
 import controller.ImageViewController;
+import controller.ImportDetailsViewController;
 import controller.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,23 +28,6 @@ public class Main extends Application {
         showMainWindow();
     }
 
-    public void getScreenSize(){
-        GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int height = graphicsDevice.getDisplayMode().getHeight();
-        if(height>864){
-            setSceneDefault();
-        }else{
-            setSceneModified(height);
-        }
-    }
-
-    private void setSceneModified(int height) {
-        Scene scene = new Scene(pane, height, 630);
-        primaryStage.setScene(scene);
-        setStageExtremes();
-        primaryStage.show();
-    }
-
     public void setSceneDefault(){
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
@@ -54,7 +38,7 @@ public class Main extends Application {
     public void setStageExtremes(){
         primaryStage.setMinWidth(860);
         primaryStage.setMinHeight(580);
-        primaryStage.setMaxHeight(570);
+        primaryStage.setMaxHeight(700);
         primaryStage.setMaxWidth(1000);
     }
 
@@ -64,7 +48,7 @@ public class Main extends Application {
             pane = loader.load();
             MainViewController mainViewController = loader.getController();
             mainViewController.setMain(this);
-            getScreenSize();
+            setSceneDefault();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -78,7 +62,19 @@ public class Main extends Application {
             imageViewController.setMain(this);
             imageViewController.setImage(picture);
             imageViewController.setText();
-            getScreenSize();
+            setSceneDefault();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showImportDetailsWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ImportDetailsView.fxml"));
+            pane = loader.load();
+            ImportDetailsViewController importDetailsViewController = loader.getController();
+            importDetailsViewController.setMain(this);
+            setSceneDefault();
         }catch (IOException e){
             e.printStackTrace();
         }

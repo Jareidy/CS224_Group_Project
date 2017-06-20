@@ -66,6 +66,11 @@ public class MainViewController implements Initializable{
     }
 
     @FXML
+    public void handleImportPhoto(){
+       main.showImportDetailsWindow();
+    }
+
+    @FXML
     public void handleClickedImage(MouseEvent event){
         selectedImage = imageTable.getSelectionModel().getSelectedItem();
         main.showImageWindow(selectedImage);
