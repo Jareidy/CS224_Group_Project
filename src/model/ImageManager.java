@@ -17,11 +17,9 @@ public class ImageManager {
        Picture newImage = new Picture(title,imageLink, location, description);
        images.add(newImage);
        imageInfo.put(title,description);
-       System.out.println(images);
     }
 
     public ArrayList<Picture> getImages(){
-        System.out.println("2"+images);
         return images;
     }
 

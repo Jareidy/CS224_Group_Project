@@ -43,9 +43,7 @@ public class MainViewController implements Initializable{
     public void fillImageTable(){
         for(int i = 0; i < pictureDataParser.getImages().size(); i++) {
             ArrayList<Picture> images=pictureDataParser.getImages();
-
             imageData.add(images.get(i));
-            //imageData.add(imageManager.getImages().get(i));
         }
        imageTable.setItems(imageData);
     }
