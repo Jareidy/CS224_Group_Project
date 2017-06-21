@@ -13,12 +13,14 @@ public class Picture {
     ObservableList<Comment> comments = FXCollections.observableArrayList();
     private Integer likes=0;
     private Integer dislikes=0;
+    private String fileExtension;
 
-    public Picture(String title, Image imageLink, String location, String description){
+    public Picture(String title, Image imageLink, String location, String description,String fileExtension){
         this.title = title;
         this.imageLink = imageLink;
         this.location = location;
         this.description = description;
+        this.fileExtension=fileExtension;
     }
 
     public Image getImageLink() {
@@ -82,5 +84,9 @@ public class Picture {
 
     public Integer getDislikes() {
         return dislikes;
+    }
+
+    public String getFileExtension(){
+        return fileExtension;
     }
 }

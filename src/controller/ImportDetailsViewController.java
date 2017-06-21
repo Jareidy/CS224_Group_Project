@@ -6,9 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import model.ImageManager;
-import model.ImportFile;
-import model.Main;
+import model.*;
 import javafx.scene.image.Image;
 
 
@@ -65,9 +63,10 @@ public class ImportDetailsViewController {
         String description = imageDescriptionField.getText();
         String path = "file:///"+System.getProperty("user.dir")+"/src/res/"+title+importPhoto.getFileExtension();
         Image image = new Image(path);
-        ImageManager imageManager = new ImageManager();
-        imageManager.addImage(title,image,location,description);
+        ImageManager imageManager = PictureDataParser.imageManager;
+        imageManager.addImage(title,image,location,description,importPhoto.getFileExtension());
     }
+
 
     public void displayErrorFileAlreadyExists() {
         errorLabel.setText("Title is already in use.");

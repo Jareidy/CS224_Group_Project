@@ -45,13 +45,17 @@ public class PictureDataParser {
             Node pictureNode = pictureNodes.item(i);
             if(pictureNode.getNodeType()==Node.ELEMENT_NODE){
                 Element pictureElement = (Element) pictureNode;
-                String location =pictureElement.getAttribute("location");
-                String imagePath = pictureElement.getElementsByTagName("path").item(0).getTextContent();
-                String title = pictureElement.getElementsByTagName("title").item(0).getTextContent();
+                String title =pictureElement.getAttribute("pictureName");
+                String imagePath = pictureElement.getElementsByTagName("fileName").item(0).getTextContent();
+                String location = pictureElement.getElementsByTagName("location").item(0).getTextContent();
                 String description = pictureElement.getElementsByTagName("description").item(0).getTextContent();
+                String positiveRatings = pictureElement.getElementsByTagName("positiveRatings").item(0).getTextContent();
+                String negativeRatings = pictureElement.getElementsByTagName("negativeRatings").item(0).getTextContent();
                 readCommentsFromDocument();
                 Image image = new Image(imagePath);
-                imageManager.addImage(title,image,location,description);
+                String fileExtension = imagePath.substring(imagePath.lastIndexOf("."), imagePath.length());
+                System.out.println(fileExtension);
+                imageManager.addImage(title,image,location,description,fileExtension);
             }
         }
     }

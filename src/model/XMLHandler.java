@@ -29,19 +29,22 @@ public class XMLHandler {
             Document doc = docBuilder.newDocument();
             Element rootElement = doc.createElement("pictures");
             doc.appendChild(rootElement);
-
             for (Picture importedPicture: importedPictures) {
                 Element pictures = doc.createElement("picture");
                 rootElement.appendChild(pictures);
                 pictures.setAttribute("pictureName", importedPicture.getTitle());
 
                 Element fileName = doc.createElement("fileName");
-                fileName.appendChild((doc.createTextNode(importedPicture.getImageLink().toString())));
+                fileName.appendChild((doc.createTextNode("/res/" + importedPicture.getTitle() + importedPicture.getFileExtension())));
                 pictures.appendChild(fileName);
 
                 Element location = doc.createElement("location");
                 location.appendChild(doc.createTextNode(importedPicture.getLocation()));
                 pictures.appendChild(location);
+
+                Element description = doc.createElement("description");
+                description.appendChild(doc.createTextNode(importedPicture.getDescription()));
+                pictures.appendChild(description);
 
                 Element positiveRatings = doc.createElement("positiveRatings");
                 positiveRatings.appendChild(doc.createTextNode(importedPicture.getLikes().toString()));
@@ -53,21 +56,21 @@ public class XMLHandler {
 
                 ObservableList<String> importComments = importedPicture.returnComments();
                 int userCount = 0;
-                for (String importComment: importComments) {
-                        Element comments = doc.createElement("comments");
-                        pictures.appendChild(comments);
-                        comments.setAttribute(importComment, String.valueOf(userCount));
+                for (String importComment : importComments) {
+                    Element comments = doc.createElement("comments");
+                    pictures.appendChild(comments);
+                    comments.setAttribute(importComment, String.valueOf(userCount));
 
-                        Element comment = doc.createElement("comment");
-                        comment.appendChild(doc.createTextNode(importComment));
-                        comments.appendChild(comment);
-                    }
+                    Element comment = doc.createElement("comment");
+                    comment.appendChild(doc.createTextNode(importComment));
+                    comments.appendChild(comment);
+                }
+
             }
-
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("pictures.xml"));
+            StreamResult result = new StreamResult(System.getProperty("user.dir")+"/src/res/PictureData.xml");
 
             transformer.transform(source, result);
 

@@ -13,10 +13,13 @@ public class ImageManager {
 
     ArrayList<Picture> images = new ArrayList<>();
 
-    public void addImage(String title, Image imageLink, String location, String description){
-       Picture newImage = new Picture(title,imageLink, location, description);
+    public void addImage(String title, Image imageLink, String location, String description, String extension){
+       Picture newImage = new Picture(title,imageLink, location, description,extension);
        images.add(newImage);
        imageInfo.put(title,description);
+       XMLHandler xmlHandler = new XMLHandler();
+       ImportFile importFile = new ImportFile();
+       xmlHandler.XMLWriter();
     }
 
     public ArrayList<Picture> getImages(){
