@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 public class ImportDetailsViewController {
 
     private Main main;
-    private static final XMLHandler xmlHandler = new XMLHandler();
+    static final XMLHandler xmlHandler = new XMLHandler();
     private final ImportFile importPhoto =  new ImportFile();
     private String title;
     @FXML private TextField imageTitleField;

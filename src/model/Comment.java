@@ -10,11 +10,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    private String getComment(){
+    String getComment(){
         return comment;
     }
 
-    private String getUser(){
+    String getUser(){
         return user;
     }
 }
