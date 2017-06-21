@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import model.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.*;
 
@@ -72,8 +73,13 @@ public class MainViewController implements Initializable{
 
     @FXML
     public void handleClickedImage(MouseEvent event){
-        selectedImage = imageTable.getSelectionModel().getSelectedItem();
-        main.showImageWindow(selectedImage);
+        try {
+            selectedImage = imageTable.getSelectionModel().getSelectedItem();
+            main.showImageWindow(selectedImage);
+        }
+        catch(NullPointerException e){
+            return;
+        }
     }
 
     @Override
