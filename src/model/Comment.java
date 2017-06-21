@@ -1,6 +1,6 @@
 package model;
 
-class Comment {
+public class Comment {
 
     private final String user;
     private final String comment;
@@ -10,11 +10,11 @@ class Comment {
         this.comment = comment;
     }
 
-    public String getComment(){
+    private String getComment(){
         return comment;
     }
 
-    public String getUser(){
+    private String getUser(){
         return user;
     }
 }

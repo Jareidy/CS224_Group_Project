@@ -81,6 +81,4 @@ public class MainViewController implements Initializable{
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         fillImageTable();
     }
-
-
 }

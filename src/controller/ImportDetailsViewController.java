@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 public class ImportDetailsViewController {
 
     private Main main;
-    public static final XMLHandler xmlHandler = new XMLHandler();
+    private static final XMLHandler xmlHandler = new XMLHandler();
     private final ImportFile importPhoto =  new ImportFile();
     private String title;
     @FXML private TextField imageTitleField;
@@ -23,7 +23,6 @@ public class ImportDetailsViewController {
     @FXML private Label errorLabel;
     @FXML private ImageView imageView;
 
-
     public void setMain(Main main) {
         this.main=main;
     }
@@ -32,12 +31,14 @@ public class ImportDetailsViewController {
     public void handleBackButton(){
         main.showMainWindow();
     }
+
     @FXML
     public void handleChooseFile(){
         importPhoto.chooseFile();
         setFilePathLabel();
         displayChosenImage();
     }
+
     @FXML
     public void handleImportPhoto() {
         if(imageTitleField.getText().equals("")||filePathLabel.getText().equals("")){

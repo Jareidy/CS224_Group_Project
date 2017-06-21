@@ -13,7 +13,6 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-
     public static void main(String[] args) {
         PictureDataParser pictureDataParser= new PictureDataParser();
         pictureDataParser.parsePictureData();
@@ -69,7 +68,6 @@ public class Main extends Application {
         }
     }
 
-
     public void showImportDetailsWindow(){
         try{
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ImportDetailsView.fxml"));
@@ -81,5 +79,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
 }

@@ -29,6 +29,9 @@ public class ImportFile {
         FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("JPG files (*.jpg)","*.JPG");
         FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)","*.PNG");
         FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG files(*.jpeg)","*.JPEG");
+        fileChooser.getExtensionFilters().add(jpgFilter);
+        fileChooser.getExtensionFilters().add(pngFilter);
+        fileChooser.getExtensionFilters().add(jpegFilter);
     }
 
     public BufferedImage getBufferedImage(){
