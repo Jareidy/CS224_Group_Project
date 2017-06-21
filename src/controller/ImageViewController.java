@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import model.Comment;
 import model.Main;
 import model.Picture;
+import model.XMLHandler;
 
 public class ImageViewController {
 
@@ -40,28 +41,30 @@ public class ImageViewController {
     public void setLikesAndDislikes(){
         like.setText(String.valueOf(picture.getLikes()));
         dislike.setText(String.valueOf(picture.getDislikes()));
+        updateXMLFile();
     }
 
     public void setComments(){
         commentsList.setItems(picture.getCommentsText());
         userList.setItems(picture.getCommentsUser());
+        updateXMLFile();
+    }
+
+    public void updateXMLFile(){
+        ImportDetailsViewController.xmlHandler.XMLWriter();
     }
 
     public void handleBackButton(){
        main.showMainWindow();
     }
 
-    public void handleCloseButton(){
-        main.close();
-    }
-
     public void handleLikeClick(){
-        picture.addLike();
+        picture.addLike(1);
         setLikesAndDislikes();
     }
 
     public void handleDislikeClick(){
-        picture.addDislike();
+        picture.addDislike(1);
         setLikesAndDislikes();
     }
 

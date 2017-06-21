@@ -17,9 +17,6 @@ public class ImageManager {
        Picture newImage = new Picture(title,imageLink, location, description,extension);
        images.add(newImage);
        imageInfo.put(title,description);
-       XMLHandler xmlHandler = new XMLHandler();
-       ImportFile importFile = new ImportFile();
-       xmlHandler.XMLWriter();
     }
 
     public ArrayList<Picture> getImages(){

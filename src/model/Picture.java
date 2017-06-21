@@ -39,10 +39,6 @@ public class Picture {
         return title;
     }
 
-    public String titleProperty() {
-        return title;
-    }
-
     public void addComment(String user, String comment){
         Comment newComment = new Comment(user, comment);
         comments.add(newComment);
@@ -70,12 +66,12 @@ public class Picture {
         return commentUser;
     }
 
-    public void addLike(){
-        likes++;
+    public void addLike(int num){
+        likes=likes+num;
     }
 
-    public void addDislike(){
-        dislikes++;
+    public void addDislike(int num){
+        dislikes=dislikes+num;
     }
 
     public Integer getLikes() {
@@ -89,4 +85,5 @@ public class Picture {
     public String getFileExtension(){
         return fileExtension;
     }
+
 }

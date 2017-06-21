@@ -49,13 +49,15 @@ public class PictureDataParser {
                 String imagePath = pictureElement.getElementsByTagName("fileName").item(0).getTextContent();
                 String location = pictureElement.getElementsByTagName("location").item(0).getTextContent();
                 String description = pictureElement.getElementsByTagName("description").item(0).getTextContent();
-                String positiveRatings = pictureElement.getElementsByTagName("positiveRatings").item(0).getTextContent();
-                String negativeRatings = pictureElement.getElementsByTagName("negativeRatings").item(0).getTextContent();
-                readCommentsFromDocument();
+                Integer positiveRatings = Integer.valueOf(pictureElement.getElementsByTagName("positiveRatings").item(0).getTextContent());
+                Integer negativeRatings = Integer.valueOf(pictureElement.getElementsByTagName("negativeRatings").item(0).getTextContent());
                 Image image = new Image(imagePath);
                 String fileExtension = imagePath.substring(imagePath.lastIndexOf("."), imagePath.length());
                 System.out.println(fileExtension);
                 imageManager.addImage(title,image,location,description,fileExtension);
+                readCommentsFromDocument(i);
+                imageManager.getImages().get(i).addLike(positiveRatings);
+                imageManager.getImages().get(i).addDislike(negativeRatings);
             }
         }
     }
@@ -64,14 +66,16 @@ public class PictureDataParser {
         return imageManager.getImages();
     }
 
-    private void readCommentsFromDocument() {
+    private void readCommentsFromDocument(int i) {
         NodeList commentNodes = document.getElementsByTagName("comments");
         for(int j = 0; j<commentNodes.getLength();j++){
             Node commentNode = commentNodes.item(j);
             if(commentNode.getNodeType()==Node.ELEMENT_NODE) {
                 Element commentElement = (Element) commentNode;
-                String user = commentElement.getAttribute("user");
+                String user = commentElement.getAttribute("username");
                 String comment = commentElement.getElementsByTagName("comment").item(0).getTextContent();
+                imageManager.getImages().get(i).returnComments().clear();
+                imageManager.getImages().get(i).addComment(user,comment);
             }
         }
     }

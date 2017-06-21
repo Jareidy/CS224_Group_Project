@@ -54,18 +54,18 @@ public class XMLHandler {
                 negativeRatings.appendChild(doc.createTextNode(importedPicture.getDislikes().toString()));
                 pictures.appendChild(negativeRatings);
 
-                ObservableList<String> importComments = importedPicture.returnComments();
-                int userCount = 0;
-                for (String importComment : importComments) {
+                for (int i = 0;i<importedPicture.returnComments().size();i++) {
                     Element comments = doc.createElement("comments");
                     pictures.appendChild(comments);
-                    comments.setAttribute(importComment, String.valueOf(userCount));
+                    Comment currentComment = (Comment) importedPicture.returnComments().get(i);
+                    String newuser = currentComment.getUser();
+                    String newcomment = currentComment.getComment();
+                    comments.setAttribute("username", newuser);
 
                     Element comment = doc.createElement("comment");
-                    comment.appendChild(doc.createTextNode(importComment));
+                    comment.appendChild(doc.createTextNode(newcomment));
                     comments.appendChild(comment);
                 }
-
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
