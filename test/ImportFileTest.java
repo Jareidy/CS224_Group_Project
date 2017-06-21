@@ -6,7 +6,7 @@ import java.io.File;
 
 public class ImportFileTest {
 
-    ImportFile importFile = new ImportFile();
+    private final ImportFile importFile = new ImportFile();
 
     @Test
     public void findFileExtensionTest(){

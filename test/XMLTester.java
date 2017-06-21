@@ -1,6 +1,5 @@
 import model.PictureDataParser;
 import model.XMLHandler;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 class XMLTester {
@@ -12,10 +11,6 @@ class XMLTester {
     void testXML(){
         PictureDataParser parser = new PictureDataParser();
         parser.parsePictureData();
-    }
-
-    @AfterEach
-    void tearDown() {
     }
 
 }

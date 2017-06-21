@@ -8,11 +8,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import model.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.*;
 
@@ -30,15 +27,14 @@ public class MainViewController implements Initializable{
     private TextField searchField;
 
     private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
-    ImageManager imageManager = PictureDataParser.imageManager;
-    PictureDataParser pictureDataParser = new PictureDataParser();
-    public static Picture selectedImage;
+    private final ImageManager imageManager = PictureDataParser.imageManager;
+    private final PictureDataParser pictureDataParser = new PictureDataParser();
 
     public void setMain(Main main) {
         this.main= main;
     }
 
-    public void fillImageTable(){
+    private void fillImageTable(){
         for(int i = 0; i < pictureDataParser.getImages().size(); i++) {
             ArrayList<Picture> images=pictureDataParser.getImages();
             imageData.add(images.get(i));
@@ -56,13 +52,11 @@ public class MainViewController implements Initializable{
         }
     }
 
-    public void fillTableWithSearchedItems(String location){
+    private void fillTableWithSearchedItems(String location){
         ArrayList<Picture> searchedImages;
         searchedImages = imageManager.searchImages(location);
         imageData.removeAll();
-        for(Picture image: searchedImages){
-            imageData.add(image);
-        }
+        imageData.addAll(searchedImages);
         imageTable.setItems(imageData);
     }
 
@@ -72,20 +66,19 @@ public class MainViewController implements Initializable{
     }
 
     @FXML
-    public void handleClickedImage(MouseEvent event){
+    public void handleClickedImage(){
         try {
-            selectedImage = imageTable.getSelectionModel().getSelectedItem();
+            Picture selectedImage = imageTable.getSelectionModel().getSelectedItem();
             main.showImageWindow(selectedImage);
         }
-        catch(NullPointerException e){
-            return;
+        catch(NullPointerException ignored){
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        imageDescriptionColumn.setCellValueFactory(new PropertyValueFactory("description"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory("location"));
+        imageDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         fillImageTable();
     }
 

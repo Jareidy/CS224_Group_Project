@@ -5,10 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import model.Comment;
 import model.Main;
 import model.Picture;
-import model.XMLHandler;
 
 public class ImageViewController {
 
@@ -20,8 +18,8 @@ public class ImageViewController {
     @FXML private ListView commentsList;
     @FXML private ListView userList;
 
-    public Main main;
-    public Picture picture;
+    private Main main;
+    private Picture picture;
 
     public void setMain(Main main){
         this.main=main;
@@ -38,19 +36,19 @@ public class ImageViewController {
         setComments();
     }
 
-    public void setLikesAndDislikes(){
+    private void setLikesAndDislikes(){
         like.setText(String.valueOf(picture.getLikes()));
         dislike.setText(String.valueOf(picture.getDislikes()));
         updateXMLFile();
     }
 
-    public void setComments(){
+    private void setComments(){
         commentsList.setItems(picture.getCommentsText());
         userList.setItems(picture.getCommentsUser());
         updateXMLFile();
     }
 
-    public void updateXMLFile(){
+    private void updateXMLFile(){
         ImportDetailsViewController.xmlHandler.XMLWriter();
     }
 

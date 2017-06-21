@@ -16,27 +16,26 @@ import java.util.ArrayList;
 
 public class PictureDataParser {
 
-    public static ImageManager imageManager = new ImageManager();
-    Document document;
+    public static final ImageManager imageManager = new ImageManager();
+    private Document document;
 
     public void parsePictureData() {
         try{
             readXMLFile();
-            readImageFromDocument();
-        }catch(IOException e){
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        }catch(IOException | SAXException | ParserConfigurationException e){
             e.printStackTrace();
         }
     }
 
     private void readXMLFile() throws IOException, SAXException, ParserConfigurationException {
         File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        document = builder.parse(file);
+        if(file.length()==0){
+        }else {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            document = builder.parse(file);
+            readImageFromDocument();
+        }
     }
 
     private void readImageFromDocument() {

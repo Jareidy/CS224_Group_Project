@@ -1,9 +1,9 @@
 package model;
 
-public class Comment {
+class Comment {
 
-    String user;
-    String comment;
+    private final String user;
+    private final String comment;
 
     public Comment(String user, String comment){
         this.user = user;

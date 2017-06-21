@@ -14,52 +14,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1000.0" style="-fx-background-color: bcebf2;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewController">
-   <children>
-      <HBox alignment="CENTER" fillHeight="false" prefHeight="570.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox alignment="CENTER" fillWidth="false" prefHeight="570.0" prefWidth="485.0">
-               <children>
-                  <Pane>
-                     <children>
-                        <ImageView fitHeight="228.0" fitWidth="473.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../res/plaincloud.png" />
-                           </image>
-                        </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="90.0" text="Sky Searcher" textAlignment="CENTER">
-                           <font>
-                              <Font name="Bookman Old Style" size="40.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" />
-                     </VBox.margin>
-                  </Pane>
-                  <TextField fx:id="searchField" prefHeight="25.0" prefWidth="300.0" promptText="Location...(ex. Indiana)">
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Button mnemonicParsing="false" onAction="#searchForLocation" text="Search" />
-                  <Button mnemonicParsing="false" onAction="#handleImportPhoto" style="-fx-background-color: green;" text="Import photo" textFill="WHITE">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
-            <TableView fx:id="imageTable" onMouseClicked="#handleClickedImage" prefHeight="459.0" prefWidth="467.0">
-              <columns>
-                <TableColumn fx:id="imageDescriptionColumn" minWidth="0.0" prefWidth="104.0" text="Images" />
-                <TableColumn fx:id="locationColumn" minWidth="0.0" prefWidth="443.0" text="Location" />
-              </columns>
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </TableView>
-         </children>
-      </HBox>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0"
+            prefWidth="1000.0" style="-fx-background-color: bcebf2;" xmlns="http://javafx.com/javafx/8.0.112"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewController">
+    <HBox alignment="CENTER" fillHeight="false" prefHeight="570.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox alignment="CENTER" fillWidth="false" prefHeight="570.0" prefWidth="485.0">
+            <Pane>
+                <VBox.margin>
+                    <Insets bottom="20.0" left="20.0"/>
+                </VBox.margin>
+                <ImageView fitHeight="228.0" fitWidth="473.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../res/plaincloud.png"/>
+                </ImageView>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="90.0"
+                       text="Sky Searcher" textAlignment="CENTER">
+                    <font>
+                        <Font name="Bookman Old Style" size="40.0"/>
+                    </font>
+                </Label>
+            </Pane>
+            <TextField fx:id="searchField" prefHeight="25.0" prefWidth="300.0"
+                       promptText="Location...(ex. Indiana)">
+                <VBox.margin>
+                    <Insets bottom="20.0"/>
+                </VBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#searchForLocation" text="Search"/>
+            <Button mnemonicParsing="false" onAction="#handleImportPhoto" style="-fx-background-color: green;"
+                    text="Import photo" textFill="WHITE">
+                <VBox.margin>
+                    <Insets top="10.0"/>
+                </VBox.margin>
+            </Button>
+        </VBox>
+        <TableView fx:id="imageTable" onMouseClicked="#handleClickedImage" prefHeight="459.0" prefWidth="467.0">
+            <columns>
+                <TableColumn fx:id="imageDescriptionColumn" minWidth="0.0" prefWidth="104.0" text="Images"/>
+                <TableColumn fx:id="locationColumn" minWidth="0.0" prefWidth="443.0" text="Location"/>
+            </columns>
+            <HBox.margin>
+                <Insets right="10.0"/>
+            </HBox.margin>
+        </TableView>
+    </HBox>
 </AnchorPane>

@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.omg.SendingContext.RunTime;
 
 import java.io.IOException;
 
@@ -22,7 +21,7 @@ public class Main extends Application {
     }
 
     private Stage primaryStage;
-    AnchorPane pane;
+    private AnchorPane pane;
 
     @Override
     public void start(Stage primaryStage) {
@@ -30,14 +29,14 @@ public class Main extends Application {
         showMainWindow();
     }
 
-    public void setSceneDefault(){
+    private void setSceneDefault(){
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
         setStageExtremes();
         primaryStage.show();
     }
 
-    public void setStageExtremes(){
+    private void setStageExtremes(){
         primaryStage.setMinWidth(860);
         primaryStage.setMinHeight(580);
         primaryStage.setMaxHeight(700);
@@ -83,7 +82,4 @@ public class Main extends Application {
         }
     }
 
-    public void close(){
-        primaryStage.close();
-    }
 }

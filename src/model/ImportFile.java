@@ -10,10 +10,10 @@ import java.nio.file.Files;
 
 public class ImportFile {
 
-    FileChooser fileChooser = new FileChooser();
-    String fileExtension;
-    BufferedImage bufferedImage;
-    File file;
+    private final FileChooser fileChooser = new FileChooser();
+    private String fileExtension;
+    private BufferedImage bufferedImage;
+    private File file;
 
     public void chooseFile(){
         extensionFilters();
@@ -25,7 +25,7 @@ public class ImportFile {
         }
     }
 
-    public void extensionFilters(){
+    private void extensionFilters(){
         FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("JPG files (*.jpg)","*.JPG");
         FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)","*.PNG");
         FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG files(*.jpeg)","*.JPEG");
@@ -39,7 +39,7 @@ public class ImportFile {
         return file;
     }
 
-    public void saveFile(BufferedImage importedFile, File file,String title) {
+    public void saveFile(File file, String title) {
         try{
             String path = System.getProperty("user.dir")+"/src/res/"+title+findFileExtension(file);
             System.out.println(path);

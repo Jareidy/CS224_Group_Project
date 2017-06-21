@@ -1,6 +1,5 @@
 package model;
 
-import javafx.collections.ObservableList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -12,7 +11,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
 import java.util.ArrayList;
 
 public class XMLHandler {
@@ -58,12 +56,12 @@ public class XMLHandler {
                     Element comments = doc.createElement("comments");
                     pictures.appendChild(comments);
                     Comment currentComment = (Comment) importedPicture.returnComments().get(i);
-                    String newuser = currentComment.getUser();
-                    String newcomment = currentComment.getComment();
-                    comments.setAttribute("username", newuser);
+                    String newUser = currentComment.getUser();
+                    String newComment = currentComment.getComment();
+                    comments.setAttribute("username", newUser);
 
                     Element comment = doc.createElement("comment");
-                    comment.appendChild(doc.createTextNode(newcomment));
+                    comment.appendChild(doc.createTextNode(newComment));
                     comments.appendChild(comment);
                 }
             }
@@ -75,11 +73,8 @@ public class XMLHandler {
             transformer.transform(source, result);
 
         }
-        catch (ParserConfigurationException pce){
+        catch (ParserConfigurationException | TransformerException pce){
             pce.printStackTrace();
-        }
-        catch (TransformerException tfe){
-            tfe.printStackTrace();
         }
     }
 }
