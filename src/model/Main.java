@@ -1,59 +1,45 @@
 package model;
 
-import com.sun.xml.internal.ws.wsdl.writer.document.Import;
 import controller.ImageViewController;
 import controller.ImportDetailsViewController;
 import controller.MainViewController;
-import controller.MapViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
+        PictureDataParser pictureDataParser= new PictureDataParser();
+        pictureDataParser.parsePictureData();
         launch(args);
     }
 
     private Stage primaryStage;
-    AnchorPane pane;
+    private AnchorPane pane;
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        showMapWindow();
+        showMainWindow();
     }
 
-    public void setSceneDefault(){
+    private void setSceneDefault(){
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
         setStageExtremes();
         primaryStage.show();
     }
 
-    public void setStageExtremes(){
+    private void setStageExtremes(){
         primaryStage.setMinWidth(860);
         primaryStage.setMinHeight(580);
         primaryStage.setMaxHeight(700);
         primaryStage.setMaxWidth(1000);
-    }
-
-    public void showMapWindow(){
-        try{
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MapView.fxml"));
-            pane = loader.load();
-            MapViewController mapViewController = loader.getController();
-            mapViewController.setMain(this);
-            setSceneDefault();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
     }
 
     public void showMainWindow(){
@@ -92,20 +78,5 @@ public class Main extends Application {
         }catch (IOException e){
             e.printStackTrace();
         }
-    }
-
-    public void showLogInWindow(){
-        try{
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/LogInView.fxml"));
-            pane = loader.load();
-
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void close(){
-        primaryStage.close();
     }
 }

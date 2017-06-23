@@ -2,19 +2,19 @@ package model;
 
 public class Comment {
 
-    String user;
-    String comment;
+    private final String user;
+    private final String comment;
 
     public Comment(String user, String comment){
         this.user = user;
         this.comment = comment;
     }
 
-    public String getComment(){
+    String getComment(){
         return comment;
     }
 
-    public String getUser(){
+    String getUser(){
         return user;
     }
 }

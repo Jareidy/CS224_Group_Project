@@ -6,19 +6,21 @@ import javafx.scene.image.Image;
 
 public class Picture {
 
-    private String title;
-    private Image imageLink;
-    private String location;
-    private String description;
-    ObservableList<Comment> comments = FXCollections.observableArrayList();
+    private final String title;
+    private final Image imageLink;
+    private final String location;
+    private final String description;
+    private final ObservableList<Comment> comments = FXCollections.observableArrayList();
     private Integer likes=0;
     private Integer dislikes=0;
+    private final String fileExtension;
 
-    public Picture(String title, Image imageLink, String location, String description){
+    public Picture(String title, Image imageLink, String location, String description,String fileExtension){
         this.title = title;
         this.imageLink = imageLink;
         this.location = location;
         this.description = description;
+        this.fileExtension=fileExtension;
     }
 
     public Image getImageLink() {
@@ -34,10 +36,6 @@ public class Picture {
     }
 
     public String getTitle() {
-        return title;
-    }
-
-    public String titleProperty() {
         return title;
     }
 
@@ -68,12 +66,12 @@ public class Picture {
         return commentUser;
     }
 
-    public void addLike(){
-        likes++;
+    public void addLike(int num){
+        likes=likes+num;
     }
 
-    public void addDislike(){
-        dislikes++;
+    public void addDislike(int num){
+        dislikes=dislikes+num;
     }
 
     public Integer getLikes() {
@@ -83,4 +81,9 @@ public class Picture {
     public Integer getDislikes() {
         return dislikes;
     }
+
+    public String getFileExtension(){
+        return fileExtension;
+    }
+
 }

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1000.0" style="-fx-background-color: bcebf2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ImageViewController">
    <children>
@@ -30,6 +28,9 @@
       <HBox alignment="CENTER" fillHeight="false" layoutY="64.0" prefHeight="448.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0">
          <children>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="468.0" prefWidth="550.0">
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
                <children>
                   <Label fx:id="imageTitle" alignment="CENTER" prefHeight="17.0" prefWidth="558.0" textAlignment="CENTER">
                      <font>
@@ -40,6 +41,9 @@
                      </VBox.margin>
                   </Label>
                   <HBox alignment="CENTER" prefHeight="296.0" prefWidth="509.0">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
                      <children>
                         <ImageView fx:id="imageView" fitHeight="288.0" fitWidth="509.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
@@ -47,15 +51,15 @@
                            </HBox.margin>
                         </ImageView>
                      </children>
-                     <VBox.margin>
-                        <Insets top="40.0" />
-                     </VBox.margin>
                   </HBox>
                   <HBox alignment="CENTER" fillHeight="false" prefHeight="63.0" prefWidth="278.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
                      <children>
                         <ImageView fitHeight="63.0" fitWidth="59.0" onMouseClicked="#handleLikeClick" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../res/happycloud.png" />
+                              <Image url="@../res/15148-illustration-of-the-sun-with-clouds-pv.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="like" prefHeight="30.0" prefWidth="60.0" text="asdf" textFill="#3bb530">
@@ -68,7 +72,7 @@
                         </Label>
                         <ImageView fitHeight="57.0" fitWidth="62.0" onMouseClicked="#handleDislikeClick" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../res/sadcloud.png" />
+                              <Image url="@../res/Thunder_Rain_and_Snow_Weather_Icon_PNG_Clip_Art-1519.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="dislike" prefHeight="17.0" prefWidth="46.0" text="adsf" textFill="#da6b6b">
@@ -80,18 +84,18 @@
                            </HBox.margin>
                         </Label>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
                   </HBox>
                </children>
-               <HBox.margin>
-                  <Insets top="5.0" />
-               </HBox.margin>
             </VBox>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="457.0" prefWidth="444.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
                <children>
                   <HBox prefHeight="225.0" prefWidth="397.0">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="10.0" top="40.0" />
+                     </VBox.margin>
                      <children>
                         <ListView fx:id="userList" prefHeight="225.0" prefWidth="170.0" />
                         <ListView fx:id="commentsList" prefHeight="225.0" prefWidth="261.0">
@@ -100,11 +104,11 @@
                            </HBox.margin>
                         </ListView>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="10.0" top="40.0" />
-                     </VBox.margin>
                   </HBox>
                   <HBox alignment="BOTTOM_LEFT" prefHeight="106.0" prefWidth="392.0">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
                      <children>
                         <TextArea fx:id="inputComment" prefHeight="106.0" prefWidth="296.0" promptText="Comment..." />
                         <Button mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="42.0" prefWidth="66.0" text="Submit">
@@ -113,14 +117,8 @@
                            </HBox.margin>
                         </Button>
                      </children>
-                     <VBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </VBox.margin>
                   </HBox>
                </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
             </VBox>
          </children>
       </HBox>
