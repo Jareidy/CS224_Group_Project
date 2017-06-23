@@ -7,7 +7,7 @@ import model.Main;
 
 import java.awt.*;
 
-public class LogInViewController {
+public class LoginViewController {
     public Main main;
 
     @FXML
@@ -26,9 +26,7 @@ public class LogInViewController {
         main.showMainWindow();
     }
 
-    public void handleConfirmButton(){
+    public void handleConfirmButton() {
 
     }
-
-
 }

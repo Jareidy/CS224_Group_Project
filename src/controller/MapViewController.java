@@ -4,7 +4,7 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import model.ImageWarehouse;
+import model.ImageManager;
 import model.Main;
 import model.Picture;
 
@@ -20,7 +20,7 @@ public class MapViewController {
     private TableView<Picture> imageTable;
 
     private final ObservableList<Picture>imageData = FXCollections.observableArrayList();
-    private ImageWarehouse images = new ImageWarehouse();
+    private ImageManager images = new ImageManager();
     public void setMain(Main main){
         this.main = main;
     }

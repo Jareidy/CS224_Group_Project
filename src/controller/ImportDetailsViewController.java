@@ -33,12 +33,14 @@ public class ImportDetailsViewController {
     public void handleBackButton(){
         main.showMainWindow();
     }
+
     @FXML
     public void handleChooseFile(){
         importPhoto.chooseFile();
         setFilePathLabel();
         displayChosenImage();
     }
+
     @FXML
     public void handleImportPhoto() throws InterruptedException {
         collectTitleInput();
@@ -68,6 +70,10 @@ public class ImportDetailsViewController {
         Image image = new Image(path);
         ImageManager imageManager = new ImageManager();
         imageManager.addImage(title,image,location,description);
+    }
+
+    private void setErrorLabel() {
+        errorLabel.setText("You must enter all fields.");
     }
 
     public void displayErrorFileAlreadyExists() {
