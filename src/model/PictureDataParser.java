@@ -19,16 +19,15 @@ public class PictureDataParser {
     public static final ImageManager imageManager = new ImageManager();
     private Document document;
 
-    public void parsePictureData() {
+    public void parsePictureData(File file) {
         try{
-            readXMLFile();
+            readXMLFile(file);
         }catch(IOException | SAXException | ParserConfigurationException e){
             e.printStackTrace();
         }
     }
 
-    private void readXMLFile() throws IOException, SAXException, ParserConfigurationException {
-        File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
+    private void readXMLFile(File file) throws IOException, SAXException, ParserConfigurationException {
         if(file.length()==0){
         }else {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -44,16 +43,22 @@ public class PictureDataParser {
             Node pictureNode = pictureNodes.item(i);
             if(pictureNode.getNodeType()==Node.ELEMENT_NODE){
                 Element pictureElement = (Element) pictureNode;
+                PictureBuilder builder = new PictureBuilder();
                 String title =pictureElement.getAttribute("pictureName");
+                builder.setTitle(title);
                 String imagePath = pictureElement.getElementsByTagName("fileName").item(0).getTextContent();
                 String location = pictureElement.getElementsByTagName("location").item(0).getTextContent();
+                builder.setLocation(location);
                 String description = pictureElement.getElementsByTagName("description").item(0).getTextContent();
+                builder.setDescription(description);
                 Integer positiveRatings = Integer.valueOf(pictureElement.getElementsByTagName("positiveRatings").item(0).getTextContent());
                 Integer negativeRatings = Integer.valueOf(pictureElement.getElementsByTagName("negativeRatings").item(0).getTextContent());
                 Image image = new Image(imagePath);
+                builder.setImageLink(image);
                 String fileExtension = imagePath.substring(imagePath.lastIndexOf("."), imagePath.length());
-                System.out.println(fileExtension);
-                imageManager.addImage(title,image,location,description,fileExtension);
+                builder.setExtension(fileExtension);
+                Picture newPicture = builder.build();
+                imageManager.addImage(newPicture);
                 readCommentsFromDocument(i);
                 imageManager.getImages().get(i).addLike(positiveRatings);
                 imageManager.getImages().get(i).addDislike(negativeRatings);
@@ -73,7 +78,6 @@ public class PictureDataParser {
                 Element commentElement = (Element) commentNode;
                 String user = commentElement.getAttribute("username");
                 String comment = commentElement.getElementsByTagName("comment").item(0).getTextContent();
-                imageManager.getImages().get(i).returnComments().clear();
                 imageManager.getImages().get(i).addComment(user,comment);
             }
         }

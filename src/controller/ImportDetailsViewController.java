@@ -68,12 +68,19 @@ public class ImportDetailsViewController {
         String description = imageDescriptionField.getText();
         String path = "file:///"+System.getProperty("user.dir")+"/src/res/"+title+importPhoto.getFileExtension();
         Image image = new Image(path);
+        PictureBuilder builder = new PictureBuilder();
+        builder.setTitle(title);
+        builder.setExtension(importPhoto.getFileExtension());
+        builder.setDescription(description);
+        builder.setLocation(location);
+        builder.setImageLink(image);
+        Picture newPicture = builder.build();
         if(imageLocationField.getText().equals("")||imageDescriptionField.getText().equals("")){
             setErrorLabel();
         }
         else {
             ImageManager imageManager = PictureDataParser.imageManager;
-            imageManager.addImage(title, image, location, description, importPhoto.getFileExtension());
+            imageManager.addImage(newPicture);
             xmlHandler.XMLWriter();
             main.showMainWindow();
         }
