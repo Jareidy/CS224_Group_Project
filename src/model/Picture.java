@@ -15,12 +15,12 @@ public class Picture {
     private Integer dislikes=0;
     private final String fileExtension;
 
-    public Picture(String title, Image imageLink, String location, String description,String fileExtension){
-        this.title = title;
-        this.imageLink = imageLink;
-        this.location = location;
-        this.description = description;
-        this.fileExtension=fileExtension;
+    public Picture(PictureBuilder builder){
+        this.title = builder.title;
+        this.imageLink = builder.imageLink;
+        this.location = builder.location;
+        this.description = builder.description;
+        this.fileExtension=builder.extension;
     }
 
     public Image getImageLink() {
