@@ -9,25 +9,26 @@ import java.util.ArrayList;
 
 public class Tests {
 
-    private final ImportFile importFile = new ImportFile();
-    private ImageManager images = new ImageManager();
-    private File file = new File(System.getProperty("user.dir")+"/Test assets/"+"test.xml");
-    ArrayList<Picture> pictures = new ArrayList<>(images.getImages());
+    ImageManager manager = new ImageManager();
+
 
     @Before
     public void createTestImageManager(){
-        PictureBuilder builder = new PictureBuilder();
-        builder.setTitle("Arizona Clouds");
-        builder.setImageLink(null);
-        builder.setExtension(".jpg");
-        builder.setDescription("Pretty clouds");
-        builder.setLocation("Arizona");
-        Picture newPicture = builder.build();
-        pictures.add(newPicture);
+        for (int i = 0; i > 12; i++){
+            PictureBuilder builder = new PictureBuilder();
+            builder.setTitle("Arizona Clouds");
+            builder.setImageLink(null);
+            builder.setExtension(".jpg");
+            builder.setDescription("Pretty clouds");
+            builder.setLocation("Arizona");
+            Picture newPicture = builder.build();
+            manager.addImage(newPicture);
+        }
     }
 
     @Test
     public void findFileExtensionTest(){
+        ImportFile importFile = new ImportFile();
         File file = new File("test.jpg");
         Assert.assertEquals(".jpg",importFile.findFileExtension(file));
     }
@@ -40,7 +41,7 @@ public class Tests {
 
     @Test
     public void imageManagerPictureTest(){
-        for (Picture picture : pictures){
+        for (Picture picture : manager.getImages()){
             Assert.assertEquals("Arizona Clouds", picture.getTitle());
             Assert.assertSame(null, picture.getImageLink());
             Assert.assertEquals("Arizona", picture.getLocation());
@@ -51,9 +52,8 @@ public class Tests {
 
     @Test
     public void xmlReadWriteTest(){
+        File file = new File(System.getProperty("user.dir")+"/Test assets/"+"test.xml");
         PictureDataParser parser = new PictureDataParser();
-        ImageManager manager = new ImageManager();
-        manager.addImage(pictures.get(0));
         XMLHandler.formatXmlFile(System.getProperty("user.dir")+"/Test assets/"+"Test.xml");
         parser.parsePictureData(file);
         Assert.assertNotNull(parser.getImages());
