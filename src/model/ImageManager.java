@@ -12,10 +12,9 @@ public class ImageManager {
 
     private final ArrayList<Picture> images = new ArrayList<>();
 
-    public void addImage(String title, Image imageLink, String location, String description, String extension){
-       Picture newImage = new Picture(title,imageLink, location, description,extension);
-       images.add(newImage);
-       imageInfo.put(title,description);
+    public void addImage(Picture picture){
+       images.add(picture);
+       imageInfo.put(picture.getTitle(),picture.getDescription());
     }
 
     public ArrayList<Picture> getImages(){
