@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import model.Account;
 import model.Main;
-
 import java.awt.*;
 
 public class LoginViewController {

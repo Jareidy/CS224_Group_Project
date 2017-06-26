@@ -83,10 +83,6 @@ public class ImportDetailsViewController {
         errorLabel.setText("You must enter all fields.");
     }
 
-    private void setErrorLabel() {
-        errorLabel.setText("You must enter all fields.");
-    }
-
     public void displayErrorFileAlreadyExists() {
         errorLabel.setText("Title is already in use.");
     }

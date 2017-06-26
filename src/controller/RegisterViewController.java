@@ -28,7 +28,6 @@ public class RegisterViewController {
         main.showMainWindow();
     }
 
-    public void handleConfirmButton(){
-
+    public void handleConfirmButton() {
     }
 }
