@@ -1,5 +1,6 @@
 package model;
 
+import com.sun.javafx.geom.BoxBounds;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
@@ -9,6 +10,7 @@ public class Picture {
     private final String title;
     private final Image imageLink;
     private final String location;
+    private final String continent;
     private final String description;
     private final ObservableList<Comment> comments = FXCollections.observableArrayList();
     private Integer likes=0;
@@ -19,6 +21,7 @@ public class Picture {
         this.title = builder.title;
         this.imageLink = builder.imageLink;
         this.location = builder.location;
+        this.continent = builder.contintent;
         this.description = builder.description;
         this.fileExtension=builder.extension;
     }
@@ -86,4 +89,7 @@ public class Picture {
         return fileExtension;
     }
 
+    public String getContinent() {
+        return continent;
+    }
 }

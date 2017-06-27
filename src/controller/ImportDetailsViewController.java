@@ -1,13 +1,18 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import model.*;
 import javafx.scene.image.Image;
+
+import java.util.ArrayList;
 
 
 public class ImportDetailsViewController {
@@ -16,12 +21,14 @@ public class ImportDetailsViewController {
     static final XMLHandler xmlHandler = new XMLHandler();
     private final ImportFile importPhoto =  new ImportFile();
     private String title;
+    ObservableList<String> choices = FXCollections.observableArrayList("Asia","Africa","Australia","Europe","North America","South America");
     @FXML private TextField imageTitleField;
     @FXML private TextField imageLocationField;
     @FXML private TextArea imageDescriptionField;
     @FXML private Label filePathLabel;
     @FXML private Label errorLabel;
     @FXML private ImageView imageView;
+    @FXML private ChoiceBox choicebox;
 
     public void setMain(Main main) {
         this.main=main;
@@ -73,6 +80,7 @@ public class ImportDetailsViewController {
         builder.setExtension(importPhoto.getFileExtension());
         builder.setDescription(description);
         builder.setLocation(location);
+        builder.setContintent(choicebox.getValue().toString());
         builder.setImageLink(image);
         Picture newPicture = builder.build();
         if(imageLocationField.getText().equals("")||imageDescriptionField.getText().equals("")){
@@ -81,7 +89,7 @@ public class ImportDetailsViewController {
         else {
             ImageManager imageManager = PictureDataParser.imageManager;
             imageManager.addImage(newPicture);
-            xmlHandler.XMLWriter();
+            xmlHandler.formatXmlFile("PictureData.xml");
             main.showMainWindow();
         }
     }
@@ -92,5 +100,10 @@ public class ImportDetailsViewController {
 
     public void displayErrorFileAlreadyExists() {
         errorLabel.setText("Title is already in use.");
+    }
+
+    @FXML
+    public void initialize(){
+        choicebox.setItems(choices);
     }
 }

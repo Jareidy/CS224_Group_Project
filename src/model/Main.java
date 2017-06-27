@@ -3,24 +3,28 @@ package model;
 import controller.ImageViewController;
 import controller.ImportDetailsViewController;
 import controller.MainViewController;
+import controller.MapViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
         PictureDataParser pictureDataParser= new PictureDataParser();
-        pictureDataParser.parsePictureData();
+        File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
+        pictureDataParser.parsePictureData(file);
         launch(args);
     }
 
     private Stage primaryStage;
     private AnchorPane pane;
+    public static MainViewController mainViewController;
 
     @Override
     public void start(Stage primaryStage) {
@@ -42,11 +46,23 @@ public class Main extends Application {
         primaryStage.setMaxWidth(1000);
     }
 
+    public void showMapViewWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MapView.fxml"));
+            pane = loader.load();
+            MapViewController mapViewController = loader.getController();
+            mapViewController.setMain(this);
+            setSceneDefault();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public void showMainWindow(){
         try{
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MainView.fxml"));
             pane = loader.load();
-            MainViewController mainViewController = loader.getController();
+            mainViewController = loader.getController();
             mainViewController.setMain(this);
             setSceneDefault();
         }catch (IOException e){

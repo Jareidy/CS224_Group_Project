@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -13,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1000.0" style="-fx-background-color: bcebf2;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ImageViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1000.0" style="-fx-background-color: #84b4e4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ImageViewController">
    <children>
       <Region prefHeight="63.0" prefWidth="628.0" style="-fx-background-color: edeff2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="1000.0" AnchorPane.topAnchor="0.0">
@@ -64,10 +70,10 @@
                      <children>
                         <ImageView fitHeight="63.0" fitWidth="59.0" onMouseClicked="#handleLikeClick" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../res/15148-illustration-of-the-sun-with-clouds-pv.png" />
+                              <Image url="@../res/like_pic.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="like" prefHeight="30.0" prefWidth="60.0" text="asdf" textFill="#3bb530">
+                        <Label fx:id="like" prefHeight="30.0" prefWidth="60.0" textFill="#3bb530">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -77,10 +83,10 @@
                         </Label>
                         <ImageView fitHeight="57.0" fitWidth="164.0" onMouseClicked="#handleDislikeClick" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../teamB/src/res/sadcloud.png" />
+                              <Image url="@../res/dislike_pic.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="dislike" prefHeight="17.0" prefWidth="46.0" text="adsf" textFill="#da6b6b">
+                        <Label fx:id="dislike" prefHeight="17.0" prefWidth="46.0" textFill="#da6b6b">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>

@@ -21,13 +21,24 @@ public class ImageManager {
         return images;
     }
 
-    public ArrayList<Picture> searchImages(String location) {
+    public ArrayList<Picture> searchImagesByLocation(String location) {
         ArrayList<Picture> searchImagesArrayList = new ArrayList<>();
         for (Picture image : images) {
             if (image.getLocation().contains(location)) {
                 searchImagesArrayList.add(image);
             }
         }
+        return searchImagesArrayList;
+    }
+
+    public ArrayList<Picture> searchImagesByContinent(String continent){
+        ArrayList<Picture> searchImagesArrayList = new ArrayList<>();
+        for(Picture image : images){
+            if(image.getContinent().contains(continent)){
+                searchImagesArrayList.add(image);
+            }
+        }
+        System.out.println(searchImagesArrayList);
         return searchImagesArrayList;
     }
 }

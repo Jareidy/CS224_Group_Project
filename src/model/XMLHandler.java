@@ -36,6 +36,10 @@ public class XMLHandler {
             location.appendChild(doc.createTextNode(importedPicture.getLocation()));
             pictures.appendChild(location);
 
+            Element continent = doc.createElement("continent");
+            continent.appendChild(doc.createTextNode(importedPicture.getContinent()));
+            pictures.appendChild(continent);
+
             Element description = doc.createElement("description");
             description.appendChild(doc.createTextNode(importedPicture.getDescription()));
             pictures.appendChild(description);

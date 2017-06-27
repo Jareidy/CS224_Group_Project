@@ -49,6 +49,8 @@ public class PictureDataParser {
                 String imagePath = pictureElement.getElementsByTagName("fileName").item(0).getTextContent();
                 String location = pictureElement.getElementsByTagName("location").item(0).getTextContent();
                 builder.setLocation(location);
+                String continent = pictureElement.getElementsByTagName("continent").item(0).getTextContent();
+                builder.setContintent(continent);
                 String description = pictureElement.getElementsByTagName("description").item(0).getTextContent();
                 builder.setDescription(description);
                 Integer positiveRatings = Integer.valueOf(pictureElement.getElementsByTagName("positiveRatings").item(0).getTextContent());

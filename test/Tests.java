@@ -36,7 +36,7 @@ public class Tests {
     @Test
     public void locationSearchTest(){
         ImageManager imageManager = new ImageManager();
-        Assert.assertNotNull(imageManager.searchImages("testLocation"));
+        Assert.assertNotNull(imageManager.searchImagesByLocation("testLocation"));
     }
 
     @Test
@@ -54,7 +54,8 @@ public class Tests {
     public void xmlReadWriteTest(){
         File file = new File(System.getProperty("user.dir")+"/Test assets/"+"test.xml");
         PictureDataParser parser = new PictureDataParser();
-        XMLHandler.formatXmlFile(System.getProperty("user.dir")+"/Test assets/"+"Test.xml");
+        XMLHandler xmlHandler = new XMLHandler();
+        xmlHandler.formatXmlFile(System.getProperty("user.dir")+"/Test assets/"+"Test.xml");
         parser.parsePictureData(file);
         Assert.assertNotNull(parser.getImages());
     }

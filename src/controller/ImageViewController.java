@@ -49,7 +49,7 @@ public class ImageViewController {
     }
 
     private void updateXMLFile(){
-        ImportDetailsViewController.xmlHandler.XMLWriter();
+        ImportDetailsViewController.xmlHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
     }
 
     public void handleBackButton(){

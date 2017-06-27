@@ -9,6 +9,7 @@ public final class PictureBuilder {
     protected String location;
     protected String description;
     protected String extension;
+    public String contintent;
 
     public void setTitle(String title) {
         this.title = title;
@@ -20,6 +21,10 @@ public final class PictureBuilder {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void setContintent(String contintent) {
+        this.contintent = contintent;
     }
 
     public void setDescription(String description) {

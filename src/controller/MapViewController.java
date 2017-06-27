@@ -1,52 +1,68 @@
 package controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import model.ImageManager;
+import javafx.scene.control.TextField;
 import model.Main;
-import model.Picture;
 
-import javafx.scene.control.TableView;
-import java.awt.*;
-import java.util.ArrayList;
+import static model.Main.mainViewController;
+
 
 public class MapViewController {
     private Main main;
     @FXML
     TextField searchField;
-    @FXML
-    private TableView<Picture> imageTable;
 
-    private final ObservableList<Picture>imageData = FXCollections.observableArrayList();
-    private ImageManager images = new ImageManager();
     public void setMain(Main main){
         this.main = main;
     }
 
-    public void searchForLocation(){
+    @FXML
+    public void handleBackButton(){
+        main.showMainWindow();
+    }
+
+    @FXML
+    public void handleSelectSouthAmerica(){
+        handleSearchForLocationByContinent("South America");
+    }
+
+    @FXML
+    public void handleSelectNorthAmerica(){
+        handleSearchForLocationByContinent("North America");
+    }
+
+    @FXML
+    public void handleSelectAustralia(){
+        handleSearchForLocationByContinent("Australia");
+    }
+
+    @FXML
+    public void handleSelectAfrica(){
+        handleSearchForLocationByContinent("Africa");
+    }
+
+    @FXML
+    public void handleSelectEurope(){
+        handleSearchForLocationByContinent("Europe");
+    }
+
+    @FXML
+    public void handleSelectAsia(){
+        handleSearchForLocationByContinent("Asia");
+    }
+
+    public void handleSearchForLocationByContinent(String continent){
+        main.showMainWindow();
+        mainViewController.searchForContinent(continent);
+    }
+
+    @FXML
+    public void handleSearchForLocation(){
         String location = searchField.getText();
         if(location.equals("")){
-            fillImageTable();
         }else{
-            fillTableWithSearchItems(location);
+            main.showMainWindow();
+            mainViewController.searchForLocation(location);
         }
-    }
-
-    public void fillImageTable(){
-        for(int i = 0; i < images.getImages().size();i++){
-            imageData.add(images.getImages().get(i));
-        }
-        imageTable.setItems(imageData);
-    }
-
-    public void fillTableWithSearchItems(String location){
-        ArrayList<Picture> searchedImage;
-        searchedImage = images.searchImages(location);
-        imageData.removeAll();
-        for(Picture image: searchedImage){
-            imageData.add(image);
-        }
-        imageTable.setItems(imageData);
     }
 }
