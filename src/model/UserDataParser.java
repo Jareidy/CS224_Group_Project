@@ -22,7 +22,6 @@ public class UserDataParser {
 
     public void parseUserData() {
         try{
-            System.out.println("1");
             readXMLFile();
         }catch(IOException | SAXException | ParserConfigurationException e){
             e.printStackTrace();
@@ -30,7 +29,6 @@ public class UserDataParser {
     }
 
     private void readXMLFile() throws IOException, SAXException, ParserConfigurationException {
-        System.out.println("2");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             document = builder.parse(System.getProperty("user.dir")+"/src/res/Users.xml");
@@ -38,7 +36,6 @@ public class UserDataParser {
     }
 
     private void readImageFromDocument() {
-        System.out.println("3");
         NodeList userNodes = document.getElementsByTagName("username");
         for(int i = 0; i<userNodes.getLength();i++){
             Node userNode = userNodes.item(i);
@@ -58,9 +55,7 @@ public class UserDataParser {
     }
 
     public void addUser(User user){
-        System.out.println("5");
         users.add(user);
-        System.out.println(users);
     }
 
 }

@@ -22,12 +22,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="" layoutX="140.0" layoutY="2.0" />
+            <TextField fx:id="usernameField" layoutX="140.0" layoutY="2.0" />
          </children>
       </Group>
       <Group layoutX="52.0" layoutY="183.0">
          <children>
-            <PasswordField fx:id="inputPassword" layoutX="135.0" layoutY="1.0" />
+            <PasswordField fx:id="passwordField" layoutX="135.0" layoutY="1.0" />
             <Label text="Password: ">
                <font>
                   <Font size="18.0" />
@@ -46,5 +46,6 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="35.0" layoutY="105.0" prefHeight="17.0" prefWidth="317.0" textFill="RED" />
    </children>
 </AnchorPane>
