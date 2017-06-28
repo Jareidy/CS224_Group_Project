@@ -54,6 +54,7 @@ public class Main extends Application {
             pane = loader.load();
             mainViewController = loader.getController();
             mainViewController.setMain(this);
+            mainViewController.setLoginButtons();
             setSceneDefault();
         }catch (IOException e){
             e.printStackTrace();

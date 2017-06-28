@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -12,6 +13,8 @@ import model.*;
 
 import java.net.URL;
 import java.util.*;
+
+import static controller.LoginViewController.loginViewController;
 
 public class MainViewController implements Initializable{
 
@@ -27,10 +30,31 @@ public class MainViewController implements Initializable{
     private TableColumn<Picture, String> locationColumn;
     @FXML
     private TextField searchField;
+    @FXML
+    private Button loginButton;
+    @FXML
+    private Button registerButton;
+    @FXML
+    private Button logoutButton;
 
 
     public void setMain(Main main) {
         this.main= main;
+    }
+
+    public void setLoginButtons(){
+        if(loginViewController.login){
+            logoutButton.defaultButtonProperty();
+            registerButton.isDisabled();
+            registerButton.setVisible(false);
+            loginButton.isDisabled();
+            loginButton.setVisible(false);
+        }else{
+            logoutButton.isDisabled();
+            logoutButton.setVisible(false);
+            registerButton.defaultButtonProperty();
+            loginButton.defaultButtonProperty();
+        }
     }
 
     private void fillImageTable(){
@@ -49,6 +73,13 @@ public class MainViewController implements Initializable{
     @FXML
     public void handleRegister(){
         main.showRegisterViewWindow();
+    }
+
+    @FXML
+    public void handleLogout(){
+        loginViewController.login=false;
+        loginViewController.currentUser=null;
+        main.showMainWindow();
     }
 
     @FXML

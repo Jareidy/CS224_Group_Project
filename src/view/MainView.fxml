@@ -61,12 +61,13 @@
                      </Button>
                   <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="199.0">
                      <children>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLogin" text="Login">
+                        <Button fx:id="loginButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLogin" text="Login">
                            <HBox.margin>
-                              <Insets right="30.0" />
+                              <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleRegister" text="Register" />
+                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+                        <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegister" text="Register" />
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
