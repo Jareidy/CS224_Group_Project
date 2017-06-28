@@ -3,6 +3,7 @@ import model.picture.Picture;
 import model.picture.PictureBuilder;
 import model.picture.PictureDataParser;
 import model.picture.PictureXMLHandler;
+import model.user.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,5 +63,8 @@ public class Tests {
         Assert.assertNotNull(parser.getImages());
     }
 
-    
+    @Test
+    public void userTest(){
+        User user = new User("jon", "jon", "jon@jon.com");
+    }
 }
