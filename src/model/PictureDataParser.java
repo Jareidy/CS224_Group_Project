@@ -74,7 +74,6 @@ public class PictureDataParser {
 
     private void readCommentsFromDocument(int i,Element pictureElement) {
         NodeList commentNodes = pictureElement.getElementsByTagName("comments");
-        System.out.println(commentNodes.getLength());
         for(int j = 0; j<commentNodes.getLength();j++){
             Node commentNode = commentNodes.item(j);
             if(commentNode.getNodeType()==Node.ELEMENT_NODE) {

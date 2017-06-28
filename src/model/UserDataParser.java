@@ -1,0 +1,66 @@
+package model;
+
+import javafx.scene.image.Image;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static model.UsersXMLHandler.userDataParser;
+
+public class UserDataParser {
+
+    public  ArrayList<User> users = new ArrayList<>();
+    private Document document;
+
+    public void parseUserData() {
+        try{
+            System.out.println("1");
+            readXMLFile();
+        }catch(IOException | SAXException | ParserConfigurationException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void readXMLFile() throws IOException, SAXException, ParserConfigurationException {
+        System.out.println("2");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            document = builder.parse(System.getProperty("user.dir")+"/src/res/Users.xml");
+            readImageFromDocument();
+    }
+
+    private void readImageFromDocument() {
+        System.out.println("3");
+        NodeList userNodes = document.getElementsByTagName("username");
+        for(int i = 0; i<userNodes.getLength();i++){
+            Node userNode = userNodes.item(i);
+            if(userNode.getNodeType()==Node.ELEMENT_NODE){
+                Element userElement = (Element) userNode;
+                String username =userElement.getAttribute("username");
+                String password = userElement.getElementsByTagName("password").item(0).getTextContent();
+                String emailAddress = userElement.getElementsByTagName("emailAddress").item(0).getTextContent();
+                User newUser = new User(username,password,emailAddress);
+                userDataParser.addUser(newUser);
+            }
+        }
+    }
+
+    public ArrayList<User> getUsersArrayList(){
+        return users;
+    }
+
+    public void addUser(User user){
+        System.out.println("5");
+        users.add(user);
+        System.out.println(users);
+    }
+
+}

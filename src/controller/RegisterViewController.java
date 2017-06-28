@@ -2,35 +2,48 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Main;
+import model.User;
+import model.UsersXMLHandler;
 
-import java.awt.*;
+import static model.UsersXMLHandler.userDataParser;
 
 public class RegisterViewController {
 
     public Main main;
     public Stage secondaryStage;
 
-    @FXML private TextField inputUserName;
-    @FXML private PasswordField inputPassword;
-    @FXML private TextField inputEmailAddress;
-    @FXML private Label title;
-    @FXML private Label userNameLabel;
-    @FXML private Label passwordLabel;
-    @FXML private Label emailAddressLabel;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private TextField emailAddressField;
 
     public void setMain(Main main, Stage secondaryStage) {
         this.main=main;
         this.secondaryStage=secondaryStage;
     }
 
+    @FXML
     public void handleBackButton(){
         secondaryStage.close();
         main.showMainWindow();
     }
 
+    @FXML
     public void handleConfirmButton() {
+        createUser();
+        UsersXMLHandler usersXMLHandler = new UsersXMLHandler();
+        usersXMLHandler.formatXmlFile();
+        secondaryStage.close();
+        main.showMainWindow();
     }
 
+    public void createUser(){
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String emailAddress = emailAddressField.getText();
+        User user = new User(username,password,emailAddress);
+        userDataParser.addUser(user);
+    }
 }

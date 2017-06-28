@@ -11,11 +11,14 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
+import static model.UsersXMLHandler.userDataParser;
+
 public class Main extends Application {
 
     public static void main(String[] args) {
         PictureDataParser pictureDataParser= new PictureDataParser();
         File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
+        userDataParser.parseUserData();
         pictureDataParser.parsePictureData(file);
         launch(args);
     }
