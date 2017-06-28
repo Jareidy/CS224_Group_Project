@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Main;
 import model.user.User;
+import model.user.UserManager;
+
+import java.util.ArrayList;
 
 import static model.user.UsersXMLHandler.userDataParser;
 
@@ -38,15 +41,16 @@ public class LoginViewController {
     public void checkCredentials(){
         String username = usernameField.getText();
         String password = passwordField.getText();
+        ArrayList<User> users = UserManager.returnUsers();
 
-            for (int i = 0; i < userDataParser.users.size(); i++) {
-                if (userDataParser.users.get(i).getPassword().equals(password) && userDataParser.users.get(i).getUsername().equals(username)) {
-                    loginViewController.currentUser = userDataParser.users.get(i);
-                    login();
-                    break;
-                }
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getPassword().equals(password) && users.get(i).getUsername().equals(username)) {
+                loginViewController.currentUser = users.get(i);
+                login();
+                break;
             }
-            invalidCredentials();
+        }
+        invalidCredentials();
     }
 
     private void login() {
