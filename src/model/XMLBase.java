@@ -11,9 +11,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-/**
- * Created by Jordan Reidy on 6/28/2017.
- */
 public class XMLBase {
 
     public void createXmlFile(Document doc, String localFileName){
