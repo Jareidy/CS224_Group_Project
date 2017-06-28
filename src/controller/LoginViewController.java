@@ -10,9 +10,11 @@ import model.User;
 import static model.UsersXMLHandler.userDataParser;
 
 public class LoginViewController {
+    public static LoginViewController loginViewController = new LoginViewController();
     public Main main;
     public Stage secondaryStage;
-    public User currentUser;
+    public User currentUser = null;
+    public boolean login = false;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;
@@ -39,7 +41,7 @@ public class LoginViewController {
 
             for (int i = 0; i < userDataParser.users.size(); i++) {
                 if (userDataParser.users.get(i).getPassword().equals(password) && userDataParser.users.get(i).getUsername().equals(username)) {
-                    currentUser = userDataParser.users.get(i);
+                    loginViewController.currentUser = userDataParser.users.get(i);
                     login();
                     break;
                 }
@@ -48,6 +50,7 @@ public class LoginViewController {
     }
 
     private void login() {
+        loginViewController.login = true;
         main.showMainWindow();
         secondaryStage.close();
     }

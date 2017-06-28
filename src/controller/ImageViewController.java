@@ -8,6 +8,8 @@ import javafx.scene.image.ImageView;
 import model.Main;
 import model.Picture;
 
+import static controller.LoginViewController.loginViewController;
+
 public class ImageViewController {
 
     @FXML private ImageView imageView;
@@ -68,9 +70,15 @@ public class ImageViewController {
 
     public void handleSubmitButton(){
         String newComment = inputComment.getText();
+        String username;
         if(newComment.equals("")){
         }else {
-            picture.addComment("Anonymous", newComment);
+            if(loginViewController.login) {
+                username = loginViewController.getCurrentUser().getUsername();
+            }else{
+                username = "anonymous";
+            }
+            picture.addComment(username, newComment);
             inputComment.clear();
             setComments();
         }
