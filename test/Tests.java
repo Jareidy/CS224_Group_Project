@@ -4,16 +4,19 @@ import model.picture.PictureBuilder;
 import model.picture.PictureDataParser;
 import model.picture.PictureXMLHandler;
 import model.user.User;
+import model.user.UserManager;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Tests {
 
     ImageManager manager = new ImageManager();
-
+    User user = new User("jon", "jon", "jon@jon.com");
+    UserManager users = new UserManager();
 
     @Before
     public void createTestImageManager(){
@@ -65,6 +68,20 @@ public class Tests {
 
     @Test
     public void userTest(){
-        User user = new User("jon", "jon", "jon@jon.com");
+        Assert.assertEquals("jon", user.getUsername());
+        Assert.assertEquals("jon", user.getPassword());
+        Assert.assertEquals("jon@jon.com", user.getEmailAddress());
+    }
+
+    @Test
+    public void userManagerTest(){
+        for (int i = 0; i < 12;i++) {
+            users.addUser(user);
+        }
+        ArrayList<User> arrayUsers = users.returnUsers();
+        for (User user: arrayUsers){
+            Assert.assertEquals("jon", user.getUsername());
+        }
+
     }
 }
