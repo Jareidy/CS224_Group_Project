@@ -1,6 +1,5 @@
-package model;
+package model.user;
 
-import javafx.scene.image.Image;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -11,9 +10,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import static model.UsersXMLHandler.userDataParser;
 
 public class UserDataParser {
 

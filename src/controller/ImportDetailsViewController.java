@@ -11,6 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import model.*;
 import javafx.scene.image.Image;
+import model.picture.Picture;
+import model.picture.PictureBuilder;
+import model.picture.PictureDataParser;
+import model.picture.PictureXMLHandler;
 
 
 public class ImportDetailsViewController {

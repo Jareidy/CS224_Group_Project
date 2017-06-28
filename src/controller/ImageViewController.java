@@ -6,7 +6,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import model.Main;
-import model.Picture;
+import model.picture.Picture;
 
 import static controller.LoginViewController.loginViewController;
 

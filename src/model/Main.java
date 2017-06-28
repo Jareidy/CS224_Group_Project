@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.picture.Picture;
+import model.picture.PictureDataParser;
 
 import java.io.File;
 import java.io.IOException;
 
-import static model.UsersXMLHandler.userDataParser;
+import static model.user.UsersXMLHandler.userDataParser;
 
 public class Main extends Application {
 

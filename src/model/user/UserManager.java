@@ -1,10 +1,7 @@
-package model;
+package model.user;
 
 import java.util.ArrayList;
 
-/**
- * Created by Jordan Reidy on 6/28/2017.
- */
 public class UserManager {
 
     public static final ArrayList<User> users = new ArrayList<>();

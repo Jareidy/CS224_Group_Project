@@ -1,6 +1,7 @@
-package model;
+package model.picture;
 
 import javafx.scene.image.Image;
+import model.ImageManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

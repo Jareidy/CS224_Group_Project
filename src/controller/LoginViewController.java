@@ -5,9 +5,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Main;
-import model.User;
+import model.user.User;
 
-import static model.UsersXMLHandler.userDataParser;
+import static model.user.UsersXMLHandler.userDataParser;
 
 public class LoginViewController {
     public static LoginViewController loginViewController = new LoginViewController();

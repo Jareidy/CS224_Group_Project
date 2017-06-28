@@ -10,6 +10,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.*;
+import model.picture.Picture;
+import model.picture.PictureDataParser;
 
 import java.net.URL;
 import java.util.*;

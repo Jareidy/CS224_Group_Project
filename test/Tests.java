@@ -1,4 +1,8 @@
 import model.*;
+import model.picture.Picture;
+import model.picture.PictureBuilder;
+import model.picture.PictureDataParser;
+import model.picture.PictureXMLHandler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

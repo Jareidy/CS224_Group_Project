@@ -1,6 +1,5 @@
-package model;
+package model.picture;
 
-import com.sun.javafx.geom.BoxBounds;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;

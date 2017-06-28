@@ -1,4 +1,4 @@
-package model;
+package model.picture;
 
 public class Comment {
 

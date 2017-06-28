@@ -1,6 +1,6 @@
 package model;
 
-import javafx.scene.image.Image;
+import model.picture.Picture;
 
 import java.util.ArrayList;
 import java.util.HashMap;
