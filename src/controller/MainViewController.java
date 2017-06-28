@@ -42,6 +42,16 @@ public class MainViewController implements Initializable{
     }
 
     @FXML
+    public void handleLogin(){
+        main.showLoginViewWindow();
+    }
+
+    @FXML
+    public void handleRegister(){
+        main.showRegisterViewWindow();
+    }
+
+    @FXML
     public void handleGetTextFieldText(){
         String location = searchField.getText();
         searchForLocation(location);

@@ -61,7 +61,7 @@ public class PictureDataParser {
                 builder.setExtension(fileExtension);
                 Picture newPicture = builder.build();
                 imageManager.addImage(newPicture);
-                readCommentsFromDocument(i);
+                readCommentsFromDocument(i,pictureElement);
                 imageManager.getImages().get(i).addLike(positiveRatings);
                 imageManager.getImages().get(i).addDislike(negativeRatings);
             }
@@ -72,8 +72,9 @@ public class PictureDataParser {
         return imageManager.getImages();
     }
 
-    private void readCommentsFromDocument(int i) {
-        NodeList commentNodes = document.getElementsByTagName("comments");
+    private void readCommentsFromDocument(int i,Element pictureElement) {
+        NodeList commentNodes = pictureElement.getElementsByTagName("comments");
+        System.out.println(commentNodes.getLength());
         for(int j = 0; j<commentNodes.getLength();j++){
             Node commentNode = commentNodes.item(j);
             if(commentNode.getNodeType()==Node.ELEMENT_NODE) {

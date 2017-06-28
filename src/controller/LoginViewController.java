@@ -2,29 +2,32 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
 import model.Account;
 import model.Main;
 import java.awt.*;
 
 public class LoginViewController {
     public Main main;
+    public Stage secondaryStage;
+    @FXML private TextField inputUserName;
+    @FXML private PasswordField inputPassword;
+    @FXML private Label title;
+    @FXML private Label userNameLabel;
+    @FXML private Label passwordLabel;
+
+    public void setMain(Main main, Stage secondaryStage) {
+        this.main=main;
+        this.secondaryStage=secondaryStage;
+    }
 
     @FXML
-    private TextField inputUserName;
-    @FXML
-    private PasswordField inputPassword;
-
-    @FXML
-    private Label title;
-    @FXML
-    private Label userNameLabel;
-    @FXML
-    private Label passwordLabel;
-
     public void handleBackButton(){
+        secondaryStage.close();
         main.showMainWindow();
     }
 
+    @FXML
     public void handleConfirmButton() {
 
     }

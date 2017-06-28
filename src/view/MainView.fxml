@@ -59,6 +59,19 @@
                              <Insets top="10.0" />
                          </VBox.margin>
                      </Button>
+                  <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="199.0">
+                     <children>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLogin" text="Login">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleRegister" text="Register" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
                  </children>
               </VBox>
               <TableView fx:id="imageTable" onMouseClicked="#handleClickedImage" prefHeight="459.0" prefWidth="467.0">

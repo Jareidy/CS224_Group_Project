@@ -13,10 +13,10 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.util.ArrayList;
 
-public class XMLHandler {
+public class UsersXMLHandler {
 
     public void formatXmlFile(String localFileName){
-        
+
         ArrayList<Picture> importedPictures = PictureDataParser.imageManager.getImages();
 
         Document doc = docCreator();

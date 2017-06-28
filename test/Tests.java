@@ -1,11 +1,9 @@
-import javafx.scene.image.Image;
 import model.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.ArrayList;
 
 public class Tests {
 
@@ -54,8 +52,8 @@ public class Tests {
     public void xmlReadWriteTest(){
         File file = new File(System.getProperty("user.dir")+"/Test assets/"+"test.xml");
         PictureDataParser parser = new PictureDataParser();
-        XMLHandler xmlHandler = new XMLHandler();
-        xmlHandler.formatXmlFile(System.getProperty("user.dir")+"/Test assets/"+"Test.xml");
+        PictureXMLHandler pictureXmlHandler = new PictureXMLHandler();
+        pictureXmlHandler.formatXmlFile(System.getProperty("user.dir")+"/Test assets/"+"Test.xml");
         parser.parsePictureData(file);
         Assert.assertNotNull(parser.getImages());
     }

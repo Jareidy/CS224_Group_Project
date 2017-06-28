@@ -1,13 +1,11 @@
 package model;
 
-import controller.ImageViewController;
-import controller.ImportDetailsViewController;
-import controller.MainViewController;
-import controller.MapViewController;
+import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -23,6 +21,7 @@ public class Main extends Application {
     }
 
     private Stage primaryStage;
+    private Stage secondaryStage;
     private AnchorPane pane;
     public static MainViewController mainViewController;
 
@@ -46,24 +45,24 @@ public class Main extends Application {
         primaryStage.setMaxWidth(1000);
     }
 
-    public void showMapViewWindow(){
-        try{
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MapView.fxml"));
-            pane = loader.load();
-            MapViewController mapViewController = loader.getController();
-            mapViewController.setMain(this);
-            setSceneDefault();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
     public void showMainWindow(){
         try{
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MainView.fxml"));
             pane = loader.load();
             mainViewController = loader.getController();
             mainViewController.setMain(this);
+            setSceneDefault();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showMapViewWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MapView.fxml"));
+            pane = loader.load();
+            MapViewController mapViewController = loader.getController();
+            mapViewController.setMain(this);
             setSceneDefault();
         }catch (IOException e){
             e.printStackTrace();
@@ -91,6 +90,40 @@ public class Main extends Application {
             ImportDetailsViewController importDetailsViewController = loader.getController();
             importDetailsViewController.setMain(this);
             setSceneDefault();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showLoginViewWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/LogInView.fxml"));
+            pane = loader.load();
+            Scene scene = new Scene(pane);
+            secondaryStage = new Stage();
+            LoginViewController loginViewController = loader.getController();
+            loginViewController.setMain(this,secondaryStage);
+            secondaryStage.initOwner(primaryStage);
+            secondaryStage.initModality(Modality.WINDOW_MODAL);
+            secondaryStage.setScene(scene);
+            secondaryStage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showRegisterViewWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/RegisterView.fxml"));
+            pane = loader.load();
+            Scene scene = new Scene(pane);
+            secondaryStage = new Stage();
+            RegisterViewController registerViewController = loader.getController();
+            registerViewController.setMain(this,secondaryStage);
+            secondaryStage.initOwner(primaryStage);
+            secondaryStage.initModality(Modality.WINDOW_MODAL);
+            secondaryStage.setScene(scene);
+            secondaryStage.show();
         }catch (IOException e){
             e.printStackTrace();
         }

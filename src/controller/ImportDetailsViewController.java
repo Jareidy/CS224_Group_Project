@@ -12,13 +12,11 @@ import javafx.scene.image.ImageView;
 import model.*;
 import javafx.scene.image.Image;
 
-import java.util.ArrayList;
-
 
 public class ImportDetailsViewController {
 
     private Main main;
-    static final XMLHandler xmlHandler = new XMLHandler();
+    static final PictureXMLHandler PICTURE_XML_HANDLER = new PictureXMLHandler();
     private final ImportFile importPhoto =  new ImportFile();
     private String title;
     ObservableList<String> choices = FXCollections.observableArrayList("Asia","Africa","Australia","Europe","North America","South America");
@@ -89,7 +87,7 @@ public class ImportDetailsViewController {
         else {
             ImageManager imageManager = PictureDataParser.imageManager;
             imageManager.addImage(newPicture);
-            xmlHandler.formatXmlFile("PictureData.xml");
+            PICTURE_XML_HANDLER.formatXmlFile("PictureData.xml");
             main.showMainWindow();
         }
     }
