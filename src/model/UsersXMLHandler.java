@@ -16,12 +16,13 @@ import java.util.ArrayList;
 public class UsersXMLHandler {
 
     public static UserDataParser userDataParser = new UserDataParser();
+    XMLBase xmlCreator = new XMLBase();
 
-    public void formatXmlFile(){
+    public void formatXmlFile(String localFileName){
 
-        ArrayList<User> parsedUsers = userDataParser.getUsersArrayList();
+        ArrayList<User> parsedUsers = UserManager.returnUsers();
 
-        Document doc = docCreator();
+        Document doc = xmlCreator.docCreator();
 
         Element rootElement = doc.createElement("users");
         doc.appendChild(rootElement);
@@ -38,35 +39,7 @@ public class UsersXMLHandler {
             emailAddress.appendChild((doc.createTextNode(parsedUser.getEmailAddress())));
             users.appendChild(emailAddress);
         }
-        createXmlFile(doc);
+        xmlCreator.createXmlFile(doc, localFileName);
 
-    }
-
-    public void createXmlFile(Document doc){
-        try{
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(System.getProperty("user.dir")+"/src/res/Users.xml");
-
-            transformer.transform(source, result);
-        }
-        catch(TransformerException e){
-            e.printStackTrace();
-        }
-    }
-
-    public Document docCreator(){
-        Document doc = null;
-        try {
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-            doc = docBuilder.newDocument();
-        }
-        catch(ParserConfigurationException e){
-            e.printStackTrace();
-        }
-        return doc;
     }
 }

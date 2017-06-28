@@ -4,9 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Main;
-import model.User;
-import model.UsersXMLHandler;
+import model.*;
 
 import static model.UsersXMLHandler.userDataParser;
 
@@ -34,7 +32,7 @@ public class RegisterViewController {
     public void handleConfirmButton() {
         createUser();
         UsersXMLHandler usersXMLHandler = new UsersXMLHandler();
-        usersXMLHandler.formatXmlFile();
+        usersXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Users.xml");
         secondaryStage.close();
         main.showMainWindow();
     }
@@ -44,6 +42,6 @@ public class RegisterViewController {
         String password = passwordField.getText();
         String emailAddress = emailAddressField.getText();
         User user = new User(username,password,emailAddress);
-        userDataParser.addUser(user);
+        UserManager.addUser(user);
     }
 }

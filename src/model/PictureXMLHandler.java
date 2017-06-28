@@ -15,11 +15,13 @@ import java.util.ArrayList;
 
 public class PictureXMLHandler {
 
+    XMLBase xmlCreator = new XMLBase();
+
     public void formatXmlFile(String localFileName){
         
         ArrayList<Picture> importedPictures = PictureDataParser.imageManager.getImages();
 
-        Document doc = docCreator();
+        Document doc = xmlCreator.docCreator();
 
         Element rootElement = doc.createElement("pictures");
         doc.appendChild(rootElement);
@@ -65,35 +67,7 @@ public class PictureXMLHandler {
                 comments.appendChild(comment);
             }
         }
-        createXmlFile(doc, localFileName);
+        xmlCreator.createXmlFile(doc, localFileName);
 
-    }
-
-    public void createXmlFile(Document doc, String localFileName){
-        try{
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(localFileName);
-
-            transformer.transform(source, result);
-        }
-        catch(TransformerException e){
-            e.printStackTrace();
-        }
-    }
-
-    public Document docCreator(){
-        Document doc = null;
-        try {
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-            doc = docBuilder.newDocument();
-        }
-        catch(ParserConfigurationException e){
-            e.printStackTrace();
-        }
-        return doc;
     }
 }
