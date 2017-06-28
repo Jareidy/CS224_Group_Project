@@ -17,7 +17,7 @@ import static model.UsersXMLHandler.userDataParser;
 
 public class UserDataParser {
 
-    public  ArrayList<User> users = new ArrayList<>();
+    public static final UserManager users = new UserManager();
     private Document document;
 
     public void parseUserData() {
@@ -45,17 +45,9 @@ public class UserDataParser {
                 String password = userElement.getElementsByTagName("password").item(0).getTextContent();
                 String emailAddress = userElement.getElementsByTagName("emailAddress").item(0).getTextContent();
                 User newUser = new User(username,password,emailAddress);
-                userDataParser.addUser(newUser);
+                users.addUser(newUser);
             }
         }
-    }
-
-    public ArrayList<User> getUsersArrayList(){
-        return users;
-    }
-
-    public void addUser(User user){
-        users.add(user);
     }
 
 }
