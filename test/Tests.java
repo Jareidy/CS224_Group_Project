@@ -1,9 +1,5 @@
-import controller.ImportDetailsViewController;
 import model.*;
-import model.picture.Picture;
-import model.picture.PictureBuilder;
-import model.picture.PictureDataParser;
-import model.picture.PictureXMLHandler;
+import model.picture.*;
 import model.user.User;
 import model.user.UserManager;
 import org.junit.Assert;
@@ -15,7 +11,7 @@ import java.util.ArrayList;
 
 public class Tests {
 
-    ImageManager manager = new ImageManager();
+    PictureDataParser parser = new PictureDataParser();
     User user = new User("jon", "jon", "jon@jon.com");
     UserManager users = new UserManager();
 
@@ -29,7 +25,7 @@ public class Tests {
             builder.setDescription("Pretty clouds");
             builder.setLocation("Arizona");
             Picture newPicture = builder.build();
-            manager.addImage(newPicture);
+            parser.PICTURE_MANAGER.addImage(newPicture);
         }
     }
 
@@ -42,13 +38,13 @@ public class Tests {
 
     @Test
     public void locationSearchTest(){
-        ImageManager imageManager = new ImageManager();
-        Assert.assertNotNull(imageManager.searchImagesByLocation("testLocation"));
+        PictureManager pictureManager = new PictureManager();
+        Assert.assertNotNull(pictureManager.searchImagesByLocation("testLocation"));
     }
 
     @Test
     public void imageManagerPictureTest(){
-        for (Picture picture : manager.getImages()){
+        for (Picture picture : parser.getImages()){
             Assert.assertEquals("Arizona Clouds", picture.getTitle());
             Assert.assertSame(null, picture.getImageLink());
             Assert.assertEquals("Arizona", picture.getLocation());
@@ -60,9 +56,9 @@ public class Tests {
     @Test
     public void xmlReadWriteTest(){
         File file = new File(System.getProperty("user.dir")+"/Test assets/"+"test.xml");
-        PictureDataParser parser = new PictureDataParser();
+        parser.parsePictureData(file);
         PictureXMLHandler pictureXmlHandler = new PictureXMLHandler();
-        pictureXmlHandler.formatXmlFile(System.getProperty("user.dir")+"/Test assets/"+"Test.xml");
+        pictureXmlHandler.formatXmlFile(System.getProperty("user.dir")+"/Test assets/"+"test.xml");
         parser.parsePictureData(file);
         Assert.assertNotNull(parser.getImages());
     }
