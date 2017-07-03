@@ -1,4 +1,4 @@
-package model;
+package model.picture;
 
 import model.picture.Picture;
 
@@ -6,15 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class ImageManager {
-
-    private final HashMap<String,String> imageInfo = new HashMap<>();
+public class PictureManager {
 
     private final ArrayList<Picture> images = new ArrayList<>();
 
     public void addImage(Picture picture){
        images.add(picture);
-       imageInfo.put(picture.getTitle(),picture.getDescription());
     }
 
     public ArrayList<Picture> getImages(){

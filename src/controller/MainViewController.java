@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.*;
+import model.picture.PictureManager;
 import model.picture.Picture;
 import model.picture.PictureDataParser;
 
@@ -22,7 +23,7 @@ public class MainViewController implements Initializable{
 
     private Main main;
     private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
-    private final ImageManager imageManager = PictureDataParser.imageManager;
+    private final PictureManager pictureManager = PictureDataParser.PICTURE_MANAGER;
     private final PictureDataParser pictureDataParser = new PictureDataParser();
     @FXML
     private TableView<Picture> imageTable;
@@ -114,7 +115,7 @@ public class MainViewController implements Initializable{
 
     protected void fillTableWithSearchedContinents(String continent){
         ArrayList<Picture> searchedImages;
-        searchedImages = imageManager.searchImagesByContinent(continent);
+        searchedImages = pictureManager.searchImagesByContinent(continent);
         imageData.removeAll();
         imageData.addAll(searchedImages);
         imageTable.setItems(imageData);
@@ -122,7 +123,7 @@ public class MainViewController implements Initializable{
 
     protected void fillTableWithSearchedLocations(String location){
         ArrayList<Picture> searchedImages;
-        searchedImages = imageManager.searchImagesByLocation(location);
+        searchedImages = pictureManager.searchImagesByLocation(location);
         imageData.removeAll();
         imageData.addAll(searchedImages);
         imageTable.setItems(imageData);

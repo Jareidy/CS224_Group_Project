@@ -1,7 +1,6 @@
 package model.picture;
 
 import javafx.scene.image.Image;
-import model.ImageManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 
 public class PictureDataParser {
 
-    public static final ImageManager imageManager = new ImageManager();
+    public static final PictureManager PICTURE_MANAGER = new PictureManager();
     private Document document;
 
     public void parsePictureData(File file) {
@@ -61,16 +60,16 @@ public class PictureDataParser {
                 String fileExtension = imagePath.substring(imagePath.lastIndexOf("."), imagePath.length());
                 builder.setExtension(fileExtension);
                 Picture newPicture = builder.build();
-                imageManager.addImage(newPicture);
+                PICTURE_MANAGER.addImage(newPicture);
                 readCommentsFromDocument(i,pictureElement);
-                imageManager.getImages().get(i).addLike(positiveRatings);
-                imageManager.getImages().get(i).addDislike(negativeRatings);
+                PICTURE_MANAGER.getImages().get(i).addLike(positiveRatings);
+                PICTURE_MANAGER.getImages().get(i).addDislike(negativeRatings);
             }
         }
     }
 
     public ArrayList<Picture> getImages(){
-        return imageManager.getImages();
+        return PICTURE_MANAGER.getImages();
     }
 
     private void readCommentsFromDocument(int i,Element pictureElement) {
@@ -81,7 +80,7 @@ public class PictureDataParser {
                 Element commentElement = (Element) commentNode;
                 String user = commentElement.getAttribute("username");
                 String comment = commentElement.getElementsByTagName("comment").item(0).getTextContent();
-                imageManager.getImages().get(i).addComment(user,comment);
+                PICTURE_MANAGER.getImages().get(i).addComment(user,comment);
             }
         }
     }

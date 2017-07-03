@@ -12,7 +12,7 @@ public class PictureXMLHandler {
 
     public void formatXmlFile(String localFileName){
         
-        ArrayList<Picture> importedPictures = PictureDataParser.imageManager.getImages();
+        ArrayList<Picture> importedPictures = PictureDataParser.PICTURE_MANAGER.getImages();
 
         Document doc = xmlCreator.docCreator();
 
