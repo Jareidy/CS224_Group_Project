@@ -1,3 +1,4 @@
+import controller.ImportDetailsViewController;
 import model.*;
 import model.picture.Picture;
 import model.picture.PictureBuilder;
@@ -82,6 +83,5 @@ public class Tests {
         for (User user: arrayUsers){
             Assert.assertEquals("jon", user.getUsername());
         }
-
     }
 }

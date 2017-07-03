@@ -38,6 +38,8 @@ public class MainViewController implements Initializable{
     private Button registerButton;
     @FXML
     private Button logoutButton;
+    @FXML
+    private Button importButton;
 
 
     public void setMain(Main main) {
@@ -51,6 +53,8 @@ public class MainViewController implements Initializable{
             registerButton.setVisible(false);
             loginButton.isDisabled();
             loginButton.setVisible(false);
+            importButton.setVisible(true);
+            importButton.setDisable(false);
         }else{
             logoutButton.isDisabled();
             logoutButton.setVisible(false);
@@ -142,6 +146,14 @@ public class MainViewController implements Initializable{
         }
         catch(NullPointerException ignored){
         }
+    }
+
+    @FXML
+    public void handleRandomButton(){
+        Random random = new Random();
+        int randomNumber = random.nextInt(imageData.size());
+        Picture randomPicture = imageData.get(randomNumber);
+        main.showImageWindow(randomPicture);
     }
 
     @Override

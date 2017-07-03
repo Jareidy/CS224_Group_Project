@@ -45,16 +45,25 @@
                      </Pane>
                      <TextField fx:id="searchField" prefHeight="25.0" prefWidth="300.0" promptText="Location...(ex. Indiana)">
                          <VBox.margin>
-                             <Insets bottom="20.0" />
+                             <Insets bottom="10.0" />
                          </VBox.margin>
                      </TextField>
-                     <Button mnemonicParsing="false" onAction="#handleGetTextFieldText" text="Search" />
+                     <Button mnemonicParsing="false" onAction="#handleGetTextFieldText" text="Search">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Button>
                   <Button mnemonicParsing="false" onAction="#handleMapView" text="Map View">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                     <Button mnemonicParsing="false" onAction="#handleImportPhoto" style="-fx-background-color: green;" text="Import photo" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#handleRandomButton" text="See Random Image">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                     <Button fx:id="importButton" disable="true" mnemonicParsing="false" onAction="#handleImportPhoto" style="-fx-background-color: green;" text="Import photo" textFill="WHITE" visible="false">
                          <VBox.margin>
                              <Insets top="10.0" />
                          </VBox.margin>
@@ -66,13 +75,16 @@
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
-                        <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegister" text="Register" />
+                        <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegister" text="Register">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin></Button>
                      </children>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </HBox>
+                  <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
                  </children>
               </VBox>
               <TableView fx:id="imageTable" onMouseClicked="#handleClickedImage" prefHeight="459.0" prefWidth="467.0">
