@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class PictureDataParser {
 
-    public static final PictureManager PICTURE_MANAGER = new PictureManager();
     private Document document;
 
     public void parsePictureData(File file) {
@@ -60,16 +59,16 @@ public class PictureDataParser {
                 String fileExtension = imagePath.substring(imagePath.lastIndexOf("."), imagePath.length());
                 builder.setExtension(fileExtension);
                 Picture newPicture = builder.build();
-                PICTURE_MANAGER.addImage(newPicture);
+                PictureManager.addImage(newPicture);
                 readCommentsFromDocument(i,pictureElement);
-                PICTURE_MANAGER.getImages().get(i).addLike(positiveRatings);
-                PICTURE_MANAGER.getImages().get(i).addDislike(negativeRatings);
+                PictureManager.getImages().get(i).addLike(positiveRatings);
+                PictureManager.getImages().get(i).addDislike(negativeRatings);
             }
         }
     }
 
     public ArrayList<Picture> getImages(){
-        return PICTURE_MANAGER.getImages();
+        return PictureManager.getImages();
     }
 
     private void readCommentsFromDocument(int i,Element pictureElement) {
@@ -80,7 +79,7 @@ public class PictureDataParser {
                 Element commentElement = (Element) commentNode;
                 String user = commentElement.getAttribute("username");
                 String comment = commentElement.getElementsByTagName("comment").item(0).getTextContent();
-                PICTURE_MANAGER.getImages().get(i).addComment(user,comment);
+                PictureManager.getImages().get(i).addComment(user,comment);
             }
         }
     }

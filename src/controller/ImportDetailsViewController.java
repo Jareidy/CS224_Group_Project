@@ -13,6 +13,9 @@ import model.*;
 import javafx.scene.image.Image;
 import model.picture.*;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 
 public class ImportDetailsViewController {
 
@@ -40,9 +43,15 @@ public class ImportDetailsViewController {
 
     @FXML
     public void handleChooseFile(){
-        importPhoto.chooseFile();
-        setFilePathLabel();
-        displayChosenImage();
+        try {
+            importPhoto.chooseFile();
+            setFilePathLabel();
+            displayChosenImage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            main.showImportDetailsWindow();
+        }
     }
 
     @FXML
@@ -86,8 +95,7 @@ public class ImportDetailsViewController {
             setErrorLabel();
         }
         else {
-            PictureManager pictureManager = PictureDataParser.PICTURE_MANAGER;
-            pictureManager.addImage(newPicture);
+            PictureManager.addImage(newPicture);
             PICTURE_XML_HANDLER.formatXmlFile("PictureData.xml");
             main.showMainWindow();
         }

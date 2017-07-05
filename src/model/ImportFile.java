@@ -5,6 +5,7 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 
@@ -15,14 +16,10 @@ public class ImportFile {
     private BufferedImage bufferedImage;
     private File file;
 
-    public void chooseFile(){
+    public void chooseFile() throws IOException, InvocationTargetException {
         extensionFilters();
         file = fileChooser.showOpenDialog(null);
-        try{
-            bufferedImage = ImageIO.read(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        bufferedImage = ImageIO.read(file);
     }
 
     private void extensionFilters(){

@@ -23,7 +23,6 @@ public class MainViewController implements Initializable{
 
     private Main main;
     private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
-    private final PictureManager pictureManager = PictureDataParser.PICTURE_MANAGER;
     private final PictureDataParser pictureDataParser = new PictureDataParser();
     @FXML
     private TableView<Picture> imageTable;
@@ -115,7 +114,7 @@ public class MainViewController implements Initializable{
 
     protected void fillTableWithSearchedContinents(String continent){
         ArrayList<Picture> searchedImages;
-        searchedImages = pictureManager.searchImagesByContinent(continent);
+        searchedImages = PictureManager.searchImagesByContinent(continent);
         imageData.removeAll();
         imageData.addAll(searchedImages);
         imageTable.setItems(imageData);
@@ -123,7 +122,7 @@ public class MainViewController implements Initializable{
 
     protected void fillTableWithSearchedLocations(String location){
         ArrayList<Picture> searchedImages;
-        searchedImages = pictureManager.searchImagesByLocation(location);
+        searchedImages = PictureManager.searchImagesByLocation(location);
         imageData.removeAll();
         imageData.addAll(searchedImages);
         imageTable.setItems(imageData);

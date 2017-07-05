@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class UsersXMLHandler {
 
-    public static UserDataParser userDataParser = new UserDataParser();
     XMLBase xmlCreator = new XMLBase();
 
     public void formatXmlFile(String localFileName){

@@ -9,18 +9,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.picture.Picture;
 import model.picture.PictureDataParser;
+import model.user.UserDataParser;
 
 import java.io.File;
 import java.io.IOException;
-
-import static model.user.UsersXMLHandler.userDataParser;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
         PictureDataParser pictureDataParser= new PictureDataParser();
         File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
-        userDataParser.parseUserData();
+        UserDataParser.parseUserData();
         pictureDataParser.parsePictureData(file);
         launch(args);
     }

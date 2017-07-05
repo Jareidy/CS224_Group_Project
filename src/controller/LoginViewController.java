@@ -10,7 +10,6 @@ import model.user.UserManager;
 
 import java.util.ArrayList;
 
-import static model.user.UsersXMLHandler.userDataParser;
 
 public class LoginViewController {
     public static LoginViewController loginViewController = new LoginViewController();

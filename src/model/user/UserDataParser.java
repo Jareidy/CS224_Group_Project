@@ -14,9 +14,9 @@ import java.io.IOException;
 public class UserDataParser {
 
     public static final UserManager users = new UserManager();
-    private Document document;
+    private static Document document;
 
-    public void parseUserData() {
+    public static void parseUserData() {
         try{
             readXMLFile();
         }catch(IOException | SAXException | ParserConfigurationException e){
@@ -24,14 +24,14 @@ public class UserDataParser {
         }
     }
 
-    private void readXMLFile() throws IOException, SAXException, ParserConfigurationException {
+    private static void readXMLFile() throws IOException, SAXException, ParserConfigurationException {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             document = builder.parse(System.getProperty("user.dir")+"/src/res/Users.xml");
             readImageFromDocument();
     }
 
-    private void readImageFromDocument() {
+    private static void readImageFromDocument() {
         NodeList userNodes = document.getElementsByTagName("username");
         for(int i = 0; i<userNodes.getLength();i++){
             Node userNode = userNodes.item(i);
