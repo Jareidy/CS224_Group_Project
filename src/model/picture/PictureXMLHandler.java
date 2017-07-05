@@ -10,12 +10,13 @@ public class PictureXMLHandler {
 
     XMLBase xmlCreator = new XMLBase();
     Document doc;
+    Element rootElement;
     Element pictures;
+    private ArrayList<Picture> importedPictures = PictureManager.images;
 
     public void formatXmlFile(String localFileName){
-        ArrayList<Picture> importedPictures = PictureManager.images;
         doc = xmlCreator.docCreator();
-        Element rootElement = doc.createElement("pictures");
+        rootElement = doc.createElement("pictures");
         doc.appendChild(rootElement);
         for (Picture importedPicture: importedPictures) {
             createPictureElement(rootElement,importedPicture);
@@ -25,16 +26,12 @@ public class PictureXMLHandler {
 
     }
 
-    private Element createPictureElement(Element rootElement,Picture importedPicture) {
+    private void createPictureElement(Element rootElement,Picture importedPicture) {
         pictures = doc.createElement("picture");
         rootElement.appendChild(pictures);
         pictures.setAttribute("pictureName", importedPicture.getTitle());
-        return pictures;
     }
 
-    public Element getPicturesElement(){
-        return pictures;
-    }
 
     public void formatPictureDetails(Picture importedPicture){
         formatFileName(importedPicture);
@@ -48,25 +45,25 @@ public class PictureXMLHandler {
     private void formatFileName(Picture importedPicture) {
         Element fileName = doc.createElement("fileName");
         fileName.appendChild((doc.createTextNode("/res/" + importedPicture.getTitle() + importedPicture.getFileExtension())));
-        getPicturesElement().appendChild(fileName);
+        pictures.appendChild(fileName);
     }
 
     private void formatLocation(Picture importedPicture) {
         Element location = doc.createElement("location");
         location.appendChild(doc.createTextNode(importedPicture.getLocation()));
-        getPicturesElement().appendChild(location);
+        pictures.appendChild(location);
     }
 
     private void formatContinent(Picture importedPicture) {
         Element continent = doc.createElement("continent");
         continent.appendChild(doc.createTextNode(importedPicture.getContinent()));
-        getPicturesElement().appendChild(continent);
+        pictures.appendChild(continent);
     }
 
     public void formatDescription( Picture importedPicture){
         Element description = doc.createElement("description");
         description.appendChild(doc.createTextNode(importedPicture.getDescription()));
-        getPicturesElement().appendChild(description);
+        pictures.appendChild(description);
     }
 
     public void formatRatings(Picture importedPicture){
@@ -77,19 +74,19 @@ public class PictureXMLHandler {
     public void formatPositiveRatings(Picture importedPicture){
         Element positiveRatings = doc.createElement("positiveRatings");
         positiveRatings.appendChild(doc.createTextNode(importedPicture.getLikes().toString()));
-        getPicturesElement().appendChild(positiveRatings);
+        pictures.appendChild(positiveRatings);
     }
 
     public void formatNegativeRatings(Picture importedPicture){
         Element negativeRatings = doc.createElement("negativeRatings");
         negativeRatings.appendChild(doc.createTextNode(importedPicture.getDislikes().toString()));
-        getPicturesElement().appendChild(negativeRatings);
+        pictures.appendChild(negativeRatings);
     }
 
     public void formatComments(Picture importedPicture){
         for (int i = 0;i<importedPicture.returnComments().size();i++) {
             Element comments = doc.createElement("comments");
-            getPicturesElement().appendChild(comments);
+            pictures.appendChild(comments);
             Comment currentComment = (Comment) importedPicture.returnComments().get(i);
             String newUser = currentComment.getUser();
             String newComment = currentComment.getComment();

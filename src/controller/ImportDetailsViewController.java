@@ -95,7 +95,7 @@ public class ImportDetailsViewController {
         }
         else {
             PictureManager.addImage(newPicture);
-            PICTURE_XML_HANDLER.formatXmlFile("PictureData.xml");
+            PICTURE_XML_HANDLER.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
             main.showMainWindow();
         }
     }
