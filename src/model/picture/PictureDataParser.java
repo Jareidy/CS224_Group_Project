@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class PictureDataParser {
 
     private Document document;
+    private PictureBuilder builder;
+    public Image image;
 
     public void parsePictureData(File file) {
         try{
@@ -41,30 +43,56 @@ public class PictureDataParser {
         for(int i = 0; i<pictureNodes.getLength();i++){
             Node pictureNode = pictureNodes.item(i);
             if(pictureNode.getNodeType()==Node.ELEMENT_NODE){
-                Element pictureElement = (Element) pictureNode;
-                PictureBuilder builder = new PictureBuilder();
-                String title =pictureElement.getAttribute("pictureName");
-                builder.setTitle(title);
-                String imagePath = pictureElement.getElementsByTagName("fileName").item(0).getTextContent();
-                String location = pictureElement.getElementsByTagName("location").item(0).getTextContent();
-                builder.setLocation(location);
-                String continent = pictureElement.getElementsByTagName("continent").item(0).getTextContent();
-                builder.setContintent(continent);
-                String description = pictureElement.getElementsByTagName("description").item(0).getTextContent();
-                builder.setDescription(description);
-                Integer positiveRatings = Integer.valueOf(pictureElement.getElementsByTagName("positiveRatings").item(0).getTextContent());
-                Integer negativeRatings = Integer.valueOf(pictureElement.getElementsByTagName("negativeRatings").item(0).getTextContent());
-                Image image = new Image(imagePath);
-                builder.setImageLink(image);
-                String fileExtension = imagePath.substring(imagePath.lastIndexOf("."), imagePath.length());
-                builder.setExtension(fileExtension);
-                Picture newPicture = builder.build();
-                PictureManager.addImage(newPicture);
-                readCommentsFromDocument(i,pictureElement);
-                PictureManager.getImages().get(i).addLike(positiveRatings);
-                PictureManager.getImages().get(i).addDislike(negativeRatings);
+                readImageDetails(pictureNode,i);
             }
         }
+    }
+
+    private void readImageDetails(Node pictureNode, int i) {
+        Element pictureElement = (Element) pictureNode;
+        builder = new PictureBuilder();
+        readTitle(pictureElement);
+        readLocation(pictureElement);
+        readContinent(pictureElement);
+        readDescription(pictureElement);
+        readImage(pictureElement);
+        Picture newPicture = builder.build();
+        PictureManager.addImage(newPicture);
+        readCommentsFromDocument(i,pictureElement);
+        readRatings(pictureElement,i);
+
+    }
+
+    private void readTitle(Element pictureElement) {
+        String title =pictureElement.getAttribute("pictureName");
+        builder.setTitle(title);
+    }
+
+    private void readLocation(Element pictureElement) {
+        String location = pictureElement.getElementsByTagName("location").item(0).getTextContent();
+        builder.setLocation(location);
+    }
+
+    private void readContinent(Element pictureElement) {
+        String continent = pictureElement.getElementsByTagName("continent").item(0).getTextContent();
+        builder.setContintent(continent);
+    }
+
+    private void readDescription(Element pictureElement) {
+        String description = pictureElement.getElementsByTagName("description").item(0).getTextContent();
+        builder.setDescription(description);
+    }
+
+    private void readImage(Element pictureElement) {
+        String imagePath = pictureElement.getElementsByTagName("fileName").item(0).getTextContent();
+        image = new Image(imagePath);
+        builder.setImageLink(image);
+        readFileExtension(imagePath);
+    }
+
+    private void readFileExtension(String imagePath) {
+        String fileExtension = imagePath.substring(imagePath.lastIndexOf("."), imagePath.length());
+        builder.setExtension(fileExtension);
     }
 
     public ArrayList<Picture> getImages(){
@@ -82,5 +110,12 @@ public class PictureDataParser {
                 PictureManager.getImages().get(i).addComment(user,comment);
             }
         }
+    }
+
+    private void readRatings(Element pictureElement,int i) {
+        Integer positiveRatings = Integer.valueOf(pictureElement.getElementsByTagName("positiveRatings").item(0).getTextContent());
+        Integer negativeRatings = Integer.valueOf(pictureElement.getElementsByTagName("negativeRatings").item(0).getTextContent());
+        PictureManager.getImages().get(i).addLike(positiveRatings);
+        PictureManager.getImages().get(i).addDislike(negativeRatings);
     }
 }

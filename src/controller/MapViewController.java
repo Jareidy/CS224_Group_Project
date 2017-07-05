@@ -6,11 +6,9 @@ import model.Main;
 
 import static model.Main.mainViewController;
 
-
 public class MapViewController {
     private Main main;
-    @FXML
-    TextField searchField;
+    @FXML TextField searchField;
 
     public void setMain(Main main){
         this.main = main;

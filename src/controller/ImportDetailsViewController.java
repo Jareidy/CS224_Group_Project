@@ -16,7 +16,6 @@ import model.picture.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-
 public class ImportDetailsViewController {
 
     private Main main;
@@ -54,6 +53,15 @@ public class ImportDetailsViewController {
         }
     }
 
+    private void setFilePathLabel(){
+        filePathLabel.setText(String.valueOf(importPhoto.getFile()));
+    }
+
+    private void displayChosenImage(){
+        Image importedPhoto = SwingFXUtils.toFXImage(importPhoto.getBufferedImage(),null);
+        imageView.setImage(importedPhoto);
+    }
+
     @FXML
     public void handleImportPhoto() {
         if(imageTitleField.getText().equals("")||filePathLabel.getText().equals("")){
@@ -63,15 +71,6 @@ public class ImportDetailsViewController {
             importPhoto.saveFile(importPhoto.getFile(), title);
             collectUserInput();
         }
-    }
-
-    private void setFilePathLabel(){
-        filePathLabel.setText(String.valueOf(importPhoto.getFile()));
-    }
-
-    private void displayChosenImage(){
-        Image importedPhoto = SwingFXUtils.toFXImage(importPhoto.getBufferedImage(),null);
-        imageView.setImage(importedPhoto);
     }
 
     private void collectTitleInput(){

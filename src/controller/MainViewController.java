@@ -24,23 +24,14 @@ public class MainViewController implements Initializable{
     private Main main;
     private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
     private final PictureDataParser pictureDataParser = new PictureDataParser();
-    @FXML
-    private TableView<Picture> imageTable;
-    @FXML
-    private TableColumn<Picture, String> imageDescriptionColumn;
-    @FXML
-    private TableColumn<Picture, String> locationColumn;
-    @FXML
-    private TextField searchField;
-    @FXML
-    private Button loginButton;
-    @FXML
-    private Button registerButton;
-    @FXML
-    private Button logoutButton;
-    @FXML
-    private Button importButton;
-
+    @FXML private TableView<Picture> imageTable;
+    @FXML private TableColumn<Picture, String> imageDescriptionColumn;
+    @FXML private TableColumn<Picture, String> locationColumn;
+    @FXML private TextField searchField;
+    @FXML private Button loginButton;
+    @FXML private Button registerButton;
+    @FXML private Button logoutButton;
+    @FXML private Button importButton;
 
     public void setMain(Main main) {
         this.main= main;
@@ -103,6 +94,14 @@ public class MainViewController implements Initializable{
         }
     }
 
+    protected void fillTableWithSearchedLocations(String location){
+        ArrayList<Picture> searchedImages;
+        searchedImages = PictureManager.searchImagesByLocation(location);
+        imageData.removeAll();
+        imageData.addAll(searchedImages);
+        imageTable.setItems(imageData);
+    }
+
     public void searchForContinent(String search){
         imageTable.getItems().clear();
         if(search.equals("")){
@@ -115,14 +114,6 @@ public class MainViewController implements Initializable{
     protected void fillTableWithSearchedContinents(String continent){
         ArrayList<Picture> searchedImages;
         searchedImages = PictureManager.searchImagesByContinent(continent);
-        imageData.removeAll();
-        imageData.addAll(searchedImages);
-        imageTable.setItems(imageData);
-    }
-
-    protected void fillTableWithSearchedLocations(String location){
-        ArrayList<Picture> searchedImages;
-        searchedImages = PictureManager.searchImagesByLocation(location);
         imageData.removeAll();
         imageData.addAll(searchedImages);
         imageTable.setItems(imageData);
