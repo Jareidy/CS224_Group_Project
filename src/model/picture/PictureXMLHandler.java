@@ -38,7 +38,6 @@ public class PictureXMLHandler {
         formatLocation(importedPicture);
         formatContinent(importedPicture);
         formatDescription(importedPicture);
-        formatRatings(importedPicture);
         formatComments(importedPicture);
     }
 
@@ -95,6 +94,8 @@ public class PictureXMLHandler {
             Element comment = doc.createElement("comment");
             comment.appendChild(doc.createTextNode(newComment));
             comments.appendChild(comment);
+
+
         }
     }
 }

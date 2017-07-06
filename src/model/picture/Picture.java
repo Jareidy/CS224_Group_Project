@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
+
 public class Picture {
 
     private final String title;
@@ -15,6 +17,7 @@ public class Picture {
     private Integer likes=0;
     private Integer dislikes=0;
     private final String fileExtension;
+    ArrayList<PictureLikeDislike> pictureLikeDislike = new ArrayList<>();
 
     public Picture(PictureBuilder builder){
         this.title = builder.title;
@@ -68,19 +71,35 @@ public class Picture {
         return commentUser;
     }
 
-    public void addLike(int num){
-        likes=likes+num;
+    public void addLike(String user){
+        PictureLikeDislike likeDislike = new PictureLikeDislike();
+        likeDislike.pictureLikeDislike("like", user);
+        pictureLikeDislike.add(likeDislike);
     }
 
-    public void addDislike(int num){
-        dislikes=dislikes+num;
+    public void addDislike(String user){
+        PictureLikeDislike likeDislike = new PictureLikeDislike();
+        likeDislike.pictureLikeDislike("dislike", user);
+        pictureLikeDislike.add(likeDislike);
     }
 
     public Integer getLikes() {
+        int likes = 0;
+        for (PictureLikeDislike likeDislike: pictureLikeDislike){
+            if (likeDislike.getLikeDislike().equals("like")){
+                likes++;
+            }
+        }
         return likes;
     }
 
     public Integer getDislikes() {
+        int dislikes = 0;
+        for (PictureLikeDislike likeDislike: pictureLikeDislike){
+            if (likeDislike.getLikeDislike().equals("like")){
+                dislikes++;
+            }
+        }
         return dislikes;
     }
 

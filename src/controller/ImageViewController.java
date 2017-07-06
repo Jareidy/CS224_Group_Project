@@ -22,6 +22,7 @@ public class ImageViewController {
 
     private Main main;
     private Picture picture;
+    String currentUser = String.valueOf(LoginViewController.loginViewController.currentUser);
 
     public void setMain(Main main){
         this.main=main;
@@ -59,12 +60,12 @@ public class ImageViewController {
     }
 
     public void handleLikeClick(){
-        picture.addLike(1);
+        picture.addLike(currentUser);
         setLikesAndDislikes();
     }
 
     public void handleDislikeClick(){
-        picture.addDislike(1);
+        picture.addDislike(currentUser);
         setLikesAndDislikes();
     }
 
