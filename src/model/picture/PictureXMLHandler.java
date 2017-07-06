@@ -19,14 +19,14 @@ public class PictureXMLHandler {
         rootElement = doc.createElement("pictures");
         doc.appendChild(rootElement);
         for (Picture importedPicture: importedPictures) {
-            createPictureElement(rootElement,importedPicture);
+            createPictureElement(importedPicture);
             formatPictureDetails(importedPicture);
         }
         xmlCreator.createXmlFile(doc, localFileName);
 
     }
 
-    private void createPictureElement(Element rootElement,Picture importedPicture) {
+    private void createPictureElement(Picture importedPicture) {
         pictures = doc.createElement("picture");
         rootElement.appendChild(pictures);
         pictures.setAttribute("pictureName", importedPicture.getTitle());
@@ -38,7 +38,7 @@ public class PictureXMLHandler {
         formatLocation(importedPicture);
         formatContinent(importedPicture);
         formatDescription(importedPicture);
-        formatComments(importedPicture);
+        formatPictureUserReviews(importedPicture);
     }
 
     private void formatFileName(Picture importedPicture) {
@@ -65,37 +65,28 @@ public class PictureXMLHandler {
         pictures.appendChild(description);
     }
 
-    public void formatRatings(Picture importedPicture){
-        formatPositiveRatings(importedPicture);
-        formatNegativeRatings(importedPicture);
-    }
 
-    public void formatPositiveRatings(Picture importedPicture){
-        Element positiveRatings = doc.createElement("positiveRatings");
-        positiveRatings.appendChild(doc.createTextNode(importedPicture.getLikes().toString()));
-        pictures.appendChild(positiveRatings);
-    }
-
-    public void formatNegativeRatings(Picture importedPicture){
-        Element negativeRatings = doc.createElement("negativeRatings");
-        negativeRatings.appendChild(doc.createTextNode(importedPicture.getDislikes().toString()));
-        pictures.appendChild(negativeRatings);
-    }
-
-    public void formatComments(Picture importedPicture){
-        for (int i = 0;i<importedPicture.returnComments().size();i++) {
+    public void formatPictureUserReviews(Picture importedPicture){
+        ArrayList<UserInput> userInputs = importedPicture.userInputs;
+        Element users = doc.createElement("users");
+        pictures.appendChild(users);
+        for (UserInput userInput : userInputs){
             Element comments = doc.createElement("comments");
-            pictures.appendChild(comments);
-            Comment currentComment = (Comment) importedPicture.returnComments().get(i);
-            String newUser = currentComment.getUser();
-            String newComment = currentComment.getComment();
-            comments.setAttribute("username", newUser);
+            users.appendChild(comments);
+            ArrayList<Comment> importComments = userInput.getComments();
+            for (Comment importComment: importComments) {
+                Element comment = doc.createElement("comment");
+                comment.appendChild(doc.createTextNode(importComment.getComment()));
+                comments.appendChild(comment);
 
-            Element comment = doc.createElement("comment");
-            comment.appendChild(doc.createTextNode(newComment));
-            comments.appendChild(comment);
+                Element date = doc.createElement("date");
+                date.appendChild(doc.createTextNode(importComment.getDate()));
+                comments.appendChild(date);
+            }
 
-
+            Element likeDislike = doc.createElement("likedislike");
+            likeDislike.appendChild(doc.createTextNode(userInput.getLikeDislike()));
+            users.appendChild(likeDislike);
         }
     }
 }

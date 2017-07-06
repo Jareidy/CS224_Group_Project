@@ -8,8 +8,6 @@ import javafx.scene.image.ImageView;
 import model.Main;
 import model.picture.Picture;
 
-import static controller.LoginViewController.loginViewController;
-
 public class ImageViewController {
 
     @FXML private ImageView imageView;
@@ -22,7 +20,6 @@ public class ImageViewController {
 
     private Main main;
     private Picture picture;
-    String currentUser = String.valueOf(LoginViewController.loginViewController.currentUser);
 
     public void setMain(Main main){
         this.main=main;
@@ -46,8 +43,9 @@ public class ImageViewController {
     }
 
     private void setComments(){
-        commentsList.setItems(picture.getCommentsText());
-        userList.setItems(picture.getCommentsUser());
+        picture.getCommentsText();
+        commentsList.setItems(picture.commentText);
+        userList.setItems(picture.commentUser);
         updateXMLFile();
     }
 
@@ -60,28 +58,17 @@ public class ImageViewController {
     }
 
     public void handleLikeClick(){
-        picture.addLike(currentUser);
+        picture.addLike();
         setLikesAndDislikes();
     }
 
     public void handleDislikeClick(){
-        picture.addDislike(currentUser);
+        picture.addDislike();
         setLikesAndDislikes();
     }
 
     public void handleSubmitButton(){
         String newComment = inputComment.getText();
-        String username;
-        if(newComment.equals("")){
-        }else {
-            if(loginViewController.login) {
-                username = loginViewController.getCurrentUser().getUsername();
-            }else{
-                username = "anonymous";
-            }
-            picture.addComment(username, newComment);
-            inputComment.clear();
-            setComments();
-        }
+        picture.addComment(newComment);
     }
 }

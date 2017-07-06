@@ -1,5 +1,7 @@
 package model.picture;
 
+import model.user.User;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
@@ -10,8 +12,8 @@ public class UserInput {
     ArrayList<Comment> comments = new ArrayList<>();
     String likeDislike;
 
-    public UserInput(String user){
-        this.user = user;
+    public UserInput(User user){
+        this.user = String.valueOf(user);
     }
 
     public void addUserComment(String comment, Date date){
@@ -19,12 +21,37 @@ public class UserInput {
         comments.add(addComment);
     }
 
+    public ArrayList getComments(){
+        return comments;
+    }
+
+    public String getUser(){
+        return user.toString();
+    }
+
+    public String getLikeDislike(){
+        return likeDislike;
+    }
+
     public void addLikeDislike(String input){
-        if (likeDislike.isEmpty()){
-            likeDislike = input;
+        if (likeDislike.equals("dislike")){
+            if (input.equals("dislike")){
+                likeDislike = "";
+            }
+            else{
+                likeDislike = "dislike";
+            }
         }
-        if (likeDislike.equals("like")){
-            if
+        else if (likeDislike.equals("like")){
+            if (input.equals("like")){
+                likeDislike = "";
+            }
+            else{
+                likeDislike = "like";
+            }
+        }
+        else{
+            likeDislike = input;
         }
     }
 }

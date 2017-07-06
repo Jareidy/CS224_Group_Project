@@ -14,8 +14,16 @@ public class Comment {
         this.date = date;
     }
 
-    String getComment(){
+    public String getComment(){
         return comment;
+    }
+
+    public String getDate(){
+        return date.toString();
+    }
+
+    public Date getDateData(){
+        return date;
     }
 
 }

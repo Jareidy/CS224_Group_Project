@@ -1,10 +1,13 @@
 package model.picture;
 
+import controller.LoginViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
+import model.user.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Picture {
 
@@ -13,11 +16,13 @@ public class Picture {
     private final String location;
     private final String continent;
     private final String description;
-    private final ObservableList<Comment> comments = FXCollections.observableArrayList();
-    private Integer likes=0;
-    private Integer dislikes=0;
     private final String fileExtension;
-    ArrayList<PictureLikeDislike> pictureLikeDislike = new ArrayList<>();
+    ArrayList<UserInput> userInputs = new ArrayList<>();
+    User currentUser = LoginViewController.loginViewController.currentUser;
+    Date date = new Date();
+
+    public static ObservableList<String> commentUser = FXCollections.observableArrayList();
+    public static ObservableList<String> commentText = FXCollections.observableArrayList();
 
     public Picture(PictureBuilder builder){
         this.title = builder.title;
@@ -44,49 +49,61 @@ public class Picture {
         return title;
     }
 
-    public void addComment(String user, String comment){
-        Comment newComment = new Comment(user, comment);
-        comments.add(newComment);
-    }
-
-    public ObservableList returnComments(){
-        return comments;
-    }
-
-    public ObservableList getCommentsText(){
-        ObservableList<String> commentText = FXCollections.observableArrayList();
-        for(int i = 0; i<comments.size(); i++) {
-            Comment currentComment = (Comment) returnComments().get(i);
-            commentText.add(currentComment.getComment());
+    public void addComment(String comment){
+        for (UserInput user: userInputs){
+            if (currentUser.toString().equals(user)){
+                user.addUserComment(comment, date);
+            }
+            else{
+                UserInput newUser = new UserInput(currentUser);
+                userInputs.add(newUser);
+                newUser.addUserComment(comment, date);
+            }
         }
-        return commentText;
     }
 
-    public ObservableList getCommentsUser(){
-        ObservableList<String> commentUser = FXCollections.observableArrayList();
-        for(int i = 0; i<comments.size(); i++) {
-            Comment currentComment = (Comment) returnComments().get(i);
-            commentUser.add(currentComment.getUser());
+
+    public void getCommentsText(){
+        for(UserInput user: userInputs) {
+            ArrayList<Comment> comments = user.getComments();
+            for(Comment comment: comments) {
+                commentUser.add(user.getUser());
+                commentText.add(comment.getComment());
+            }
         }
-        return commentUser;
     }
 
-    public void addLike(String user){
-        PictureLikeDislike likeDislike = new PictureLikeDislike();
-        likeDislike.pictureLikeDislike("like", user);
-        pictureLikeDislike.add(likeDislike);
+
+    public void addLike(){
+        for (UserInput user: userInputs){
+            if (currentUser.toString().equals(user)){
+                user.addLikeDislike("like");
+            }
+            else{
+                UserInput newUser = new UserInput(currentUser);
+                userInputs.add(newUser);
+                newUser.addLikeDislike("like");
+            }
+        }
     }
 
-    public void addDislike(String user){
-        PictureLikeDislike likeDislike = new PictureLikeDislike();
-        likeDislike.pictureLikeDislike("dislike", user);
-        pictureLikeDislike.add(likeDislike);
+    public void addDislike(){
+        for (UserInput user: userInputs){
+            if (currentUser.toString().equals(user)){
+                user.addLikeDislike("dislike");
+            }
+            else{
+                UserInput newUser = new UserInput(currentUser);
+                userInputs.add(newUser);
+                newUser.addLikeDislike("dislike");
+            }
+        }
     }
 
     public Integer getLikes() {
         int likes = 0;
-        for (PictureLikeDislike likeDislike: pictureLikeDislike){
-            if (likeDislike.getLikeDislike().equals("like")){
+        for (UserInput user: userInputs){
+            if (user.getLikeDislike().equals("like")){
                 likes++;
             }
         }
@@ -95,8 +112,8 @@ public class Picture {
 
     public Integer getDislikes() {
         int dislikes = 0;
-        for (PictureLikeDislike likeDislike: pictureLikeDislike){
-            if (likeDislike.getLikeDislike().equals("like")){
+        for (UserInput user: userInputs){
+            if (user.getLikeDislike().equals("dislike")){
                 dislikes++;
             }
         }
