@@ -17,7 +17,7 @@ public class Picture {
     private final String continent;
     private final String description;
     private final String fileExtension;
-    ArrayList<UserInput> userInputs = new ArrayList<>();
+    ArrayList<UserInput> userInputs;
     User currentUser = LoginViewController.loginViewController.currentUser;
     Date date = new Date();
 
@@ -50,14 +50,20 @@ public class Picture {
     }
 
     public void addComment(String comment){
-        for (UserInput user: userInputs){
-            if (currentUser.toString().equals(user)){
-                user.addUserComment(comment, date);
-            }
-            else{
-                UserInput newUser = new UserInput(currentUser);
-                userInputs.add(newUser);
-                newUser.addUserComment(comment, date);
+
+        if(userInputs.isEmpty()){
+            UserInput newUser = new UserInput(currentUser);
+            userInputs.add(newUser);
+            newUser.addUserComment(comment, date);
+        }else {
+            for (UserInput user : userInputs) {
+                if (currentUser.toString().equals(user.getUser())) {
+                    user.addUserComment(comment, date);
+                } else {
+                    UserInput newUser = new UserInput(currentUser);
+                    userInputs.add(newUser);
+                    newUser.addUserComment(comment, date);
+                }
             }
         }
     }

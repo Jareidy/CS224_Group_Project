@@ -107,7 +107,7 @@ public class PictureDataParser {
                 Element commentElement = (Element) commentNode;
                 String user = commentElement.getAttribute("username");
                 String comment = commentElement.getElementsByTagName("comment").item(0).getTextContent();
-                PictureManager.getImages().get(i).addComment(user,comment);
+                PictureManager.getImages().get(i).addComment(comment);
             }
         }
     }
@@ -115,7 +115,7 @@ public class PictureDataParser {
     private void readRatings(Element pictureElement,int i) {
         Integer positiveRatings = Integer.valueOf(pictureElement.getElementsByTagName("positiveRatings").item(0).getTextContent());
         Integer negativeRatings = Integer.valueOf(pictureElement.getElementsByTagName("negativeRatings").item(0).getTextContent());
-        PictureManager.getImages().get(i).addLike(positiveRatings);
-        PictureManager.getImages().get(i).addDislike(negativeRatings);
+        PictureManager.getImages().get(i).addLike();
+        PictureManager.getImages().get(i).addDislike();
     }
 }
