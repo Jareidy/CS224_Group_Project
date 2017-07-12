@@ -59,8 +59,6 @@ public class PictureDataParser {
         Picture newPicture = builder.build();
         PictureManager.addImage(newPicture);
         readCommentsFromDocument(i,pictureElement);
-        readRatings(pictureElement,i);
-
     }
 
     private void readTitle(Element pictureElement) {

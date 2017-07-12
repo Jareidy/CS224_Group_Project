@@ -69,7 +69,7 @@ public class ImageViewController {
 
     public void handleSubmitButton(){
         String newComment = inputComment.getText();
-
         picture.addComment(newComment);
+        setComments();
     }
 }

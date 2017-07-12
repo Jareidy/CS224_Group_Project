@@ -17,9 +17,8 @@ public class Picture {
     private final String continent;
     private final String description;
     private final String fileExtension;
-    ArrayList<UserInput> userInputs;
-    User currentUser = LoginViewController.loginViewController.currentUser;
-    Date date = new Date();
+    public ArrayList<UserInput> userInputs= new ArrayList<>();
+    int date = new Date().hashCode();
 
     public static ObservableList<String> commentUser = FXCollections.observableArrayList();
     public static ObservableList<String> commentText = FXCollections.observableArrayList();
@@ -50,17 +49,16 @@ public class Picture {
     }
 
     public void addComment(String comment){
-
         if(userInputs.isEmpty()){
-            UserInput newUser = new UserInput(currentUser);
+            UserInput newUser = new UserInput(LoginViewController.currentUser);
             userInputs.add(newUser);
             newUser.addUserComment(comment, date);
         }else {
             for (UserInput user : userInputs) {
-                if (currentUser.toString().equals(user.getUser())) {
+                if (String.valueOf(LoginViewController.currentUser).equals(user.getUser())) {
                     user.addUserComment(comment, date);
                 } else {
-                    UserInput newUser = new UserInput(currentUser);
+                    UserInput newUser = new UserInput(LoginViewController.currentUser);
                     userInputs.add(newUser);
                     newUser.addUserComment(comment, date);
                 }
@@ -82,11 +80,11 @@ public class Picture {
 
     public void addLike(){
         for (UserInput user: userInputs){
-            if (currentUser.toString().equals(user)){
+            if (LoginViewController.currentUser.toString().equals(user)){
                 user.addLikeDislike("like");
             }
             else{
-                UserInput newUser = new UserInput(currentUser);
+                UserInput newUser = new UserInput(LoginViewController.currentUser);
                 userInputs.add(newUser);
                 newUser.addLikeDislike("like");
             }
@@ -95,11 +93,11 @@ public class Picture {
 
     public void addDislike(){
         for (UserInput user: userInputs){
-            if (currentUser.toString().equals(user)){
+            if (LoginViewController.currentUser.toString().equals(user)){
                 user.addLikeDislike("dislike");
             }
             else{
-                UserInput newUser = new UserInput(currentUser);
+                UserInput newUser = new UserInput(LoginViewController.currentUser);
                 userInputs.add(newUser);
                 newUser.addLikeDislike("dislike");
             }

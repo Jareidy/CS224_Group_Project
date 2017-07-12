@@ -1,5 +1,6 @@
 package model.picture;
 
+import controller.LoginViewController;
 import model.user.User;
 
 import java.util.ArrayList;
@@ -13,12 +14,14 @@ public class UserInput {
     String likeDislike;
 
     public UserInput(User user){
-        this.user = String.valueOf(user);
+        this.user = user.getUsername();
     }
 
-    public void addUserComment(String comment, Date date){
+    public void addUserComment(String comment, int date){
         Comment addComment = new Comment(date, comment);
         comments.add(addComment);
+
+
     }
 
     public ArrayList getComments(){

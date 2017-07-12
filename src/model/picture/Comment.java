@@ -7,9 +7,9 @@ import java.util.Date;
 public class Comment {
 
     private final String comment;
-    Date date;
+    int date;
 
-    public Comment(Date date, String comment){
+    public Comment(int date, String comment){
         this.comment = comment;
         this.date = date;
     }
@@ -18,11 +18,7 @@ public class Comment {
         return comment;
     }
 
-    public String getDate(){
-        return date.toString();
-    }
-
-    public Date getDateData(){
+    public int getDate(){
         return date;
     }
 

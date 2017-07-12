@@ -21,6 +21,7 @@ public class Main extends Application {
         File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
         UserDataParser.parseUserData();
         pictureDataParser.parsePictureData(file);
+
         launch(args);
     }
 

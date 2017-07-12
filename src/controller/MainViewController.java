@@ -9,15 +9,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.*;
-import model.picture.PictureManager;
+import model.Main;
 import model.picture.Picture;
 import model.picture.PictureDataParser;
+import model.picture.PictureManager;
 
 import java.net.URL;
-import java.util.*;
-
-import static controller.LoginViewController.loginViewController;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable{
 
@@ -38,7 +38,7 @@ public class MainViewController implements Initializable{
     }
 
     public void setLoginButtons(){
-        if(loginViewController.login){
+        if(LoginViewController.login){
             logoutButton.defaultButtonProperty();
             registerButton.isDisabled();
             registerButton.setVisible(false);
@@ -74,8 +74,8 @@ public class MainViewController implements Initializable{
 
     @FXML
     public void handleLogout(){
-        loginViewController.login=false;
-        loginViewController.currentUser=null;
+        LoginViewController.login=false;
+        LoginViewController.currentUser=null;
         main.showMainWindow();
     }
 

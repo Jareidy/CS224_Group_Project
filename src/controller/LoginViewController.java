@@ -11,11 +11,10 @@ import model.user.UserManager;
 import java.util.ArrayList;
 
 public class LoginViewController {
-    public static LoginViewController loginViewController = new LoginViewController();
     public Main main;
     public Stage secondaryStage;
-    public User currentUser = null;
-    public boolean login = false;
+    public static User currentUser;
+    public static boolean login = false;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;
@@ -43,7 +42,7 @@ public class LoginViewController {
 
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getPassword().equals(password) && users.get(i).getUsername().equals(username)) {
-                loginViewController.currentUser = users.get(i);
+                currentUser = users.get(i);
                 login();
                 break;
             }
@@ -52,7 +51,7 @@ public class LoginViewController {
     }
 
     private void login() {
-        loginViewController.login = true;
+        login = true;
         main.showMainWindow();
         secondaryStage.close();
     }
@@ -61,7 +60,7 @@ public class LoginViewController {
         errorLabel.setText("Your user name or password is incorrect.");
     }
 
-    public User getCurrentUser(){
+    public static User getCurrentUser(){
         return currentUser;
     }
 }

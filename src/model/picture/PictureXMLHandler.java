@@ -67,26 +67,35 @@ public class PictureXMLHandler {
 
 
     public void formatPictureUserReviews(Picture importedPicture){
-        ArrayList<UserInput> userInputs = importedPicture.userInputs;
+        final ArrayList<UserInput> inputs = importedPicture.userInputs;
         Element users = doc.createElement("users");
         pictures.appendChild(users);
-        for (UserInput userInput : userInputs){
-            Element comments = doc.createElement("comments");
-            users.appendChild(comments);
-            ArrayList<Comment> importComments = userInput.getComments();
-            for (Comment importComment: importComments) {
-                Element comment = doc.createElement("comment");
-                comment.appendChild(doc.createTextNode(importComment.getComment()));
-                comments.appendChild(comment);
+        if(inputs.isEmpty()){
+            System.out.print(inputs);
+        }else {
+            for (UserInput userInput : inputs) {
+                Element user = doc.createElement("user");
+                user.appendChild(doc.createTextNode(userInput.getUser()));
+                users.appendChild(user);
 
-                Element date = doc.createElement("date");
-                date.appendChild(doc.createTextNode(importComment.getDate()));
-                comments.appendChild(date);
+                Element comments = doc.createElement("comments");
+                user.appendChild(comments);
+
+                ArrayList<Comment> importComments = userInput.getComments();
+                for (Comment importComment : importComments) {
+                    Element comment = doc.createElement("comment");
+                    comment.appendChild(doc.createTextNode(importComment.getComment()));
+                    comments.appendChild(comment);
+
+                    Element date = doc.createElement("date");
+                    date.appendChild(doc.createTextNode(String.valueOf(importComment.getDate())));
+                    comments.appendChild(date);
+                }
+
+                Element likeDislike = doc.createElement("likedislike");
+                likeDislike.appendChild(doc.createTextNode(userInput.getLikeDislike()));
+                users.appendChild(likeDislike);
             }
-
-            Element likeDislike = doc.createElement("likedislike");
-            likeDislike.appendChild(doc.createTextNode(userInput.getLikeDislike()));
-            users.appendChild(likeDislike);
         }
     }
 }
