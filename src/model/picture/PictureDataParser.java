@@ -64,7 +64,7 @@ public class PictureDataParser {
     }
 
     private void readTitle(Element pictureElement) {
-        String title =pictureElement.getAttribute("pictureName");
+        String title = pictureElement.getAttribute("pictureName");
         builder.setTitle(title);
     }
 
@@ -100,14 +100,21 @@ public class PictureDataParser {
     }
 
     private void readCommentsFromDocument(int i,Element pictureElement) {
-        NodeList commentNodes = pictureElement.getElementsByTagName("comments");
-        for(int j = 0; j<commentNodes.getLength();j++){
-            Node commentNode = commentNodes.item(j);
-            if(commentNode.getNodeType()==Node.ELEMENT_NODE) {
-                Element commentElement = (Element) commentNode;
-                String user = commentElement.getAttribute("username");
-                String comment = commentElement.getElementsByTagName("comment").item(0).getTextContent();
-                PictureManager.getImages().get(i).addComment(comment);
+        NodeList inputNodes = pictureElement.getElementsByTagName("user");
+        for(int j = 0; j<inputNodes.getLength();j++){
+            Node inputNode = inputNodes.item(j);
+            if(inputNode.getNodeType()==Node.ELEMENT_NODE) {
+                Element inputElement = (Element) inputNode;
+                String username = inputElement.getAttribute("username");
+                NodeList commentNodes = inputElement.getElementsByTagName("comments");
+                for(int k = 0; k<commentNodes.getLength();k++){
+                    Node commentNode = commentNodes.item(j);
+                    if(inputNode.getNodeType()==Node.ELEMENT_NODE){
+                        Element commentElement = (Element) commentNode;
+                        String comment = commentElement.getElementsByTagName("comment").item(0).getTextContent();
+                        PictureManager.getImages().get(i).addCommentFromXML(comment,username);
+                    }
+                }
             }
         }
     }

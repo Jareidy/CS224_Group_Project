@@ -4,6 +4,8 @@ import controller.LoginViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
+import model.user.User;
+import model.user.UserManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,6 +48,36 @@ public class Picture {
 
     public String getTitle() {
         return title;
+    }
+
+    public void addCommentFromXML(String comment, String username){
+        if(userInputs.isEmpty()){
+            UserInput newUser = new UserInput(findUserFromUsername(username));
+            userInputs.add(newUser);
+            newUser.addUserComment(comment, date);
+        }else{
+            for (UserInput user : userInputs) {
+                if (username.equals(user)) {
+                    user.addUserComment(comment, date);
+                } else {
+                    UserInput newUser = new UserInput(findUserFromUsername(username));
+                    userInputs.add(newUser);
+                    newUser.addUserComment(comment, date);
+                }
+            }
+        }
+    }
+
+    private User findUserFromUsername(String username) {
+        User tempUser=null;
+        System.out.println(username);
+        for(User user : UserManager.users){
+            if(user.getUsername().equals(username)){
+                tempUser = user;
+            }
+            System.out.println(user.getUsername());
+        }
+        return tempUser;
     }
 
     public void addComment(String comment){
