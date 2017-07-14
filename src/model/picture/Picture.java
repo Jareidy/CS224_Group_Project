@@ -10,6 +10,7 @@ import model.user.UserManager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class Picture {
 
@@ -51,20 +52,22 @@ public class Picture {
     }
 
     public void addCommentFromXML(String comment, String username){
+        UserInput newUser = null;
         if(userInputs.isEmpty()){
-            UserInput newUser = new UserInput(findUserFromUsername(username));
+            newUser = new UserInput(findUserFromUsername(username));
             userInputs.add(newUser);
             newUser.addUserComment(comment, date);
         }else{
-            for (UserInput user : userInputs) {
-                if (username.equals(user)) {
+            for (Iterator<UserInput> iterator = userInputs.iterator();iterator.hasNext();) {
+                UserInput user = iterator.next();
+                if (user.equals(username)) {
                     user.addUserComment(comment, date);
                 } else {
-                    UserInput newUser = new UserInput(findUserFromUsername(username));
-                    userInputs.add(newUser);
+                    newUser = new UserInput(findUserFromUsername(username));
                     newUser.addUserComment(comment, date);
                 }
             }
+            userInputs.add(newUser);
         }
     }
 
