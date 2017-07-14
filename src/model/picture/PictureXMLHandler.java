@@ -91,7 +91,7 @@ public class PictureXMLHandler {
 
                 Element likeDislike = doc.createElement("likedislike");
                 likeDislike.appendChild(doc.createTextNode(userInput.getLikeDislike()));
-                users.appendChild(likeDislike);
+                user.appendChild(likeDislike);
 
             }
         }

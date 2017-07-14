@@ -81,27 +81,39 @@ public class Picture {
 
 
     public void addLike(){
-        for (UserInput user: userInputs){
-            if (LoginViewController.currentUser.equals(user)){
-                user.addLikeDislike("like");
-            }
-            else{
-                UserInput newUser = new UserInput(LoginViewController.currentUser);
-                userInputs.add(newUser);
-                newUser.addLikeDislike("like");
+        if(userInputs.isEmpty()){
+            UserInput newUser = new UserInput(LoginViewController.currentUser);
+            userInputs.add(newUser);
+            newUser.addLikeDislike("like");
+        }
+        else {
+            for (UserInput user : userInputs) {
+                if (LoginViewController.currentUser.getUsername().equals(user.getUser())) {
+                    user.addLikeDislike("like");
+                } else {
+                    UserInput newUser = new UserInput(LoginViewController.currentUser);
+                    userInputs.add(newUser);
+                    newUser.addLikeDislike("like");
+                }
             }
         }
     }
 
     public void addDislike(){
-        for (UserInput user: userInputs){
-            if (LoginViewController.currentUser.equals(user)){
-                user.addLikeDislike("dislike");
-            }
-            else{
-                UserInput newUser = new UserInput(LoginViewController.currentUser);
-                userInputs.add(newUser);
-                newUser.addLikeDislike("dislike");
+        if(userInputs.isEmpty()){
+            UserInput newUser = new UserInput(LoginViewController.currentUser);
+            userInputs.add(newUser);
+            newUser.addLikeDislike("dislike");
+        }
+        else {
+            for (UserInput user : userInputs) {
+                if (LoginViewController.currentUser.getUsername().equals(user.getUser())) {
+                    user.addLikeDislike("dislike");
+                } else {
+                    UserInput newUser = new UserInput(LoginViewController.currentUser);
+                    userInputs.add(newUser);
+                    newUser.addLikeDislike("dislike");
+                }
             }
         }
     }

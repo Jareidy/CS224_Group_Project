@@ -15,8 +15,8 @@ import java.util.regex.Pattern;
 
 public class RegisterViewController {
 
-    public Main main;
-    public Stage secondaryStage;
+    private Main main;
+    private Stage secondaryStage;
 
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
@@ -40,7 +40,7 @@ public class RegisterViewController {
         usersXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Users.xml");
     }
 
-    public void createUser(){
+    private void createUser(){
         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(emailAddressField.getText());
         if (mat.matches()) {

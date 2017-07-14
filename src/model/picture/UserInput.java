@@ -39,7 +39,7 @@ public class UserInput {
                 likeDislike = "";
             }
             else{
-                likeDislike = "dislike";
+                likeDislike = "like";
             }
         }
         else if (likeDislike.equals("like")){
@@ -47,7 +47,7 @@ public class UserInput {
                 likeDislike = "";
             }
             else{
-                likeDislike = "like";
+                likeDislike = "dislike";
             }
         }
         else{
