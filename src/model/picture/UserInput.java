@@ -11,7 +11,7 @@ public class UserInput {
 
     String user;
     ArrayList<Comment> comments = new ArrayList<>();
-    String likeDislike;
+    String likeDislike="";
 
     public UserInput(User user){
         this.user = user.getUsername();

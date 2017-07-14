@@ -13,4 +13,8 @@ public class UserManager {
     public static ArrayList returnUsers(){
         return users;
     }
+
+    public static void clearUserData(){
+        users.clear();
+    }
 }

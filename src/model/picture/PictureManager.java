@@ -38,4 +38,8 @@ public class PictureManager {
         System.out.println(searchImagesArrayList);
         return searchImagesArrayList;
     }
+
+    public static void clearPictures(){
+        images.clear();
+    }
 }

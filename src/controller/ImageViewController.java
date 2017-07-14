@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -7,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import model.Main;
 import model.picture.Picture;
+import model.picture.UserInput;
 
 public class ImageViewController {
 
@@ -46,6 +49,7 @@ public class ImageViewController {
         picture.getCommentsText();
         commentsList.setItems(picture.commentText);
         userList.setItems(picture.commentUser);
+
         updateXMLFile();
     }
 

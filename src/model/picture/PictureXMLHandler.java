@@ -1,6 +1,7 @@
 package model.picture;
 
 import model.XMLBase;
+import model.user.UserManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -23,7 +24,6 @@ public class PictureXMLHandler {
             formatPictureDetails(importedPicture);
         }
         xmlCreator.createXmlFile(doc, localFileName);
-
     }
 
     private void createPictureElement(Picture importedPicture) {
@@ -71,30 +71,28 @@ public class PictureXMLHandler {
         Element users = doc.createElement("users");
         pictures.appendChild(users);
         if(inputs.isEmpty()){
-            System.out.print(inputs);
         }else {
             for (UserInput userInput : inputs) {
                 Element user = doc.createElement("user");
-                user.appendChild(doc.createTextNode(userInput.getUser()));
                 users.appendChild(user);
+                user.setAttribute("username",userInput.getUser());
 
                 Element comments = doc.createElement("comments");
                 user.appendChild(comments);
 
                 ArrayList<Comment> importComments = userInput.getComments();
+                System.out.println(importComments);
                 for (Comment importComment : importComments) {
                     Element comment = doc.createElement("comment");
                     comment.appendChild(doc.createTextNode(importComment.getComment()));
                     comments.appendChild(comment);
-
-                    Element date = doc.createElement("date");
-                    date.appendChild(doc.createTextNode(String.valueOf(importComment.getDate())));
-                    comments.appendChild(date);
+                    comment.setAttribute("date",String.valueOf(importComment.getDate()));
                 }
 
                 Element likeDislike = doc.createElement("likedislike");
                 likeDislike.appendChild(doc.createTextNode(userInput.getLikeDislike()));
                 users.appendChild(likeDislike);
+
             }
         }
     }

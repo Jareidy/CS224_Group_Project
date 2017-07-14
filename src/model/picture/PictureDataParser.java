@@ -1,6 +1,7 @@
 package model.picture;
 
 import javafx.scene.image.Image;
+import model.user.UserManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,6 +22,7 @@ public class PictureDataParser {
     public Image image;
 
     public void parsePictureData(File file) {
+        PictureManager.clearPictures();
         try{
             readXMLFile(file);
         }catch(IOException | SAXException | ParserConfigurationException e){

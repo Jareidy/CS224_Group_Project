@@ -55,7 +55,7 @@ public class Picture {
             newUser.addUserComment(comment, date);
         }else {
             for (UserInput user : userInputs) {
-                if (String.valueOf(LoginViewController.currentUser).equals(user.getUser())) {
+                if (LoginViewController.currentUser.getUsername().equals(user.getUser())) {
                     user.addUserComment(comment, date);
                 } else {
                     UserInput newUser = new UserInput(LoginViewController.currentUser);
@@ -80,7 +80,7 @@ public class Picture {
 
     public void addLike(){
         for (UserInput user: userInputs){
-            if (LoginViewController.currentUser.toString().equals(user)){
+            if (LoginViewController.currentUser.equals(user)){
                 user.addLikeDislike("like");
             }
             else{
@@ -93,7 +93,7 @@ public class Picture {
 
     public void addDislike(){
         for (UserInput user: userInputs){
-            if (LoginViewController.currentUser.toString().equals(user)){
+            if (LoginViewController.currentUser.equals(user)){
                 user.addLikeDislike("dislike");
             }
             else{
