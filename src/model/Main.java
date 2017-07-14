@@ -75,14 +75,12 @@ public class Main extends Application {
         }
     }
 
-    public void showImageWindow(Picture picture){
+    public void showImageWindow(){
         try{
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ImageView.fxml"));
             pane = loader.load();
             ImageViewController imageViewController = loader.getController();
             imageViewController.setMain(this);
-            imageViewController.setImage(picture);
-            imageViewController.setText();
             setSceneDefault();
         }catch (IOException e){
             e.printStackTrace();

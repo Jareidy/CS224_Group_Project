@@ -24,6 +24,7 @@ public class MainViewController implements Initializable{
     private Main main;
     private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
     private final PictureDataParser pictureDataParser = new PictureDataParser();
+    public static Picture selectedPicture;
     @FXML private TableView<Picture> imageTable;
     @FXML private TableColumn<Picture, String> imageDescriptionColumn;
     @FXML private TableColumn<Picture, String> locationColumn;
@@ -132,8 +133,8 @@ public class MainViewController implements Initializable{
     @FXML
     public void handleClickedImage(){
         try {
-            Picture selectedImage = imageTable.getSelectionModel().getSelectedItem();
-            main.showImageWindow(selectedImage);
+            selectedPicture = imageTable.getSelectionModel().getSelectedItem();
+            main.showImageWindow();
         }
         catch(NullPointerException ignored){
         }
@@ -143,8 +144,8 @@ public class MainViewController implements Initializable{
     public void handleRandomButton(){
         Random random = new Random();
         int randomNumber = random.nextInt(imageData.size());
-        Picture randomPicture = imageData.get(randomNumber);
-        main.showImageWindow(randomPicture);
+        selectedPicture = imageData.get(randomNumber);
+        main.showImageWindow();
     }
 
     @Override

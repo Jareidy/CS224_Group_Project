@@ -1,11 +1,8 @@
 package model.picture;
 
-import controller.LoginViewController;
 import model.user.User;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class UserInput {
 
@@ -17,7 +14,7 @@ public class UserInput {
         this.user = user.getUsername();
     }
 
-    public void addUserComment(String comment, int date){
+    public void addUserComment(String comment, LocalDateTime date){
         Comment addComment = new Comment(date, comment);
         comments.add(addComment);
 

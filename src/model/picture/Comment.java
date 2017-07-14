@@ -1,15 +1,13 @@
 package model.picture;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Comment {
 
     private final String comment;
-    int date;
+    LocalDateTime date = LocalDateTime.now();
 
-    public Comment(int date, String comment){
+    public Comment(LocalDateTime date, String comment){
         this.comment = comment;
         this.date = date;
     }
@@ -18,7 +16,7 @@ public class Comment {
         return comment;
     }
 
-    public int getDate(){
+    public LocalDateTime getDate(){
         return date;
     }
 

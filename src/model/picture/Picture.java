@@ -4,8 +4,8 @@ import controller.LoginViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
-import model.user.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,7 +18,7 @@ public class Picture {
     private final String description;
     private final String fileExtension;
     public ArrayList<UserInput> userInputs= new ArrayList<>();
-    int date = new Date().hashCode();
+    LocalDateTime date = LocalDateTime.now();
 
     public static ObservableList<String> commentUser = FXCollections.observableArrayList();
     public static ObservableList<String> commentText = FXCollections.observableArrayList();
@@ -68,6 +68,8 @@ public class Picture {
 
 
     public void getCommentsText(){
+        commentUser.clear();
+        commentText.clear();
         for(UserInput user: userInputs) {
             ArrayList<Comment> comments = user.getComments();
             for(Comment comment: comments) {

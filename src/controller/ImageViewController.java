@@ -1,17 +1,18 @@
 package controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import model.Main;
 import model.picture.Picture;
-import model.picture.UserInput;
 
-public class ImageViewController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ImageViewController implements Initializable {
 
     @FXML private ImageView imageView;
     @FXML private Label dislike;
@@ -22,7 +23,7 @@ public class ImageViewController {
     @FXML private ListView userList;
 
     private Main main;
-    private Picture picture;
+    private Picture picture = MainViewController.selectedPicture;
 
     public void setMain(Main main){
         this.main=main;
@@ -49,7 +50,6 @@ public class ImageViewController {
         picture.getCommentsText();
         commentsList.setItems(picture.commentText);
         userList.setItems(picture.commentUser);
-
         updateXMLFile();
     }
 
@@ -75,5 +75,11 @@ public class ImageViewController {
         String newComment = inputComment.getText();
         picture.addComment(newComment);
         setComments();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setImage(picture);
+        setText();
     }
 }
