@@ -91,9 +91,9 @@ public class Picture {
             for (UserInput user : userInputs) {
                 if (LoginViewController.currentUser.getUsername().equals(user.getUser())) {
                     user.addUserComment(comment, date);
-                    System.out.println("3");
+
                 } else {
-                    System.out.println("4");
+
                     UserInput newUser = new UserInput(LoginViewController.currentUser);
                     userInputs.add(newUser);
                     newUser.addUserComment(comment, date);

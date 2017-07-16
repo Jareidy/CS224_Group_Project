@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -21,6 +22,7 @@ public class ImageViewController implements Initializable {
     @FXML private TextArea inputComment;
     @FXML private ListView commentsList;
     @FXML private ListView userList;
+    @FXML private Button submitButton;
 
     private Main main;
     private Picture picture = MainViewController.selectedPicture;
@@ -62,19 +64,31 @@ public class ImageViewController implements Initializable {
     }
 
     public void handleLikeClick(){
-        picture.addLike();
-        setLikesAndDislikes();
+        if(LoginViewController.login){
+            picture.addLike();
+            setLikesAndDislikes();
+        }else{
+            main.showImageLoginPopupViewWindow();
+        }
     }
 
     public void handleDislikeClick(){
-        picture.addDislike();
-        setLikesAndDislikes();
+        if(LoginViewController.login) {
+            picture.addDislike();
+            setLikesAndDislikes();
+        }else{
+            main.showImageLoginPopupViewWindow();
+        }
     }
 
     public void handleSubmitButton(){
-        String newComment = inputComment.getText();
-        picture.addComment(newComment);
-        setComments();
+        if(LoginViewController.login) {
+            String newComment = inputComment.getText();
+            picture.addComment(newComment);
+            setComments();
+        }else{
+            main.showImageLoginPopupViewWindow();
+        }
     }
 
     @Override

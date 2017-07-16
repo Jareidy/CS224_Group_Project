@@ -93,7 +93,6 @@ public class PictureXMLHandler {
                             pictures.getChildNodes().item(i).appendChild(likeDislike);
                             exists = true;
                         }else if(i==pictures.getChildNodes().getLength()-1&&!exists){
-                            System.out.println("two");
                             Element user = doc.createElement("user");
                             users.appendChild(user);
                             user.setAttribute("username", userInput.getUser());

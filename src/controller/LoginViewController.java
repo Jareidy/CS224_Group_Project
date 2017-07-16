@@ -27,7 +27,6 @@ public class LoginViewController {
     @FXML
     public void handleBackButton(){
         secondaryStage.close();
-        main.showMainWindow();
     }
 
     @FXML

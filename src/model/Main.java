@@ -132,4 +132,20 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    public void showImageLoginPopupViewWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ImageLoginPopupView.fxml"));
+            pane = loader.load();
+            Scene scene = new Scene(pane);
+            secondaryStage = new Stage();
+            ImageLoginPopupViewController imageLoginPopupViewController = loader.getController();
+            imageLoginPopupViewController.setMain(this,secondaryStage);
+            secondaryStage.initOwner(primaryStage);
+            secondaryStage.initModality(Modality.WINDOW_MODAL);
+            secondaryStage.setScene(scene);
+            secondaryStage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }
