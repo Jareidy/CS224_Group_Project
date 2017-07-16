@@ -21,8 +21,8 @@ public class Picture {
     public LinkedList<UserInput> userInputs= new LinkedList<>();
     LocalDateTime date = LocalDateTime.now();
 
-    public static ObservableList<String> commentUser = FXCollections.observableArrayList();
-    public static ObservableList<String> commentText = FXCollections.observableArrayList();
+    public static ObservableList<Comment> comments = FXCollections.observableArrayList();
+
 
     public Picture(PictureBuilder builder){
         this.title = builder.title;
@@ -49,7 +49,7 @@ public class Picture {
         return title;
     }
 
-    public void addCommentFromXML(String comment, String username){
+    public void addCommentFromXML(String comment, String username, LocalDateTime commentDate){
         UserInput newUser = null;
         if(userInputs.isEmpty()){
             newUser = new UserInput(findUserFromUsername(username));
@@ -59,12 +59,12 @@ public class Picture {
             for (int i = 0; i < userInputs.size(); i++) {
                 UserInput user = userInputs.get(i);
                 if (user.getUser().equals(username)) {
-                    user.addUserComment(comment, date);
+                    user.addUserComment(comment, commentDate);
                     return;
                 }
             }
             newUser = new UserInput(findUserFromUsername(username));
-            newUser.addUserComment(comment, date);
+            newUser.addUserComment(comment, commentDate);
             userInputs.add(newUser);
         }
     }
@@ -100,9 +100,12 @@ public class Picture {
 
 
     public void getCommentsText(){
-        commentUser.clear();
-        commentText.clear();
-
+        for(UserInput userInput: userInputs){
+            ArrayList<Comment> userComments = userInput.getComments();
+            for(Comment comment: userComments){
+                comments.add(comment);
+            }
+        }
     }
 
 
@@ -116,12 +119,12 @@ public class Picture {
             for (UserInput user : userInputs) {
                 if (LoginViewController.currentUser.getUsername().equals(user.getUser())) {
                     user.addLikeDislike("like");
-                } else {
-                    UserInput newUser = new UserInput(LoginViewController.currentUser);
-                    userInputs.add(newUser);
-                    newUser.addLikeDislike("like");
+                    return;
                 }
             }
+            UserInput newUser = new UserInput(LoginViewController.currentUser);
+            userInputs.add(newUser);
+            newUser.addLikeDislike("like");
         }
     }
 
@@ -135,12 +138,12 @@ public class Picture {
             for (UserInput user : userInputs) {
                 if (LoginViewController.currentUser.getUsername().equals(user.getUser())) {
                     user.addLikeDislike("dislike");
-                } else {
-                    UserInput newUser = new UserInput(LoginViewController.currentUser);
-                    userInputs.add(newUser);
-                    newUser.addLikeDislike("dislike");
+                    return;
                 }
             }
+            UserInput newUser = new UserInput(LoginViewController.currentUser);
+            userInputs.add(newUser);
+            newUser.addLikeDislike("dislike");
         }
     }
 

@@ -39,8 +39,8 @@ public class ReportsViewController implements Initializable{
         try {
             for(Picture picture : PictureManager.images){
                 if(picture.getTitle().equals(reportsTableView.getSelectionModel().getSelectedItem().getPicture())){
-                    mainViewController.selectedPicture = picture;
-                    System.out.println(mainViewController.selectedPicture.getTitle());
+                    MainViewController.selectedPicture = picture;
+                    System.out.println(MainViewController.selectedPicture.getTitle());
                 }
             }
             main.showImageWindow();

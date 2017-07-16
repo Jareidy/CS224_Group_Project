@@ -1,12 +1,12 @@
 package controller;
 
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import model.picture.Comment;
 import model.report.Report;
 import model.report.ReportXMLHandler;
 import model.report.ReportsManager;
@@ -23,11 +23,13 @@ public class ImageViewController implements Initializable {
     @FXML private Label like;
     @FXML private Label imageTitle;
     @FXML private TextArea inputComment;
-    @FXML private ListView commentsList;
-    @FXML private ListView userList;
     @FXML private Button removeImageButton;
     @FXML private Button reportImageButton;
     @FXML private Button removeReportButton;
+    @FXML private TableView<Comment> commentsTable;
+    @FXML private TableColumn<Comment, String> userColumn;
+    @FXML private TableColumn<Comment, String> commentColumn;
+    @FXML private TableColumn<Comment, String> dateColumn;
 
     private Main main;
     private Picture picture = MainViewController.selectedPicture;
@@ -73,9 +75,8 @@ public class ImageViewController implements Initializable {
 
     private void setComments(){
         picture.getCommentsText();
-        commentsList.setItems(picture.commentText);
-        userList.setItems(picture.commentUser);
         updateXMLFile();
+        dateColumn.setSortType(TableColumn.SortType.DESCENDING);
     }
 
     private void updateXMLFile(){
@@ -138,5 +139,12 @@ public class ImageViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setImage(picture);
         setText();
+        userColumn.setCellValueFactory(new PropertyValueFactory<>("user"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
+        commentsTable.setItems(Picture.comments);
+        dateColumn.setSortType(TableColumn.SortType.DESCENDING);
+        commentColumn.setSortable(false);
+        userColumn.setSortable(false);
     }
 }

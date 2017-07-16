@@ -45,7 +45,7 @@ public class ReportDataParser {
                 String username = reportElement.getElementsByTagName("user").item(0).getTextContent();
                 User reportingUser=null;
                 UserManager userManager=new UserManager();
-                ArrayList<User> userList =userManager.getUsers();
+                ArrayList<User> userList = UserManager.getUsers();
                 for(User user : userList){
                     if(user.getUsername().equals(username)){
                         reportingUser=user;

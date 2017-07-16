@@ -15,7 +15,6 @@ public class ImageLoginPopupViewController {
     @FXML
     public void handleLoginButton(){
         secondaryStage.close();
-        main.showLoginViewWindow();
     }
 
     @FXML

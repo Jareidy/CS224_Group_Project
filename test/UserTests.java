@@ -20,9 +20,9 @@ public class UserTests {
     @Test
     public void userManagerTest(){
         for (int i = 0; i < 12;i++) {
-            users.addUser(user);
+            UserManager.addUser(user);
         }
-        ArrayList<User> arrayUsers = users.getUsers();
+        ArrayList<User> arrayUsers = UserManager.getUsers();
         for (User user: arrayUsers){
             Assert.assertEquals("jon", user.getUsername());
         }

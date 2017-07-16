@@ -13,6 +13,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PictureDataParser {
@@ -124,9 +126,11 @@ public class PictureDataParser {
                                     Node commentNode = commentNodes.item(m);
                                     if(commentNode.getNodeType()==Node.ELEMENT_NODE) {
                                         Element commentElement = (Element) commentNode;
-                                        String date = commentElement.getAttribute("date");
+                                        String dateString = commentElement.getAttribute("date");
+                                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                        LocalDateTime date = LocalDateTime.parse(dateString, formatter);
                                         String comment = commentElement.getTextContent();
-                                        PictureManager.getImages().get(i).addCommentFromXML(comment, username);
+                                        PictureManager.getImages().get(i).addCommentFromXML(comment, username, date);
                                     }
                                 }
                             }

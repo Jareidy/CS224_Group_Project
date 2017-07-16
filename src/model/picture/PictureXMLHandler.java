@@ -128,7 +128,7 @@ public class PictureXMLHandler {
                         Element comment = doc.createElement("comment");
                         comment.appendChild(doc.createTextNode(importComment.getComment()));
                         comments.appendChild(comment);
-                        comment.setAttribute("date", String.valueOf(importComment.getDate()));
+                        comment.setAttribute("date", String.valueOf(importComment.getDateData()));
                     }
 
                     Element likeDislike = doc.createElement("likedislike");

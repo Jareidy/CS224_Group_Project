@@ -24,7 +24,7 @@ public class PictureTests {
             builder.setDescription("Pretty clouds");
             builder.setLocation("Arizona");
             Picture newPicture = builder.build();
-            pictureManager.addImage(newPicture);
+            PictureManager.addImage(newPicture);
         }
     }
 
@@ -38,13 +38,13 @@ public class PictureTests {
     @Test
     public void locationSearchTest(){
         PictureManager pictureManager = new PictureManager();
-        Assert.assertNotNull(pictureManager.searchImagesByLocation("testLocation"));
+        Assert.assertNotNull(PictureManager.searchImagesByLocation("testLocation"));
     }
 
     @Test
     public void imageManagerPictureTest(){
         createPictureData();
-        for (Picture picture : pictureManager.getImages()){
+        for (Picture picture : PictureManager.getImages()){
             Assert.assertEquals("Arizona Clouds", picture.getTitle());
             Assert.assertSame(null, picture.getImageLink());
             Assert.assertEquals("Arizona", picture.getLocation());

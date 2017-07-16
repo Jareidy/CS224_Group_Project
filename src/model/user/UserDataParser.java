@@ -41,7 +41,7 @@ public class UserDataParser {
                 String password = userElement.getElementsByTagName("password").item(0).getTextContent();
                 String emailAddress = userElement.getElementsByTagName("emailAddress").item(0).getTextContent();
                 User newUser = new User(username,password,emailAddress);
-                users.addUser(newUser);
+                UserManager.addUser(newUser);
             }
         }
     }
