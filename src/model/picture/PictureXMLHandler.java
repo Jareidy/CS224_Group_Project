@@ -73,26 +73,68 @@ public class PictureXMLHandler {
         if(inputs.isEmpty()){
         }else {
             for (UserInput userInput : inputs) {
-                Element user = doc.createElement("user");
-                users.appendChild(user);
-                user.setAttribute("username",userInput.getUser());
+                if(pictures.hasChildNodes()) {
+                    Boolean exists = false;
+                    for (int i = 0; i < pictures.getChildNodes().getLength(); i++) {
+                        if (pictures.getChildNodes().item(i).getTextContent().equals(userInput.getUser())) {
+                            Element comments = doc.createElement("comments");
+                            pictures.getChildNodes().item(i).appendChild(comments);
 
-                Element comments = doc.createElement("comments");
-                user.appendChild(comments);
+                            ArrayList<Comment> importComments = userInput.getComments();
+                            for (Comment importComment : importComments) {
+                                Element comment = doc.createElement("comment");
+                                comment.appendChild(doc.createTextNode(importComment.getComment()));
+                                comments.appendChild(comment);
+                                comment.setAttribute("date", String.valueOf(importComment.getDate()));
+                            }
 
-                ArrayList<Comment> importComments = userInput.getComments();
-                System.out.println(importComments);
-                for (Comment importComment : importComments) {
-                    Element comment = doc.createElement("comment");
-                    comment.appendChild(doc.createTextNode(importComment.getComment()));
-                    comments.appendChild(comment);
-                    comment.setAttribute("date",String.valueOf(importComment.getDate()));
+                            Element likeDislike = doc.createElement("likedislike");
+                            likeDislike.appendChild(doc.createTextNode(userInput.getLikeDislike()));
+                            pictures.getChildNodes().item(i).appendChild(likeDislike);
+                            exists = true;
+                        }else if(i==pictures.getChildNodes().getLength()-1&&!exists){
+                            System.out.println("two");
+                            Element user = doc.createElement("user");
+                            users.appendChild(user);
+                            user.setAttribute("username", userInput.getUser());
+
+                            Element comments = doc.createElement("comments");
+                            user.appendChild(comments);
+
+                            ArrayList<Comment> importComments = userInput.getComments();
+                            for (Comment importComment : importComments) {
+                                Element comment = doc.createElement("comment");
+                                comment.appendChild(doc.createTextNode(importComment.getComment()));
+                                comments.appendChild(comment);
+                                comment.setAttribute("date", String.valueOf(importComment.getDate()));
+                            }
+
+                            Element likeDislike = doc.createElement("likedislike");
+                            likeDislike.appendChild(doc.createTextNode(userInput.getLikeDislike()));
+                            user.appendChild(likeDislike);
+                        }
+                    }
+
+                }else{
+                    Element user = doc.createElement("user");
+                    users.appendChild(user);
+                    user.setAttribute("username", userInput.getUser());
+
+                    Element comments = doc.createElement("comments");
+                    user.appendChild(comments);
+
+                    ArrayList<Comment> importComments = userInput.getComments();
+                    for (Comment importComment : importComments) {
+                        Element comment = doc.createElement("comment");
+                        comment.appendChild(doc.createTextNode(importComment.getComment()));
+                        comments.appendChild(comment);
+                        comment.setAttribute("date", String.valueOf(importComment.getDate()));
+                    }
+
+                    Element likeDislike = doc.createElement("likedislike");
+                    likeDislike.appendChild(doc.createTextNode(userInput.getLikeDislike()));
+                    user.appendChild(likeDislike);
                 }
-
-                Element likeDislike = doc.createElement("likedislike");
-                likeDislike.appendChild(doc.createTextNode(userInput.getLikeDislike()));
-                user.appendChild(likeDislike);
-
             }
         }
     }

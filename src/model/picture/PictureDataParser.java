@@ -135,8 +135,6 @@ public class PictureDataParser {
                 }
             }
         }
-
-
     }
 
     private void readRatings(Element pictureElement,int i) {

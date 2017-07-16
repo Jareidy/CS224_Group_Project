@@ -42,7 +42,6 @@ public class ImportFile {
     public void saveFile(File file, String title) {
         try{
             String path = System.getProperty("user.dir")+"/src/res/"+title+findFileExtension(file);
-            System.out.println(path);
             File saved = new File(path);
             Files.copy(file.toPath(),saved.toPath());
         }catch(FileAlreadyExistsException e){

@@ -35,7 +35,6 @@ public class PictureManager {
                 searchImagesArrayList.add(image);
             }
         }
-        System.out.println(searchImagesArrayList);
         return searchImagesArrayList;
     }
 

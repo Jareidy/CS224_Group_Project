@@ -60,25 +60,24 @@ public class Picture {
         }else{
             for (Iterator<UserInput> iterator = userInputs.iterator();iterator.hasNext();) {
                 UserInput user = iterator.next();
-                if (user.equals(username)) {
+                if (user.getUser().equals(username)) {
                     user.addUserComment(comment, date);
                 } else {
                     newUser = new UserInput(findUserFromUsername(username));
                     newUser.addUserComment(comment, date);
+                    userInputs.add(newUser);
                 }
             }
-            userInputs.add(newUser);
+
         }
     }
 
     private User findUserFromUsername(String username) {
         User tempUser=null;
-        System.out.println(username);
         for(User user : UserManager.users){
             if(user.getUsername().equals(username)){
                 tempUser = user;
             }
-            System.out.println(user.getUsername());
         }
         return tempUser;
     }
@@ -92,7 +91,9 @@ public class Picture {
             for (UserInput user : userInputs) {
                 if (LoginViewController.currentUser.getUsername().equals(user.getUser())) {
                     user.addUserComment(comment, date);
+                    System.out.println("3");
                 } else {
+                    System.out.println("4");
                     UserInput newUser = new UserInput(LoginViewController.currentUser);
                     userInputs.add(newUser);
                     newUser.addUserComment(comment, date);
