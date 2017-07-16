@@ -81,6 +81,7 @@ public class Main extends Application {
             pane = loader.load();
             ImageViewController imageViewController = loader.getController();
             imageViewController.setMain(this);
+            imageViewController.setButtons();
             setSceneDefault();
         }catch (IOException e){
             e.printStackTrace();

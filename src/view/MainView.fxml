@@ -68,6 +68,10 @@
                              <Insets top="10.0" />
                          </VBox.margin>
                      </Button>
+                  <Button fx:id="viewReportsButton" mnemonicParsing="false" onAction="#handleViewReportsButton" style="-fx-background-color: pink;" text="View Reports">
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin></Button>
                   <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="199.0">
                      <children>
                         <Button fx:id="loginButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLogin" text="Login">
@@ -81,7 +85,7 @@
                            </HBox.margin></Button>
                      </children>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                   <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />

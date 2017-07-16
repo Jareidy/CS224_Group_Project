@@ -38,6 +38,10 @@ public class PictureManager {
         return searchImagesArrayList;
     }
 
+    public static void removePicture(Picture removedPicture){
+        images.remove(removedPicture);
+    }
+
     public static void clearPictures(){
         images.clear();
     }

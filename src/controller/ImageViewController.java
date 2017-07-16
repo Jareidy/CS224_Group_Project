@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import model.Main;
 import model.picture.Picture;
+import model.picture.PictureManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +23,7 @@ public class ImageViewController implements Initializable {
     @FXML private TextArea inputComment;
     @FXML private ListView commentsList;
     @FXML private ListView userList;
-    @FXML private Button submitButton;
+    @FXML private Button removeImageButton;
 
     private Main main;
     private Picture picture = MainViewController.selectedPicture;
@@ -40,6 +41,13 @@ public class ImageViewController implements Initializable {
         imageTitle.setText(String.valueOf(picture.getTitle()));
         setLikesAndDislikes();
         setComments();
+    }
+
+    @FXML
+    public void setButtons(){
+        if(LoginViewController.currentUser.getUsername().equals("admin")){
+            removeImageButton.setVisible(true);
+        }
     }
 
     private void setLikesAndDislikes(){
@@ -81,6 +89,7 @@ public class ImageViewController implements Initializable {
         }
     }
 
+    @FXML
     public void handleSubmitButton(){
         if(LoginViewController.login) {
             String newComment = inputComment.getText();
@@ -89,6 +98,12 @@ public class ImageViewController implements Initializable {
         }else{
             main.showImageLoginPopupViewWindow();
         }
+    }
+
+    @FXML
+    public void handleRemoveImageButton(){
+        PictureManager.removePicture(picture);
+        main.showMainWindow();
     }
 
     @Override

@@ -33,6 +33,7 @@ public class MainViewController implements Initializable{
     @FXML private Button registerButton;
     @FXML private Button logoutButton;
     @FXML private Button importButton;
+    @FXML private Button viewReportsButton;
 
     public void setMain(Main main) {
         this.main= main;
@@ -40,6 +41,10 @@ public class MainViewController implements Initializable{
 
     public void setLoginButtons(){
         if(LoginViewController.login){
+            viewReportsButton.setVisible(false);
+            if(LoginViewController.currentUser.getUsername().equals("admin")){
+                viewReportsButton.setVisible(true);
+            }
             logoutButton.defaultButtonProperty();
             registerButton.isDisabled();
             registerButton.setVisible(false);
@@ -48,6 +53,7 @@ public class MainViewController implements Initializable{
             importButton.setVisible(true);
             importButton.setDisable(false);
         }else{
+            viewReportsButton.setVisible(false);
             logoutButton.isDisabled();
             logoutButton.setVisible(false);
             registerButton.defaultButtonProperty();
@@ -146,6 +152,11 @@ public class MainViewController implements Initializable{
         int randomNumber = random.nextInt(imageData.size());
         selectedPicture = imageData.get(randomNumber);
         main.showImageWindow();
+    }
+
+    @FXML
+    public void handleViewReportsButton(){
+
     }
 
     @Override
