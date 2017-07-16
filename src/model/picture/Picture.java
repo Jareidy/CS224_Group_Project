@@ -8,9 +8,7 @@ import model.user.User;
 import model.user.UserManager;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
 public class Picture {
 
@@ -20,7 +18,7 @@ public class Picture {
     private final String continent;
     private final String description;
     private final String fileExtension;
-    public ArrayList<UserInput> userInputs= new ArrayList<>();
+    public LinkedList<UserInput> userInputs= new LinkedList<>();
     LocalDateTime date = LocalDateTime.now();
 
     public static ObservableList<String> commentUser = FXCollections.observableArrayList();
@@ -58,17 +56,16 @@ public class Picture {
             userInputs.add(newUser);
             newUser.addUserComment(comment, date);
         }else{
-            for (Iterator<UserInput> iterator = userInputs.iterator();iterator.hasNext();) {
-                UserInput user = iterator.next();
+            for (int i = 0; i < userInputs.size(); i++) {
+                UserInput user = userInputs.get(i);
                 if (user.getUser().equals(username)) {
                     user.addUserComment(comment, date);
-                } else {
-                    newUser = new UserInput(findUserFromUsername(username));
-                    newUser.addUserComment(comment, date);
-                    userInputs.add(newUser);
+                    return;
                 }
             }
-
+            newUser = new UserInput(findUserFromUsername(username));
+            newUser.addUserComment(comment, date);
+            userInputs.add(newUser);
         }
     }
 
@@ -88,17 +85,16 @@ public class Picture {
             userInputs.add(newUser);
             newUser.addUserComment(comment, date);
         }else {
-            for (UserInput user : userInputs) {
+            for (int i = 0; i < userInputs.size(); i++) {
+                UserInput user = userInputs.get(i);
                 if (LoginViewController.currentUser.getUsername().equals(user.getUser())) {
                     user.addUserComment(comment, date);
-
-                } else {
-
-                    UserInput newUser = new UserInput(LoginViewController.currentUser);
-                    userInputs.add(newUser);
-                    newUser.addUserComment(comment, date);
+                    return;
                 }
             }
+            UserInput newUser = new UserInput(LoginViewController.currentUser);
+            userInputs.add(newUser);
+            newUser.addUserComment(comment, date);
         }
     }
 
@@ -106,13 +102,7 @@ public class Picture {
     public void getCommentsText(){
         commentUser.clear();
         commentText.clear();
-        for(UserInput user: userInputs) {
-            ArrayList<Comment> comments = user.getComments();
-            for(Comment comment: comments) {
-                commentUser.add(user.getUser());
-                commentText.add(comment.getComment());
-            }
-        }
+
     }
 
 

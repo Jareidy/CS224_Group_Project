@@ -2,9 +2,8 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import model.Main;
 
-import static model.Main.mainViewController;
+import static controller.Main.mainViewController;
 
 public class MapViewController {
     private Main main;

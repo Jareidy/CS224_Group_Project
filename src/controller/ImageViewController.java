@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import model.Main;
 import model.report.Report;
 import model.report.ReportXMLHandler;
 import model.report.ReportsManager;

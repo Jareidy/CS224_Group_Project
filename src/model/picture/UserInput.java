@@ -15,7 +15,7 @@ public class UserInput {
     }
 
     public void addUserComment(String comment, LocalDateTime date){
-        Comment addComment = new Comment(date, comment);
+        Comment addComment = new Comment(date, comment, user);
         comments.add(addComment);
 
 
@@ -26,7 +26,7 @@ public class UserInput {
     }
 
     public String getUser(){
-        return user.toString();
+        return user;
     }
 
     public String getLikeDislike(){

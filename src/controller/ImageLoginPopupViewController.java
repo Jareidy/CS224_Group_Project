@@ -2,7 +2,6 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
-import model.Main;
 
 public class ImageLoginPopupViewController {
     Main main;

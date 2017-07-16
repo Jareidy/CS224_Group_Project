@@ -3,10 +3,12 @@ import model.picture.Picture;
 import model.picture.PictureBuilder;
 import model.picture.PictureDataParser;
 import model.picture.PictureManager;
+import model.user.User;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class PictureTests {
 
@@ -50,5 +52,4 @@ public class PictureTests {
             Assert.assertEquals(".jpg", picture.getFileExtension());
         }
     }
-
 }

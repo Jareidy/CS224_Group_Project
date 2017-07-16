@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import model.Main;
 import model.user.User;
 import model.user.UserManager;
 
@@ -35,6 +34,7 @@ public class LoginViewController {
     }
 
     public void checkCredentials(){
+        currentUser = null;
         String username = usernameField.getText();
         String password = passwordField.getText();
         ArrayList<User> users = UserManager.getUsers();

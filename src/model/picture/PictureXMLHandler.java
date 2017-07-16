@@ -6,6 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class PictureXMLHandler {
 
@@ -67,7 +68,7 @@ public class PictureXMLHandler {
 
 
     public void formatPictureUserReviews(Picture importedPicture){
-        final ArrayList<UserInput> inputs = importedPicture.userInputs;
+        final LinkedList<UserInput> inputs = importedPicture.userInputs;
         Element users = doc.createElement("users");
         pictures.appendChild(users);
         if(inputs.isEmpty()){

@@ -1,13 +1,11 @@
-package model;
+package controller;
 
-import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.picture.Picture;
 import model.picture.PictureDataParser;
 import model.report.ReportDataParser;
 import model.user.UserDataParser;

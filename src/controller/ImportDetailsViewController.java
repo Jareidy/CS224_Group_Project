@@ -14,7 +14,6 @@ import javafx.scene.image.Image;
 import model.picture.*;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 public class ImportDetailsViewController {
 
