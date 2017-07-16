@@ -9,6 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.picture.Picture;
 import model.picture.PictureDataParser;
+import model.report.ReportDataParser;
 import model.user.UserDataParser;
 
 import java.io.File;
@@ -21,7 +22,7 @@ public class Main extends Application {
         File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
         UserDataParser.parseUserData();
         pictureDataParser.parsePictureData(file);
-
+        ReportDataParser.parseReportData();
         launch(args);
     }
 
@@ -94,6 +95,18 @@ public class Main extends Application {
             pane = loader.load();
             ImportDetailsViewController importDetailsViewController = loader.getController();
             importDetailsViewController.setMain(this);
+            setSceneDefault();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showReportsWindow(){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ReportsView.fxml"));
+            pane = loader.load();
+            ReportsViewController reportsViewController = loader.getController();
+            reportsViewController.setMain(this);
             setSceneDefault();
         }catch (IOException e){
             e.printStackTrace();

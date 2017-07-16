@@ -51,11 +51,6 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="removeImageButton" mnemonicParsing="false" onAction="#handleRemoveImageButton" style="-fx-background-color: pink;" text="Remove Image" visible="false">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
                   <HBox alignment="CENTER" prefHeight="296.0" prefWidth="509.0">
                      <VBox.margin>
                         <Insets top="40.0" />
@@ -133,6 +128,24 @@
                            </HBox.margin>
                         </Button>
                      </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="363.0">
+                     <children>
+                        <Button fx:id="removeImageButton" mnemonicParsing="false" onAction="#handleRemoveImageButton" style="-fx-background-color: pink;" text="Remove Image" visible="false" />
+                        <Button fx:id="removeReportButton" mnemonicParsing="false" onAction="#handleRemoveReportButton" text="Remove Report" visible="false">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="reportImageButton" mnemonicParsing="false" onAction="#handleReportImageButton" style="-fx-background-color: pink;" text="Report Image">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>

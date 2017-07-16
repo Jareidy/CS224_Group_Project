@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="507.0" style="-fx-background-color: #84b4e4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ImageViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="507.0" style="-fx-background-color: #84b4e4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportsViewController">
    <children>
       <Region prefHeight="63.0" prefWidth="628.0" style="-fx-background-color: edeff2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="1000.0" AnchorPane.topAnchor="0.0">
@@ -24,7 +24,7 @@
             </Label>
          </children>
       </HBox>
-      <TableView fx:id="reportsTableView" layoutX="77.0" layoutY="105.0" prefHeight="424.0" prefWidth="351.0">
+      <TableView fx:id="reportsTableView" layoutX="77.0" layoutY="105.0" onMouseClicked="#handleSelectedImage" prefHeight="424.0" prefWidth="351.0">
         <columns>
           <TableColumn fx:id="userColumn" prefWidth="167.0" text="User" />
           <TableColumn fx:id="reportColumn" prefWidth="183.0" text="Report" />

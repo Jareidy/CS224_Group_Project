@@ -37,7 +37,7 @@ public class LoginViewController {
     public void checkCredentials(){
         String username = usernameField.getText();
         String password = passwordField.getText();
-        ArrayList<User> users = UserManager.returnUsers();
+        ArrayList<User> users = UserManager.getUsers();
 
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getPassword().equals(password) && users.get(i).getUsername().equals(username)) {

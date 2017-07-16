@@ -26,7 +26,7 @@ public class MainViewController implements Initializable{
     private final PictureDataParser pictureDataParser = new PictureDataParser();
     public static Picture selectedPicture;
     @FXML private TableView<Picture> imageTable;
-    @FXML private TableColumn<Picture, String> imageDescriptionColumn;
+    @FXML private TableColumn<Picture, String> imageTitleColumn;
     @FXML private TableColumn<Picture, String> locationColumn;
     @FXML private TextField searchField;
     @FXML private Button loginButton;
@@ -156,12 +156,12 @@ public class MainViewController implements Initializable{
 
     @FXML
     public void handleViewReportsButton(){
-
+        main.showReportsWindow();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        imageDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        imageTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         fillImageTable();
     }

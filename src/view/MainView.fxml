@@ -93,8 +93,8 @@
               </VBox>
               <TableView fx:id="imageTable" onMouseClicked="#handleClickedImage" prefHeight="459.0" prefWidth="467.0">
                   <columns>
-                      <TableColumn fx:id="imageDescriptionColumn" minWidth="0.0" prefWidth="278.0" text="Description" />
-                      <TableColumn fx:id="locationColumn" minWidth="0.0" prefWidth="269.0" resizable="false" text="Location" />
+                      <TableColumn fx:id="imageTitleColumn" minWidth="0.0" prefWidth="278.0" text="Title" />
+                      <TableColumn fx:id="locationColumn" minWidth="0.0" prefWidth="188.0" resizable="false" text="Location" />
                   </columns>
                   <HBox.margin>
                       <Insets right="10.0" />

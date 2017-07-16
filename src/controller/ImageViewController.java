@@ -8,6 +8,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import model.Main;
+import model.report.Report;
+import model.report.ReportXMLHandler;
+import model.report.ReportsManager;
 import model.picture.Picture;
 import model.picture.PictureManager;
 
@@ -24,9 +27,13 @@ public class ImageViewController implements Initializable {
     @FXML private ListView commentsList;
     @FXML private ListView userList;
     @FXML private Button removeImageButton;
+    @FXML private Button reportImageButton;
+    @FXML private Button removeReportButton;
 
     private Main main;
     private Picture picture = MainViewController.selectedPicture;
+    private ReportsManager reportsManager = new ReportsManager();
+    ReportXMLHandler reportXMLHandler = new ReportXMLHandler();
 
     public void setMain(Main main){
         this.main=main;
@@ -45,9 +52,18 @@ public class ImageViewController implements Initializable {
 
     @FXML
     public void setButtons(){
-        if(LoginViewController.currentUser.getUsername().equals("admin")){
-            removeImageButton.setVisible(true);
+        if(LoginViewController.login) {
+            if (LoginViewController.currentUser.getUsername().equals("admin")) {
+                removeImageButton.setVisible(true);
+                removeReportButton.setVisible(true);
+                reportImageButton.setVisible(false);
+            } else {
+                reportImageButton.setVisible(true);
+            }
+        }else{
+            reportImageButton.setVisible(false);
         }
+
     }
 
     private void setLikesAndDislikes(){
@@ -103,9 +119,22 @@ public class ImageViewController implements Initializable {
     @FXML
     public void handleRemoveImageButton(){
         PictureManager.removePicture(picture);
+        reportsManager.removeReport(picture);
         main.showMainWindow();
     }
 
+    @FXML
+    public void handleReportImageButton(){
+        Report newReport = new Report(LoginViewController.currentUser,picture);
+        reportsManager.addReport(newReport);
+        reportXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Reports.xml");
+    }
+
+    @FXML
+    public void handleRemoveReportButton(){
+        reportsManager.removeReport(picture);
+        reportXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Reports.xml");
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setImage(picture);

@@ -13,7 +13,7 @@ public class UsersXMLHandler {
     Element users;
 
     public void formatXmlFile(String localFileName){
-        ArrayList<User> parsedUsers = UserManager.returnUsers();
+        ArrayList<User> parsedUsers = UserManager.getUsers();
         doc = xmlCreator.docCreator();
         Element rootElement = doc.createElement("users");
         doc.appendChild(rootElement);

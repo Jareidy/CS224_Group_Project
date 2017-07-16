@@ -10,7 +10,7 @@ public class UserManager {
         users.add(user);
     }
 
-    public static ArrayList returnUsers(){
+    public static ArrayList getUsers(){
         return users;
     }
 

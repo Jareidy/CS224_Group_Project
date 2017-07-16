@@ -22,7 +22,7 @@ public class UserTests {
         for (int i = 0; i < 12;i++) {
             users.addUser(user);
         }
-        ArrayList<User> arrayUsers = users.returnUsers();
+        ArrayList<User> arrayUsers = users.getUsers();
         for (User user: arrayUsers){
             Assert.assertEquals("jon", user.getUsername());
         }
