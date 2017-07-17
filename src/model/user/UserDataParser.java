@@ -16,18 +16,18 @@ public class UserDataParser {
     public static final UserManager users = new UserManager();
     private static Document document;
 
-    public static void parseUserData() {
+    public static void parseUserData(String filename) {
         try{
-            readXMLFile();
+            readXMLFile(filename);
         }catch(IOException | SAXException | ParserConfigurationException e){
             e.printStackTrace();
         }
     }
 
-    private static void readXMLFile() throws IOException, SAXException, ParserConfigurationException {
+    private static void readXMLFile(String filename) throws IOException, SAXException, ParserConfigurationException {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(System.getProperty("user.dir")+"/src/res/Users.xml");
+            document = builder.parse(filename);
             readImageFromDocument();
     }
 

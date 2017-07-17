@@ -1,17 +1,16 @@
-import model.user.User;
-import model.user.UserBuilder;
-import model.user.UserManager;
+import model.user.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class UserTests {
 
-    UserManager users = new UserManager();
     User user;
 
-    public void createTestUser(){
+
+    public void createTestUsers(){
         UserBuilder userBuilder = new UserBuilder();
         userBuilder.setUsername("jon");
         userBuilder.setPassword("jon");
@@ -19,24 +18,58 @@ public class UserTests {
         userBuilder.setSecurityQuestion("jon");
         userBuilder.setEmail("jon@jon.com");
         user = userBuilder.build();
+        for (int i = 0; i < 12;i++) {
+            UserManager.addUser(user);
+        }
+    }
 
+    public void createUserXMLFile(){
+        createTestUsers();
+        UsersXMLHandler userXML = new UsersXMLHandler();
+        userXML.formatXmlFile(System.getProperty("user.dir")+"/Test assets/"+"TestUserData.xml");
     }
 
     @Test
-    public void userTest(){
-        Assert.assertEquals("jon", user.getUsername());
+    public void userPassword(){
+        createTestUsers();
         Assert.assertEquals("jon", user.getPassword());
+    }
+
+    @Test
+    public void testUsername(){
+        createTestUsers();
+        Assert.assertEquals("jon", user.getUsername());
+    }
+
+    @Test
+    public void testEmail(){
+        createTestUsers();
         Assert.assertEquals("jon@jon.com", user.getEmailAddress());
     }
 
     @Test
     public void userManagerTest(){
-        for (int i = 0; i < 12;i++) {
-            UserManager.addUser(user);
-        }
+        createTestUsers();
         ArrayList<User> arrayUsers = UserManager.getUsers();
         for (User user: arrayUsers){
             Assert.assertEquals("jon", user.getUsername());
         }
+    }
+
+    @Test
+    public void testUsersXMLHandler(){
+        createUserXMLFile();
+        File file = new File(System.getProperty("user.dir")+"/Test assets/"+"TestUserData.xml");
+        Assert.assertTrue(file.exists());
+        file.delete();
+    }
+
+    @Test
+    public void testUserDataParser(){
+        UserDataParser userParser = new UserDataParser();
+        createUserXMLFile();
+        File file = new File(System.getProperty("user.dir")+"/Test assets/"+"TestUserData.xml");
+        userParser.parseUserData(System.getProperty("user.dir")+"/Test assets/"+"TestUserData.xml");
+
     }
 }

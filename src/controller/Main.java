@@ -19,7 +19,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         PictureDataParser pictureDataParser= new PictureDataParser();
         File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
-        UserDataParser.parseUserData();
+        UserDataParser.parseUserData(System.getProperty("user.dir")+"/src/res/"+"Users.xml");
         pictureDataParser.parsePictureData(file);
         ReportDataParser.parseReportData();
         launch(args);
