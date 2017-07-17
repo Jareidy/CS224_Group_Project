@@ -69,7 +69,7 @@ public class Picture {
         }
     }
 
-    private User findUserFromUsername(String username) {
+    public User findUserFromUsername(String username) {
         User tempUser=null;
         for(User user : UserManager.users){
             if(user.getUsername().equals(username)){

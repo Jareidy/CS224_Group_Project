@@ -1,13 +1,12 @@
 import model.ImportFile;
-import model.picture.Picture;
-import model.picture.PictureBuilder;
-import model.picture.PictureDataParser;
-import model.picture.PictureManager;
+import model.picture.*;
 import model.user.User;
+import model.user.UserDataParser;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PictureTests {
@@ -23,6 +22,7 @@ public class PictureTests {
             builder.setExtension(".jpg");
             builder.setDescription("Pretty clouds");
             builder.setLocation("Arizona");
+            builder.setContintent("America");
             Picture newPicture = builder.build();
             PictureManager.addImage(newPicture);
         }
@@ -37,7 +37,6 @@ public class PictureTests {
 
     @Test
     public void locationSearchTest(){
-        PictureManager pictureManager = new PictureManager();
         Assert.assertNotNull(PictureManager.searchImagesByLocation("testLocation"));
     }
 
@@ -51,5 +50,10 @@ public class PictureTests {
             Assert.assertEquals("Pretty clouds", picture.getDescription());
             Assert.assertEquals(".jpg", picture.getFileExtension());
         }
+    }
+
+    @Test
+    public void getContinentTest(){
+        Assert.assertEquals("America", PictureManager.images.get(0).getContinent());
     }
 }
