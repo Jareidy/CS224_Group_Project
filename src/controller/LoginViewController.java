@@ -13,6 +13,7 @@ public class LoginViewController {
     public Main main;
     public Stage secondaryStage;
     public static User currentUser;
+    private String currentPrimaryScene;
     public static boolean login = false;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
@@ -21,6 +22,10 @@ public class LoginViewController {
     public void setMain(Main main, Stage secondaryStage) {
         this.main=main;
         this.secondaryStage=secondaryStage;
+    }
+
+    public void setCurrentPrimaryScene(String currentPrimaryScene) {
+        this.currentPrimaryScene = currentPrimaryScene;
     }
 
     @FXML
@@ -51,8 +56,12 @@ public class LoginViewController {
 
     private void login() {
         login = true;
-        main.showMainWindow();
         secondaryStage.close();
+        if(currentPrimaryScene.equals("imageView")){
+            main.showImageWindow();
+        }else if(currentPrimaryScene.equals("mainView")){
+            main.showMainWindow();
+        }
     }
 
     private void invalidCredentials() {
@@ -62,4 +71,5 @@ public class LoginViewController {
     public static User getCurrentUser(){
         return currentUser;
     }
+
 }

@@ -111,7 +111,7 @@ public class Main extends Application {
         }
     }
 
-    public void showLoginViewWindow(){
+    public void showLoginViewWindow(String currentScene){
         try{
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/LogInView.fxml"));
             pane = loader.load();
@@ -119,6 +119,7 @@ public class Main extends Application {
             secondaryStage = new Stage();
             LoginViewController loginViewController = loader.getController();
             loginViewController.setMain(this,secondaryStage);
+            loginViewController.setCurrentPrimaryScene(currentScene);
             secondaryStage.initOwner(primaryStage);
             secondaryStage.initModality(Modality.WINDOW_MODAL);
             secondaryStage.setScene(scene);

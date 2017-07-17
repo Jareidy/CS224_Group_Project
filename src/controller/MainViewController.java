@@ -70,7 +70,7 @@ public class MainViewController implements Initializable{
 
     @FXML
     public void handleLogin(){
-        main.showLoginViewWindow();
+        main.showLoginViewWindow("mainView");
     }
 
     @FXML
