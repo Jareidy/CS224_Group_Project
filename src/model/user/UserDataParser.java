@@ -40,7 +40,15 @@ public class UserDataParser {
                 String username =userElement.getAttribute("username");
                 String password = userElement.getElementsByTagName("password").item(0).getTextContent();
                 String emailAddress = userElement.getElementsByTagName("emailAddress").item(0).getTextContent();
-                User newUser = new User(username,password,emailAddress);
+                String securityQuestion = userElement.getElementsByTagName("securityQuestion").item(0).getTextContent();
+                String answer = userElement.getElementsByTagName("answer").item(0).getTextContent();
+                UserBuilder userBuilder = new UserBuilder();
+                userBuilder.setUsername(username);
+                userBuilder.setEmail(emailAddress);
+                userBuilder.setPassword(password);
+                userBuilder.setSecurityQuestion(securityQuestion);
+                userBuilder.setAnswer(answer);
+                User newUser = userBuilder.build();
                 UserManager.addUser(newUser);
             }
         }

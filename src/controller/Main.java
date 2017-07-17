@@ -129,6 +129,24 @@ public class Main extends Application {
         }
     }
 
+    public void showSecurityQuestionViewWindow(String currentScene){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/SecurityQuestionView.fxml"));
+            pane = loader.load();
+            Scene scene = new Scene(pane);
+            secondaryStage = new Stage();
+            SecurityQuestionViewController securityQuestionViewController = loader.getController();
+            securityQuestionViewController.setMain(this,secondaryStage);
+            securityQuestionViewController.setCurrentScene(currentScene);
+            secondaryStage.initOwner(primaryStage);
+            secondaryStage.initModality(Modality.WINDOW_MODAL);
+            secondaryStage.setScene(scene);
+            secondaryStage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public void showRegisterViewWindow(){
         try{
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/RegisterView.fxml"));

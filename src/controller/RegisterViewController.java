@@ -1,11 +1,15 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.user.User;
+import model.user.UserBuilder;
 import model.user.UserManager;
 import model.user.UsersXMLHandler;
 
@@ -16,11 +20,13 @@ public class RegisterViewController {
 
     private Main main;
     private Stage secondaryStage;
-
+    ObservableList<String> choices = FXCollections.observableArrayList("What is your mothers maiden name?","What was the first car you owned?","In what city were your born?");
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private TextField emailAddressField;
     @FXML private PasswordField confirmPasswordField;
+    @FXML private PasswordField securityAnswerField;
+    @FXML private ChoiceBox securityQuestionChoiceBox;
 
     public void setMain(Main main, Stage secondaryStage) {
         this.main=main;
@@ -54,8 +60,16 @@ public class RegisterViewController {
             String username = usernameField.getText();
             String password = passwordField.getText();
             String emailAddress = emailAddressField.getText();
-            User user = new User(username, password, emailAddress);
-            UserManager.addUser(user);
+            String secuirtyQuestion = securityQuestionChoiceBox.getValue().toString();
+            String answer = securityAnswerField.getText();
+            UserBuilder userBuilder = new UserBuilder();
+            userBuilder.setUsername(username);
+            userBuilder.setEmail(emailAddress);
+            userBuilder.setPassword(password);
+            userBuilder.setSecurityQuestion(secuirtyQuestion);
+            userBuilder.setAnswer(answer);
+            User newUser = userBuilder.build();
+            UserManager.addUser(newUser);
             secondaryStage.close();
             main.showMainWindow();
         }
@@ -67,5 +81,10 @@ public class RegisterViewController {
 
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    public void initialize(){
+        securityQuestionChoiceBox.setItems(choices);
     }
 }

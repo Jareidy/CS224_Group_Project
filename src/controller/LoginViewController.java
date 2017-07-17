@@ -38,6 +38,12 @@ public class LoginViewController {
         checkCredentials();
     }
 
+    @FXML
+    public void handleForgotPasswordButton(){
+        secondaryStage.close();
+        main.showSecurityQuestionViewWindow(currentPrimaryScene);
+    }
+
     public void checkCredentials(){
         currentUser = null;
         String username = usernameField.getText();

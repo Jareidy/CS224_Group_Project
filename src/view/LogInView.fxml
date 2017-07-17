@@ -22,7 +22,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameField" layoutX="140.0" layoutY="2.0" />
+            <TextField fx:id="usernameField" layoutX="140.0" layoutY="2.0" prefHeight="25.0" prefWidth="146.0" />
          </children>
       </Group>
       <Group layoutX="52.0" layoutY="183.0">
@@ -35,7 +35,7 @@
             </Label>
          </children>
       </Group>
-      <Button layoutX="173.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleConfirmButton" text="Confirm" />
+      <Button layoutX="82.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleConfirmButton" text="Confirm" />
       <Label contentDisplay="CENTER" layoutX="141.0" layoutY="33.0" prefHeight="80.0" prefWidth="119.0" text="Log In">
          <font>
             <Font name="System Bold" size="36.0" />
@@ -47,5 +47,6 @@
          </font>
       </Button>
       <Label fx:id="errorLabel" alignment="CENTER" layoutX="35.0" layoutY="105.0" prefHeight="17.0" prefWidth="317.0" textFill="RED" />
+      <Button layoutX="231.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleForgotPasswordButton" text="Forgot Password" />
    </children>
 </AnchorPane>

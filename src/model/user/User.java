@@ -5,11 +5,15 @@ public class User {
     String username;
     String password;
     String emailAddress;
+    String securityQuestion;
+    String answer;
 
-    public User(String username,String password,String emailAddress){
-        this.username=username;
-        this.password=password;
-        this.emailAddress=emailAddress;
+    public User(UserBuilder userBuilder){
+        this.username=userBuilder.username;
+        this.password=userBuilder.password;
+        this.emailAddress=userBuilder.email;
+        this.securityQuestion=userBuilder.securityQuestion;
+        this.answer=userBuilder.answer;
     }
 
     public String getUsername(){
@@ -22,5 +26,13 @@ public class User {
 
     public String getEmailAddress(){
         return emailAddress;
+    }
+
+    public String getSecurityQuestion(){
+        return securityQuestion;
+    }
+
+    public String getAnswer(){
+        return answer;
     }
 }
