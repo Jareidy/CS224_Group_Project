@@ -1,8 +1,8 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -21,6 +21,8 @@ public class SecurityQuestionViewController {
     @FXML private Label usernameLabel;
     @FXML private TextField answerField;
     @FXML private Label answerLabel;
+    @FXML private Button confirmButton;
+    @FXML private Button enterButton;
 
     public void setMain(Main main,Stage secondaryStage){
         this.main=main;
@@ -32,19 +34,23 @@ public class SecurityQuestionViewController {
     }
 
     @FXML
-    public void handleConfirmButton(){
-        if(usernameLabel.isVisible()){
-            for(User tempUser : UserManager.users){
-                if(tempUser.getUsername().toLowerCase().equals(usernameField.getText().toLowerCase()));{
-                    user=tempUser;
-                    usernameField.setVisible(false);
-                    usernameLabel.setVisible(false);
-                    securityQuestionLabel.setText(user.getSecurityQuestion());
-                    answerField.setVisible(true);
-                    answerLabel.setVisible(true);
-                }
+    public void handleEnterButton(){
+        String searchUser = usernameField.getText().toLowerCase();
+        for(User tempUser : UserManager.users){
+            if(tempUser.getUsername().toLowerCase().equals(searchUser));{
+                user=tempUser;
+                securityQuestionLabel.setText(user.getSecurityQuestion());
+                answerField.setVisible(true);
+                answerLabel.setVisible(true);
+                confirmButton.setVisible(true);
+                return;
             }
-        }else{
+        }
+    }
+
+    @FXML
+    public void handleConfirmButton(){
+            System.out.println(user.getUsername());
             System.out.println(user.getAnswer());
             if(answerField.getText().toLowerCase().equals(user.getAnswer().toLowerCase())){
                 usernameField.setVisible(false);
@@ -52,6 +58,8 @@ public class SecurityQuestionViewController {
                 securityQuestionLabel.setText("Your password is "+user.getPassword()+".");
                 answerField.setVisible(false);
                 answerLabel.setVisible(false);
+                confirmButton.setVisible(false);
+                enterButton.setVisible(false);
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -60,8 +68,6 @@ public class SecurityQuestionViewController {
 
                 alert.showAndWait();
             }
-
-        }
     }
 
     @FXML
