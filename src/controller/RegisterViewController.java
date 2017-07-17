@@ -42,7 +42,6 @@ public class RegisterViewController {
             createUser();
             UsersXMLHandler usersXMLHandler = new UsersXMLHandler();
             usersXMLHandler.formatXmlFile(System.getProperty("user.dir") + "/src/res/" + "Users.xml");
-            UserDataParser.parseUserData();
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
