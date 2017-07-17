@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.BCrypt;
 import model.user.User;
 import model.user.UserManager;
 
@@ -51,7 +52,8 @@ public class LoginViewController {
         ArrayList<User> users = UserManager.getUsers();
 
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getPassword().equals(password) && users.get(i).getUsername().toLowerCase().equals(username.toLowerCase())) {
+            if (BCrypt.checkpw(passwordField.getText(),users.get(i).getPassword()) && users.get(i).getUsername().toLowerCase().equals(username.toLowerCase())) {
+
                 currentUser = users.get(i);
                 login();
                 break;

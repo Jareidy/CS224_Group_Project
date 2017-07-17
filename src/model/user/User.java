@@ -35,4 +35,8 @@ public class User {
     public String getAnswer(){
         return answer;
     }
+
+    public void resetPassword(String password) {
+        password.equals(password);
+    }
 }

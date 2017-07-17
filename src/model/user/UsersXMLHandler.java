@@ -1,5 +1,6 @@
 package model.user;
 
+import model.BCrypt;
 import model.XMLBase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,7 +36,7 @@ public class UsersXMLHandler {
 
     private void formatPassword(Element users, User parsedUser) {
         Element password = doc.createElement("password");
-        password.appendChild((doc.createTextNode(parsedUser.getPassword())));
+        password.appendChild((doc.createTextNode(BCrypt.hashpw(parsedUser.getPassword(),BCrypt.gensalt()))));
         users.appendChild(password);
     }
 

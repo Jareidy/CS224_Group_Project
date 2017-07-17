@@ -53,13 +53,7 @@ public class SecurityQuestionViewController {
             System.out.println(user.getUsername());
             System.out.println(user.getAnswer());
             if(answerField.getText().toLowerCase().equals(user.getAnswer().toLowerCase())){
-                usernameField.setVisible(false);
-                usernameLabel.setVisible(false);
-                securityQuestionLabel.setText("Your password is "+user.getPassword()+".");
-                answerField.setVisible(false);
-                answerLabel.setVisible(false);
-                confirmButton.setVisible(false);
-                enterButton.setVisible(false);
+                main.showResetPasswordViewWindow(currentScene,user);
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");

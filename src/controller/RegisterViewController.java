@@ -8,10 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.user.User;
-import model.user.UserBuilder;
-import model.user.UserManager;
-import model.user.UsersXMLHandler;
+import model.user.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,6 +42,7 @@ public class RegisterViewController {
             createUser();
             UsersXMLHandler usersXMLHandler = new UsersXMLHandler();
             usersXMLHandler.formatXmlFile(System.getProperty("user.dir") + "/src/res/" + "Users.xml");
+            UserDataParser.parseUserData();
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

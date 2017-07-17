@@ -8,6 +8,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.picture.PictureDataParser;
 import model.report.ReportDataParser;
+import model.user.User;
 import model.user.UserDataParser;
 
 import java.io.File;
@@ -138,6 +139,25 @@ public class Main extends Application {
             SecurityQuestionViewController securityQuestionViewController = loader.getController();
             securityQuestionViewController.setMain(this,secondaryStage);
             securityQuestionViewController.setCurrentScene(currentScene);
+            secondaryStage.initOwner(primaryStage);
+            secondaryStage.initModality(Modality.WINDOW_MODAL);
+            secondaryStage.setScene(scene);
+            secondaryStage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showResetPasswordViewWindow(String currentScene,User user){
+        try{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ResetPasswordView.fxml"));
+            pane = loader.load();
+            Scene scene = new Scene(pane);
+            secondaryStage = new Stage();
+            ResetPasswordViewController resetPasswordViewController = loader.getController();
+            resetPasswordViewController.setMain(this,secondaryStage);
+            resetPasswordViewController.setResettingUser(user);
+            resetPasswordViewController.setCurrentScene(currentScene);
             secondaryStage.initOwner(primaryStage);
             secondaryStage.initModality(Modality.WINDOW_MODAL);
             secondaryStage.setScene(scene);
