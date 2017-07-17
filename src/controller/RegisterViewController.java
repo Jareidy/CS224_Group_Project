@@ -20,6 +20,7 @@ public class RegisterViewController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private TextField emailAddressField;
+    @FXML private PasswordField confirmPasswordField;
 
     public void setMain(Main main, Stage secondaryStage) {
         this.main=main;
@@ -34,9 +35,16 @@ public class RegisterViewController {
 
     @FXML
     public void handleConfirmButton() {
-        createUser();
-        UsersXMLHandler usersXMLHandler = new UsersXMLHandler();
-        usersXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Users.xml");
+        if(passwordField.getText().equals(confirmPasswordField.getText())) {
+            createUser();
+            UsersXMLHandler usersXMLHandler = new UsersXMLHandler();
+            usersXMLHandler.formatXmlFile(System.getProperty("user.dir") + "/src/res/" + "Users.xml");
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Your passwords do not match.");
+            alert.showAndWait();
+        }
     }
 
     private void createUser(){
