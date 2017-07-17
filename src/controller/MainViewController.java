@@ -87,22 +87,22 @@ public class MainViewController implements Initializable{
 
     @FXML
     public void handleGetTextFieldText(){
-        String location = searchField.getText();
-        searchForLocation(location);
+        String search = searchField.getText();
+        searchForImage(search);
     }
 
-    public void searchForLocation(String search){
+    public void searchForImage(String search){
         imageTable.getItems().clear();
         if(search.equals("")){
             fillImageTable();
         }else{
-            fillTableWithSearchedLocations(search);
+            fillTableWithSearchedImages(search);
         }
     }
 
-    protected void fillTableWithSearchedLocations(String location){
+    protected void fillTableWithSearchedImages(String search){
         ArrayList<Picture> searchedImages;
-        searchedImages = PictureManager.searchImagesByLocation(location);
+        searchedImages = PictureManager.searchImages(search);
         imageData.removeAll();
         imageData.addAll(searchedImages);
         imageTable.setItems(imageData);

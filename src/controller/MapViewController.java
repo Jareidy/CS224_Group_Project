@@ -54,12 +54,12 @@ public class MapViewController {
     }
 
     @FXML
-    public void handleSearchForLocation(){
-        String location = searchField.getText();
-        if(location.equals("")){
+    public void handleSearchForImage(){
+        String search = searchField.getText();
+        if(search.equals("")){
         }else{
             main.showMainWindow();
-            mainViewController.searchForLocation(location);
+            mainViewController.searchForImage(search);
         }
     }
 }

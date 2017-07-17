@@ -37,7 +37,7 @@ public class PictureTests {
 
     @Test
     public void locationSearchTest(){
-        Assert.assertNotNull(PictureManager.searchImagesByLocation("testLocation"));
+        Assert.assertNotNull(PictureManager.searchImages("testLocation"));
     }
 
     @Test

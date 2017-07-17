@@ -18,10 +18,10 @@ public class PictureManager {
         return images;
     }
 
-    public static ArrayList<Picture> searchImagesByLocation(String location) {
+    public static ArrayList<Picture> searchImages(String search) {
         ArrayList<Picture> searchImagesArrayList = new ArrayList<>();
         for (Picture image : images) {
-            if (image.getLocation().contains(location)) {
+            if (image.getTitle().toLowerCase().contains(search.toLowerCase())) {
                 searchImagesArrayList.add(image);
             }
         }
@@ -31,7 +31,7 @@ public class PictureManager {
     public static ArrayList<Picture> searchImagesByContinent(String continent){
         ArrayList<Picture> searchImagesArrayList = new ArrayList<>();
         for(Picture image : images){
-            if(image.getContinent().contains(continent)){
+            if(image.getContinent().toLowerCase().contains(continent.toLowerCase())){
                 searchImagesArrayList.add(image);
             }
         }
