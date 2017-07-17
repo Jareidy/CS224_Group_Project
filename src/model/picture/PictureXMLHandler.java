@@ -44,7 +44,7 @@ public class PictureXMLHandler {
 
     private void formatFileName(Picture importedPicture) {
         Element fileName = doc.createElement("fileName");
-        fileName.appendChild((doc.createTextNode("/res/" + importedPicture.getTitle() + importedPicture.getFileExtension())));
+        fileName.appendChild((doc.createTextNode("file:///"+"/res/" + importedPicture.getTitle() + importedPicture.getFileExtension())));
         pictures.appendChild(fileName);
     }
 
