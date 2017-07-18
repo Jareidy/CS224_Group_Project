@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.BCrypt;
 import model.user.User;
+import model.user.UserDataParser;
 import model.user.UserManager;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class LoginViewController {
 
     @FXML
     public void handleConfirmButton() {
+        UserDataParser.parseUserData(System.getProperty("user.dir")+"/src/res/"+"Users.xml");
         checkCredentials();
     }
 
@@ -52,8 +54,7 @@ public class LoginViewController {
         ArrayList<User> users = UserManager.getUsers();
 
         for (int i = 0; i < users.size(); i++) {
-            if (BCrypt.checkpw(passwordField.getText(),users.get(i).getPassword()) && users.get(i).getUsername().toLowerCase().equals(username.toLowerCase())) {
-
+            if (BCrypt.checkpw(password,users.get(i).getPassword()) && users.get(i).getUsername().toLowerCase().equals(username.toLowerCase())) {
                 currentUser = users.get(i);
                 login();
                 break;
