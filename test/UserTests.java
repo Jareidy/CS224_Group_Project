@@ -11,6 +11,7 @@ public class UserTests {
 
 
     public void createTestUsers(){
+        UserManager.clearUserData();
         UserBuilder userBuilder = new UserBuilder();
         userBuilder.setUsername("jon");
         userBuilder.setPassword("jon");
@@ -70,6 +71,7 @@ public class UserTests {
         createUserXMLFile();
         File file = new File(System.getProperty("user.dir")+"/Test assets/"+"TestUserData.xml");
         userParser.parseUserData(System.getProperty("user.dir")+"/Test assets/"+"TestUserData.xml");
-
+        Assert.assertEquals(12, userParser.users.getUsers().size());
+        file.delete();
     }
 }
