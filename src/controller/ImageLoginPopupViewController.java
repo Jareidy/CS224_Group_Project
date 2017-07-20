@@ -22,5 +22,4 @@ public class ImageLoginPopupViewController {
     public void handleCancelButton(){
         secondaryStage.close();
     }
-
 }

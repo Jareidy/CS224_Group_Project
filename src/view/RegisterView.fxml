@@ -38,8 +38,6 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="emailAddressField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="usernameField" GridPane.columnIndex="1" />
             <Label text="Email Address: " GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
@@ -55,8 +53,6 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Security Question:" GridPane.rowIndex="4">
                <font>
                   <Font size="18.0" />
@@ -67,12 +63,16 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <TextField fx:id="usernameField" GridPane.columnIndex="1" />
+            <TextField fx:id="emailAddressField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="securityQuestionChoiceBox" prefHeight="25.0" prefWidth="168.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <PasswordField fx:id="securityAnswerField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <Button layoutX="163.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleConfirmButton" prefHeight="40.0" prefWidth="74.0" text="Confirm" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="32.0" prefWidth="46.0" text="Back" />
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="50.0" layoutY="111.0" prefHeight="17.0" prefWidth="297.0" textFill="RED" />
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="52.0" layoutY="99.0" prefHeight="17.0" prefWidth="297.0" textFill="RED" />
    </children>
 </AnchorPane>

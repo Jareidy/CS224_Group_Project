@@ -17,11 +17,6 @@ import java.io.IOException;
 
 public class ImportDetailsViewController {
 
-    private Main main;
-    static final PictureXMLHandler PICTURE_XML_HANDLER = new PictureXMLHandler();
-    private final ImportFile importPhoto =  new ImportFile();
-    private String title;
-    ObservableList<String> choices = FXCollections.observableArrayList("Asia","Africa","Australia","Europe","North America","South America");
     @FXML private TextField imageTitleField;
     @FXML private TextField imageLocationField;
     @FXML private TextArea imageDescriptionField;
@@ -29,6 +24,12 @@ public class ImportDetailsViewController {
     @FXML private Label errorLabel;
     @FXML private ImageView imageView;
     @FXML private ChoiceBox choicebox;
+
+    private Main main;
+    static final PictureXMLHandler PICTURE_XML_HANDLER = new PictureXMLHandler();
+    private final ImportFile importPhoto =  new ImportFile();
+    private String title;
+    ObservableList<String> choices = FXCollections.observableArrayList("Asia","Africa","Australia","Europe","North America","South America");
 
     public void setMain(Main main) {
         this.main=main;

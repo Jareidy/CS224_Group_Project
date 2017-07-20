@@ -135,6 +135,7 @@ public class ImageViewController implements Initializable {
         reportsManager.removeReport(picture);
         reportXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Reports.xml");
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setImage(picture);

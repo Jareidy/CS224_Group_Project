@@ -140,11 +140,4 @@ public class PictureDataParser {
             }
         }
     }
-
-    private void readRatings(Element pictureElement,int i) {
-        Integer positiveRatings = Integer.valueOf(pictureElement.getElementsByTagName("positiveRatings").item(0).getTextContent());
-        Integer negativeRatings = Integer.valueOf(pictureElement.getElementsByTagName("negativeRatings").item(0).getTextContent());
-        PictureManager.getImages().get(i).addLike();
-        PictureManager.getImages().get(i).addDislike();
-    }
 }

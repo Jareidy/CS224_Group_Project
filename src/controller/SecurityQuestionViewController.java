@@ -53,6 +53,7 @@ public class SecurityQuestionViewController {
             System.out.println(user.getUsername());
             System.out.println(user.getAnswer());
             if(answerField.getText().toLowerCase().equals(user.getAnswer().toLowerCase())){
+                secondaryStage.close();
                 main.showResetPasswordViewWindow(currentScene,user);
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);

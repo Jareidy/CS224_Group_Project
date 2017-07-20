@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.picture.Picture;
 import model.picture.PictureDataParser;
@@ -20,10 +17,6 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable{
 
-    private Main main;
-    private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
-    private final PictureDataParser pictureDataParser = new PictureDataParser();
-    public static Picture selectedPicture;
     @FXML private TableView<Picture> imageTable;
     @FXML private TableColumn<Picture, String> imageTitleColumn;
     @FXML private TableColumn<Picture, String> locationColumn;
@@ -33,6 +26,11 @@ public class MainViewController implements Initializable{
     @FXML private Button logoutButton;
     @FXML private Button importButton;
     @FXML private Button viewReportsButton;
+
+    private Main main;
+    private final ObservableList<Picture> imageData = FXCollections.observableArrayList();
+    public static Picture selectedPicture;
+
 
     public void setMain(Main main) {
         this.main= main;
@@ -61,8 +59,8 @@ public class MainViewController implements Initializable{
     }
 
     private void fillImageTable(){
-        for(int i = 0; i < pictureDataParser.getImages().size(); i++) {
-            ArrayList<Picture> images=pictureDataParser.getImages();
+        for(int i = 0; i < PictureManager.getImages().size(); i++) {
+            ArrayList<Picture> images=PictureManager.getImages();
             imageData.add(images.get(i));
         }
        imageTable.setItems(imageData);
@@ -86,7 +84,7 @@ public class MainViewController implements Initializable{
     }
 
     @FXML
-    public void handleGetTextFieldText(){
+    public void handleSearchButton(){
         String search = searchField.getText();
         searchForImage(search);
     }
@@ -146,11 +144,30 @@ public class MainViewController implements Initializable{
     }
 
     @FXML
+    public void handleClearButton(){
+        searchField.clear();
+        imageTable.getItems().clear();
+        fillImageTable();
+    }
+
+    @FXML
     public void handleRandomButton(){
-        Random random = new Random();
-        int randomNumber = random.nextInt(imageData.size());
-        selectedPicture = imageData.get(randomNumber);
-        main.showImageWindow();
+        if(PictureManager.images.size()>0) {
+            Random random = new Random();
+            int randomNumber = random.nextInt(PictureManager.images.size());
+            selectedPicture = PictureManager.images.get(randomNumber);
+            main.showImageWindow();
+        }else{
+            showNoImagesAlert();
+        }
+    }
+
+    private void showNoImagesAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("There are no images.");
+        alert.setContentText("To see a random image, you must first add some images.");
+        alert.showAndWait();
     }
 
     @FXML

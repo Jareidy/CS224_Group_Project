@@ -47,7 +47,7 @@ public class ResetPasswordViewController {
 
     @FXML
     public void handleBackButton(){
+        secondaryStage.close();
         main.showSecurityQuestionViewWindow(currentScene);
     }
-
 }

@@ -12,14 +12,16 @@ import model.user.UserManager;
 import java.util.ArrayList;
 
 public class LoginViewController {
+
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private Label errorLabel;
+
     public Main main;
     public Stage secondaryStage;
     public static User currentUser;
     private String currentPrimaryScene;
     public static boolean login = false;
-    @FXML private TextField usernameField;
-    @FXML private PasswordField passwordField;
-    @FXML private Label errorLabel;
 
     public void setMain(Main main, Stage secondaryStage) {
         this.main=main;
@@ -57,10 +59,10 @@ public class LoginViewController {
             if (BCrypt.checkpw(password,users.get(i).getPassword()) && users.get(i).getUsername().toLowerCase().equals(username.toLowerCase())) {
                 currentUser = users.get(i);
                 login();
-                break;
+            }else{
+                invalidCredentials();
             }
         }
-        invalidCredentials();
     }
 
     private void login() {
@@ -76,9 +78,4 @@ public class LoginViewController {
     private void invalidCredentials() {
         errorLabel.setText("Your user name or password is incorrect.");
     }
-
-    public static User getCurrentUser(){
-        return currentUser;
-    }
-
 }

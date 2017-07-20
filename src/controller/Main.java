@@ -26,7 +26,6 @@ public class Main extends Application {
     }
 
     private Stage primaryStage;
-    private Stage secondaryStage;
     private AnchorPane pane;
     public static MainViewController mainViewController;
 
@@ -41,6 +40,14 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         setStageExtremes();
         primaryStage.show();
+    }
+
+    private void setSecondarySceneDefault(Stage secondaryStage){
+        Scene scene = new Scene(pane);
+        secondaryStage.initOwner(primaryStage);
+        secondaryStage.initModality(Modality.WINDOW_MODAL);
+        secondaryStage.setScene(scene);
+        secondaryStage.show();
     }
 
     private void setStageExtremes(){
@@ -114,17 +121,13 @@ public class Main extends Application {
 
     public void showLoginViewWindow(String currentScene){
         try{
+            Stage secondaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/LogInView.fxml"));
             pane = loader.load();
-            Scene scene = new Scene(pane);
-            secondaryStage = new Stage();
             LoginViewController loginViewController = loader.getController();
             loginViewController.setMain(this,secondaryStage);
             loginViewController.setCurrentPrimaryScene(currentScene);
-            secondaryStage.initOwner(primaryStage);
-            secondaryStage.initModality(Modality.WINDOW_MODAL);
-            secondaryStage.setScene(scene);
-            secondaryStage.show();
+            setSecondarySceneDefault(secondaryStage);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -132,17 +135,13 @@ public class Main extends Application {
 
     public void showSecurityQuestionViewWindow(String currentScene){
         try{
+            Stage secondaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/SecurityQuestionView.fxml"));
             pane = loader.load();
-            Scene scene = new Scene(pane);
-            secondaryStage = new Stage();
             SecurityQuestionViewController securityQuestionViewController = loader.getController();
             securityQuestionViewController.setMain(this,secondaryStage);
             securityQuestionViewController.setCurrentScene(currentScene);
-            secondaryStage.initOwner(primaryStage);
-            secondaryStage.initModality(Modality.WINDOW_MODAL);
-            secondaryStage.setScene(scene);
-            secondaryStage.show();
+            setSecondarySceneDefault(secondaryStage);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -150,18 +149,14 @@ public class Main extends Application {
 
     public void showResetPasswordViewWindow(String currentScene,User user){
         try{
+            Stage secondaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ResetPasswordView.fxml"));
             pane = loader.load();
-            Scene scene = new Scene(pane);
-            secondaryStage = new Stage();
             ResetPasswordViewController resetPasswordViewController = loader.getController();
             resetPasswordViewController.setMain(this,secondaryStage);
             resetPasswordViewController.setResettingUser(user);
             resetPasswordViewController.setCurrentScene(currentScene);
-            secondaryStage.initOwner(primaryStage);
-            secondaryStage.initModality(Modality.WINDOW_MODAL);
-            secondaryStage.setScene(scene);
-            secondaryStage.show();
+            setSecondarySceneDefault(secondaryStage);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -169,32 +164,25 @@ public class Main extends Application {
 
     public void showRegisterViewWindow(){
         try{
+            Stage secondaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/RegisterView.fxml"));
             pane = loader.load();
-            Scene scene = new Scene(pane);
-            secondaryStage = new Stage();
             RegisterViewController registerViewController = loader.getController();
             registerViewController.setMain(this,secondaryStage);
-            secondaryStage.initOwner(primaryStage);
-            secondaryStage.initModality(Modality.WINDOW_MODAL);
-            secondaryStage.setScene(scene);
-            secondaryStage.show();
+            setSecondarySceneDefault(secondaryStage);
         }catch (IOException e){
             e.printStackTrace();
         }
     }
+
     public void showImageLoginPopupViewWindow(){
         try{
+            Stage secondaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/ImageLoginPopupView.fxml"));
             pane = loader.load();
-            Scene scene = new Scene(pane);
-            secondaryStage = new Stage();
             ImageLoginPopupViewController imageLoginPopupViewController = loader.getController();
             imageLoginPopupViewController.setMain(this,secondaryStage);
-            secondaryStage.initOwner(primaryStage);
-            secondaryStage.initModality(Modality.WINDOW_MODAL);
-            secondaryStage.setScene(scene);
-            secondaryStage.show();
+            setSecondarySceneDefault(secondaryStage);
         }catch (IOException e){
             e.printStackTrace();
         }

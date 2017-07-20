@@ -48,11 +48,16 @@
                              <Insets bottom="10.0" />
                          </VBox.margin>
                      </TextField>
-                     <Button mnemonicParsing="false" onAction="#handleGetTextFieldText" text="Search">
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Button>
+                  <HBox prefHeight="28.0" prefWidth="117.0">
+                     <children>
+                           <Button mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
+                        <Button mnemonicParsing="false" onAction="#handleClearButton" text="Clear">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                   <Button mnemonicParsing="false" onAction="#handleMapView" text="Map View">
                      <VBox.margin>
                         <Insets top="10.0" />
