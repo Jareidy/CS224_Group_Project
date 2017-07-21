@@ -104,13 +104,4 @@ public class PictureTests {
         Assert.assertTrue(file.exists());
         file.delete();
     }
-
-    @Test
-    public void testPictureXMLParser(){
-        createPictureXMLFile();
-        PictureDataParser dataParser = new PictureDataParser();
-        File file = new File(System.getProperty("user.dir")+"/Test assets/"+"TestPictureData.xml");
-        dataParser.parsePictureData(file);
-        file.delete();
-    }
 }
