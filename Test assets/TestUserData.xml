@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<users>
-    <username username="test">
-        <password>$2a$10$3E3un.We0zT3ZVEFJEp4Lu2JwVoQHaF64eIIBnDbgdBVixvtmy.6O</password>
-        <emailAddress>fakeaddress@fake.com</emailAddress>
-        <securityQuestion>What is your mother's maiden name?</securityQuestion>
-        <answer>Smith</answer>
-    </username>
-</users>

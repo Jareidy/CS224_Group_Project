@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1000.0" style="-fx-background-color: #84b4e4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ImageViewController">
    <children>
       <Region prefHeight="63.0" prefWidth="628.0" style="-fx-background-color: edeff2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
@@ -91,11 +88,11 @@
                         <Insets bottom="20.0" left="10.0" top="40.0" />
                      </VBox.margin>
                      <children>
-                        <TableView fx:id="commentsTable" editable="true" prefHeight="259.0" prefWidth="408.0">
+                        <TableView fx:id="commentsTable" prefHeight="259.0" prefWidth="408.0">
                           <columns>
-                            <TableColumn fx:id="dateColumn" editable="false" minWidth="0.0" prefWidth="103.0" sortType="DESCENDING" text="Date" />
-                            <TableColumn fx:id="userColumn" editable="false" prefWidth="110.0" sortType="DESCENDING" text="User" />
-                              <TableColumn fx:id="commentColumn" editable="false" prefWidth="183.0" sortType="DESCENDING" text="Comment" />
+                            <TableColumn fx:id="dateColumn" editable="false" minWidth="0.0" prefWidth="112.0" text="Date" />
+                            <TableColumn fx:id="userColumn" editable="false" prefWidth="101.0" text="User" />
+                              <TableColumn fx:id="commentColumn" editable="false" prefWidth="183.0" text="Comment" />
                           </columns>
                         </TableView>
                      </children>
