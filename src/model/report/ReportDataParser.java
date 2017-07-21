@@ -21,18 +21,18 @@ public class ReportDataParser {
     public static ReportsManager reports = new ReportsManager();
     private static Document document;
 
-    public static void parseReportData() {
+    public static void parseReportData(String path) {
         try{
-            readXMLFile();
+            readXMLFile(path);
         }catch(IOException | SAXException | ParserConfigurationException e){
             e.printStackTrace();
         }
     }
 
-    private static void readXMLFile() throws IOException, SAXException, ParserConfigurationException {
+    private static void readXMLFile(String path) throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        document = builder.parse(System.getProperty("user.dir")+"/src/res/Reports.xml");
+        document = builder.parse(path);
         readImageFromDocument();
     }
 
