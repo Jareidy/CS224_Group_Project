@@ -1,17 +1,16 @@
 package controller;
 
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import model.picture.Comment;
+import model.picture.Picture;
+import model.picture.PictureManager;
 import model.report.Report;
 import model.report.ReportXMLHandler;
 import model.report.ReportsManager;
-import model.picture.Picture;
-import model.picture.PictureManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -76,7 +75,6 @@ public class ImageViewController implements Initializable {
     private void setComments(){
         picture.getCommentsText();
         updateXMLFile();
-        dateColumn.setSortType(TableColumn.SortType.DESCENDING);
     }
 
     private void updateXMLFile(){
@@ -145,7 +143,5 @@ public class ImageViewController implements Initializable {
         commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
         commentsTable.setItems(Picture.comments);
         dateColumn.setSortType(TableColumn.SortType.DESCENDING);
-        commentColumn.setSortable(false);
-        userColumn.setSortable(false);
     }
 }

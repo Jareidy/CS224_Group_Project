@@ -70,8 +70,8 @@ public class UserTests {
         UserDataParser userParser = new UserDataParser();
         createUserXMLFile();
         File file = new File(System.getProperty("user.dir")+"/Test assets/"+"TestUserData.xml");
-        userParser.parseUserData(System.getProperty("user.dir")+"/Test assets/"+"TestUserData.xml");
-        Assert.assertEquals(24, userParser.users.getUsers().size());
+        UserDataParser.parseUserData(System.getProperty("user.dir")+"/Test assets/"+"TestUserData.xml");
+        Assert.assertEquals(24, UserManager.getUsers().size());
         file.delete();
     }
 }

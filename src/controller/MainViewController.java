@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.picture.Picture;
-import model.picture.PictureDataParser;
 import model.picture.PictureManager;
 
 import java.net.URL;
@@ -139,7 +138,8 @@ public class MainViewController implements Initializable{
             selectedPicture = imageTable.getSelectionModel().getSelectedItem();
             main.showImageWindow();
         }
-        catch(NullPointerException ignored){
+        catch(Exception ignored){
+            return;
         }
     }
 

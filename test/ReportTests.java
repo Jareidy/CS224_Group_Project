@@ -1,15 +1,15 @@
+import javafx.scene.image.Image;
 import model.picture.Picture;
 import model.picture.PictureBuilder;
 import model.report.Report;
-import model.report.ReportDataParser;
 import model.report.ReportXMLHandler;
 import model.report.ReportsManager;
-import model.user.*;
+import model.user.User;
+import model.user.UserBuilder;
+import model.user.UserManager;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
-
-import javafx.scene.image.Image;
 
 import java.io.File;
 
@@ -63,6 +63,6 @@ public class ReportTests {
         createReports();
         ReportsManager manager = new ReportsManager();
         manager.addReport(report);
-        Assert.assertNotNull(manager.reports);
+        Assert.assertNotNull(ReportsManager.reports);
     }
 }
