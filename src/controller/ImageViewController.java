@@ -126,6 +126,11 @@ public class ImageViewController implements Initializable {
         Report newReport = new Report(LoginViewController.currentUser,picture);
         ReportDataParser.reports.addReport(newReport);
         reportXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Reports.xml");
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Report");
+        alert.setHeaderText("Image Reported");
+        alert.setContentText("You have successfully reported "+picture.getTitle()+".");
+        alert.showAndWait();
     }
 
     @FXML
