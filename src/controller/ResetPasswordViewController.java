@@ -5,8 +5,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.BCrypt;
-import model.user.User;
-import model.user.UserManager;
+import model.user.*;
+
+import java.io.File;
 
 public class ResetPasswordViewController {
     Main main;
@@ -32,8 +33,28 @@ public class ResetPasswordViewController {
 
     @FXML
     public void handleConfirmButton(){
+        User currentUser = user;
         if(newPasswordField.getText().equals(confirmPasswordField.getText())){
-            user.resetPassword(newPasswordField.getText());
+            for(int i =0; i<UserManager.users.size();i++){
+                if(UserManager.users.get(i).getUsername().equals(user.getUsername())){
+                    UserManager.users.remove(i);
+                    String password = confirmPasswordField.getText();
+                    UserBuilder userBuilder = new UserBuilder();
+                    userBuilder.setUsername(currentUser.getUsername());
+                    userBuilder.setPassword(password);
+                    userBuilder.setEmail(currentUser.getEmailAddress());
+                    userBuilder.setSecurityQuestion(currentUser.getSecurityQuestion());
+                    userBuilder.setAnswer(currentUser.getAnswer());
+                    User resetUser = userBuilder.build();
+                    UserManager.addUser(resetUser);
+                }
+            }
+            UsersXMLHandler usersXMLHandler = new UsersXMLHandler();
+            File file = new File(System.getProperty("user.dir") + "/src/res/" + "Users.xml");
+            usersXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Users.xml");
+            UserManager.clearUserData();
+            UserDataParser userDataParser = new UserDataParser();
+            userDataParser.parseUserData(file);
             secondaryStage.close();
             main.showLoginViewWindow(currentScene);
         }else{

@@ -14,35 +14,42 @@ public class SecurityQuestionViewController {
     Main main;
     Stage secondaryStage;
     String currentScene;
-    User user=null;
+    private User user;
 
     @FXML private Label securityQuestionLabel;
     @FXML private TextField usernameField;
-    @FXML private Label usernameLabel;
     @FXML private TextField answerField;
     @FXML private Label answerLabel;
     @FXML private Button confirmButton;
-    @FXML private Button enterButton;
 
     public void setMain(Main main,Stage secondaryStage){
         this.main=main;
         this.secondaryStage=secondaryStage;
+        user=null;
     }
 
     public void setCurrentScene(String currentScene){
         this.currentScene=currentScene;
     }
 
+    public void setUser(User tempUser){
+        user=tempUser;
+    }
+
     @FXML
     public void handleEnterButton(){
         String searchUser = usernameField.getText().toLowerCase();
         for(User tempUser : UserManager.users){
-            if(tempUser.getUsername().toLowerCase().equals(searchUser));{
-                user=tempUser;
-                securityQuestionLabel.setText(user.getSecurityQuestion());
+            if(searchUser.toLowerCase().equals(tempUser.getUsername().toLowerCase())){
+                System.out.println(tempUser.getUsername());
+                System.out.println(searchUser);
+                securityQuestionLabel.setText(tempUser.getSecurityQuestion());
                 answerField.setVisible(true);
                 answerLabel.setVisible(true);
                 confirmButton.setVisible(true);
+                System.out.println(tempUser.getUsername());
+                setUser(tempUser);
+                System.out.println(user.getUsername());
                 return;
             }
         }
@@ -50,8 +57,6 @@ public class SecurityQuestionViewController {
 
     @FXML
     public void handleConfirmButton(){
-            System.out.println(user.getUsername());
-            System.out.println(user.getAnswer());
             if(answerField.getText().toLowerCase().equals(user.getAnswer().toLowerCase())){
                 secondaryStage.close();
                 main.showResetPasswordViewWindow(currentScene,user);

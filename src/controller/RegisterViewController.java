@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.user.*;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,9 +78,11 @@ public class RegisterViewController {
 
     public void updateXML(){
         UsersXMLHandler usersXMLHandler = new UsersXMLHandler();
-        usersXMLHandler.formatXmlFile(System.getProperty("user.dir") + "/src/res/" + "Users.xml");
+        File file = new File(System.getProperty("user.dir") + "/src/res/" + "Users.xml");
+        usersXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Users.xml");
         UserManager.clearUserData();
-        UserDataParser.parseUserData(System.getProperty("user.dir")+"/src/res/"+"Users.xml");
+        UserDataParser userDataParser = new UserDataParser();
+        userDataParser.parseUserData(file);
     }
 
     public void showInvalidEmailAlert(){

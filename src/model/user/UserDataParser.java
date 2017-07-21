@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
 
 public class UserDataParser {
@@ -16,22 +17,23 @@ public class UserDataParser {
     public static final UserManager users = new UserManager();
     private static Document document;
 
-    public static void parseUserData(String filename) {
+    public void parseUserData(File file) {
         try{
-            readXMLFile(filename);
+            readXMLFile(file);
         }catch(IOException | SAXException | ParserConfigurationException e){
             e.printStackTrace();
         }
     }
 
-    private static void readXMLFile(String filename) throws IOException, SAXException, ParserConfigurationException {
+    private void readXMLFile(File file) throws IOException, SAXException, ParserConfigurationException {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(filename);
+            document = builder.parse(file);
             readImageFromDocument();
+
     }
 
-    private static void readImageFromDocument() {
+    private void readImageFromDocument() {
         NodeList userNodes = document.getElementsByTagName("username");
         for(int i = 0; i<userNodes.getLength();i++){
             Node userNode = userNodes.item(i);

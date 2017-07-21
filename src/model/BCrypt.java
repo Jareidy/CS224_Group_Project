@@ -533,8 +533,8 @@ public class BCrypt {
 	 * Initialise the Blowfish key schedule
 	 */
 	private void init_key() {
-		P = P_orig.clone();
-		S = S_orig.clone();
+		P = (int[])P_orig.clone();
+		S = (int[])S_orig.clone();
 	}
 
 	/**
@@ -682,7 +682,7 @@ public class BCrypt {
 
 		B = new BCrypt();
 		hashed = B.crypt_raw(passwordb, saltb, rounds,
-                bf_crypt_ciphertext.clone());
+		    (int[])bf_crypt_ciphertext.clone());
 
 		rs.append("$2");
 		if (minor >= 'a')

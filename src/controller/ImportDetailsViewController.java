@@ -80,7 +80,7 @@ public class ImportDetailsViewController {
     private void collectUserInput() {
         String location = imageLocationField.getText();
         String description = imageDescriptionField.getText();
-        String path = "file:///"+System.getProperty("user.dir")+"/src/res/"+title+importPhoto.getFileExtension();
+        String path = System.getProperty("user.dir")+"/src/res/"+title+importPhoto.getFileExtension();
         Image image = new Image(path);
         PictureBuilder builder = new PictureBuilder();
         builder.setTitle(title);

@@ -9,6 +9,7 @@ import model.user.User;
 import model.user.UserDataParser;
 import model.user.UserManager;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class LoginViewController {
@@ -39,7 +40,6 @@ public class LoginViewController {
 
     @FXML
     public void handleConfirmButton() {
-        UserDataParser.parseUserData(System.getProperty("user.dir")+"/src/res/"+"Users.xml");
         checkCredentials();
     }
 
