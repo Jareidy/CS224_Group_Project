@@ -15,7 +15,7 @@ public class ReportXMLHandler {
     Element reports;
 
     public void formatXmlFile(String localFileName){
-        ArrayList<Report> parsedReports = ReportsManager.reports;
+        ArrayList<Report> parsedReports = ReportDataParser.reports.getReportsList();
         doc = xmlCreator.docCreator();
         Element rootElement = doc.createElement("reports");
         doc.appendChild(rootElement);

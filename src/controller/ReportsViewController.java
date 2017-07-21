@@ -28,6 +28,7 @@ public class ReportsViewController implements Initializable{
     }
 
     private void fillImageTable() {
+        reportsTableView.getItems().clear();
         ObservableList<Report> reportsList = FXCollections.observableArrayList();
         reportsList.setAll(ReportsManager.reports);
         reportsTableView.setItems(reportsList);
@@ -40,7 +41,6 @@ public class ReportsViewController implements Initializable{
             for(Picture picture : PictureManager.images){
                 if(picture.getTitle().equals(reportsTableView.getSelectionModel().getSelectedItem().getPicture())){
                     MainViewController.selectedPicture = picture;
-                    System.out.println(MainViewController.selectedPicture.getTitle());
                 }
             }
             main.showImageWindow();

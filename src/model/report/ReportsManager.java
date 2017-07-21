@@ -15,10 +15,17 @@ public class ReportsManager {
     }
 
     public void removeReport(Picture picture){
+        Report sameReport = null;
         for(Report report:reports){
-            if(report.getPicture().equals(picture)){
-                reports.remove(report);
+            if(report.getPicture().equals(picture.getTitle())){
+                sameReport=report;
+                break;
             }
         }
+        reports.remove(sameReport);
+    }
+
+    public ArrayList<Report> getReportsList(){
+        return reports;
     }
 }

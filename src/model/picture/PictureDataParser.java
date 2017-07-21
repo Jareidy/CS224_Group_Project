@@ -120,7 +120,6 @@ public class PictureDataParser {
                             Node commentsNode = commentsNodes.item(k);
                             if(commentsNode.getNodeType()==Node.ELEMENT_NODE){
                                 Element commentsElement = (Element) commentsNode;
-
                                 NodeList commentNodes = commentsElement.getElementsByTagName("comment");
                                 for(int m = 0; m<commentNodes.getLength();m++){
                                     Node commentNode = commentNodes.item(m);
@@ -135,6 +134,15 @@ public class PictureDataParser {
                                 }
                             }
                         }
+
+
+                        String likedislike = inputElement.getElementsByTagName("likedislike").item(0).getTextContent();
+                        if(likedislike.equals("like")){
+                            PictureManager.getImages().get(i).addLikeFromXML(username);
+                        }else if(likedislike.equals("dislike")){
+                            PictureManager.getImages().get(i).addDislikeFromXML(username);
+                        }
+
                     }
                 }
             }

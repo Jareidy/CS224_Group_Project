@@ -98,7 +98,6 @@ public class Picture {
         }
     }
 
-
     public void getCommentsText(){
         for(UserInput userInput: userInputs){
             ArrayList<Comment> userComments = userInput.getComments();
@@ -107,7 +106,6 @@ public class Picture {
             }
         }
     }
-
 
     public void addLike(){
         if(userInputs.isEmpty()){
@@ -128,6 +126,15 @@ public class Picture {
         }
     }
 
+    public void addLikeFromXML(String username){
+            for (UserInput user : userInputs) {
+                if (username.equals(user.getUser())) {
+                    user.addLikeDislike("like");
+                    return;
+                }
+            }
+    }
+
     public void addDislike(){
         if(userInputs.isEmpty()){
             UserInput newUser = new UserInput(LoginViewController.currentUser);
@@ -144,6 +151,15 @@ public class Picture {
             UserInput newUser = new UserInput(LoginViewController.currentUser);
             userInputs.add(newUser);
             newUser.addLikeDislike("dislike");
+        }
+    }
+
+    public void addDislikeFromXML(String username){
+        for (UserInput user : userInputs) {
+            if (username.equals(user.getUser())) {
+                user.addLikeDislike("dislike");
+                return;
+            }
         }
     }
 

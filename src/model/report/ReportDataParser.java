@@ -23,6 +23,7 @@ public class ReportDataParser {
 
     public static void parseReportData() {
         try{
+            reports.getReportsList().clear();
             readXMLFile();
         }catch(IOException | SAXException | ParserConfigurationException e){
             e.printStackTrace();
@@ -40,29 +41,32 @@ public class ReportDataParser {
         NodeList reportsNodes = document.getElementsByTagName("reports");
         for(int i = 0; i<reportsNodes.getLength();i++){
             Node reportNode = reportsNodes.item(i);
-            if(reportNode.getNodeType()==Node.ELEMENT_NODE){
-                Element reportElement = (Element) reportNode;
-                String username = reportElement.getElementsByTagName("user").item(0).getTextContent();
-                User reportingUser=null;
-                UserManager userManager=new UserManager();
-                ArrayList<User> userList = UserManager.getUsers();
-                for(User user : userList){
-                    if(user.getUsername().equals(username)){
-                        reportingUser=user;
+            if(reportNode.hasChildNodes()){
+                if (reportNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element reportElement = (Element) reportNode;
+                    String username = reportElement.getElementsByTagName("user").item(0).getTextContent();
+                    User reportingUser = null;
+                    UserManager userManager = new UserManager();
+                    ArrayList<User> userList = UserManager.getUsers();
+                    for (User user : userList) {
+                        if (user.getUsername().equals(username)) {
+                            reportingUser = user;
+                        }
                     }
-                }
-                String pictureTitle = reportElement.getElementsByTagName("picture").item(0).getTextContent();
-                Picture reportedPicture=null;
-                PictureDataParser pictureDataParser = new PictureDataParser();
-                ArrayList<Picture> imageList=pictureDataParser.getImages();
-                for(Picture picture: imageList){
-                    if(picture.getTitle().equals(pictureTitle)){
-                        reportedPicture=picture;
+                    String pictureTitle = reportElement.getElementsByTagName("picture").item(0).getTextContent();
+                    Picture reportedPicture = null;
+                    PictureDataParser pictureDataParser = new PictureDataParser();
+                    ArrayList<Picture> imageList = pictureDataParser.getImages();
+                    for (Picture picture : imageList) {
+                        if (picture.getTitle().equals(pictureTitle)) {
+                            reportedPicture = picture;
+                        }
                     }
+                    Report newReport = new Report(reportingUser, reportedPicture);
+                    reports.addReport(newReport);
+            }else {
+
                 }
-                Report newReport = new Report(reportingUser,reportedPicture);
-                reports.addReport(newReport);
-                System.out.println(newReport);
             }
         }
     }

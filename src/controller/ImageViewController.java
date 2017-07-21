@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import model.picture.Comment;
 import model.report.Report;
+import model.report.ReportDataParser;
 import model.report.ReportXMLHandler;
 import model.report.ReportsManager;
 import model.picture.Picture;
@@ -33,7 +34,6 @@ public class ImageViewController implements Initializable {
 
     private Main main;
     private Picture picture = MainViewController.selectedPicture;
-    private ReportsManager reportsManager = new ReportsManager();
     ReportXMLHandler reportXMLHandler = new ReportXMLHandler();
 
     public void setMain(Main main){
@@ -119,20 +119,20 @@ public class ImageViewController implements Initializable {
     @FXML
     public void handleRemoveImageButton(){
         PictureManager.removePicture(picture);
-        reportsManager.removeReport(picture);
+        ReportDataParser.reports.removeReport(picture);
         main.showMainWindow();
     }
 
     @FXML
     public void handleReportImageButton(){
         Report newReport = new Report(LoginViewController.currentUser,picture);
-        reportsManager.addReport(newReport);
+        ReportDataParser.reports.addReport(newReport);
         reportXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Reports.xml");
     }
 
     @FXML
     public void handleRemoveReportButton(){
-        reportsManager.removeReport(picture);
+        ReportDataParser.reports.removeReport(picture);
         reportXMLHandler.formatXmlFile(System.getProperty("user.dir")+"/src/res/"+"Reports.xml");
     }
 
