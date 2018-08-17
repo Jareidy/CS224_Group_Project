@@ -1,7 +1,6 @@
 package model.picture;
 
 import javafx.scene.image.Image;
-import model.user.UserManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -137,12 +136,7 @@ public class PictureDataParser {
 
 
                         String likedislike = inputElement.getElementsByTagName("likedislike").item(0).getTextContent();
-                        if(likedislike.equals("like")){
-                            PictureManager.getImages().get(i).addLikeFromXML(username);
-                        }else if(likedislike.equals("dislike")){
-                            PictureManager.getImages().get(i).addDislikeFromXML(username);
-                        }
-
+                        PictureManager.getImages().get(i).addLikeDislikeFromXML(username, likedislike);
                     }
                 }
             }

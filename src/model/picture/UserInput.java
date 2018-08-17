@@ -1,6 +1,7 @@
 package model.picture;
 
 import model.user.User;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -17,8 +18,6 @@ public class UserInput {
     public void addUserComment(String comment, LocalDateTime date){
         Comment addComment = new Comment(date, comment, user);
         comments.add(addComment);
-
-
     }
 
     public ArrayList getComments(){
@@ -53,5 +52,9 @@ public class UserInput {
         else{
             likeDislike = input;
         }
+    }
+
+    public void addLikeDislikeFromXML(String likeDislike){
+        this.likeDislike = likeDislike;
     }
 }

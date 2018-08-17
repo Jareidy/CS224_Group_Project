@@ -8,7 +8,8 @@ import model.user.User;
 import model.user.UserManager;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Picture {
 
@@ -126,14 +127,6 @@ public class Picture {
         }
     }
 
-    public void addLikeFromXML(String username){
-            for (UserInput user : userInputs) {
-                if (username.equals(user.getUser())) {
-                    user.addLikeDislike("like");
-                    return;
-                }
-            }
-    }
 
     public void addDislike(){
         if(userInputs.isEmpty()){
@@ -154,11 +147,19 @@ public class Picture {
         }
     }
 
-    public void addDislikeFromXML(String username){
-        for (UserInput user : userInputs) {
-            if (username.equals(user.getUser())) {
-                user.addLikeDislike("dislike");
-                return;
+
+    public void addLikeDislikeFromXML(String username, String likeDislike){
+        UserInput newUser = null;
+        if (userInputs.isEmpty()){
+            newUser = new UserInput(findUserFromUsername(username));
+            userInputs.add(newUser);
+            newUser.addLikeDislike(likeDislike);
+        }
+        else {
+            for (UserInput user : userInputs) {
+                if (user.getUser().equals(username)) {
+                    user.addLikeDislike(likeDislike);
+                }
             }
         }
     }

@@ -1,0 +1,80 @@
+Index: src/controller/ImportDetailsViewController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\n\nimport javafx.embed.swing.SwingFXUtils;\nimport javafx.fxml.FXML;\nimport javafx.scene.control.Label;\nimport javafx.scene.control.TextArea;\nimport javafx.scene.control.TextField;\nimport javafx.scene.image.ImageView;\nimport model.*;\nimport javafx.scene.image.Image;\n\n\npublic class ImportDetailsViewController {\n\n    private Main main;\n    static final XMLHandler xmlHandler = new XMLHandler();\n    private final ImportFile importPhoto =  new ImportFile();\n    private String title;\n    @FXML private TextField imageTitleField;\n    @FXML private TextField imageLocationField;\n    @FXML private TextArea imageDescriptionField;\n    @FXML private Label filePathLabel;\n    @FXML private Label errorLabel;\n    @FXML private ImageView imageView;\n\n    public void setMain(Main main) {\n        this.main=main;\n    }\n\n    @FXML\n    public void handleBackButton(){\n        main.showMainWindow();\n    }\n\n    @FXML\n    public void handleChooseFile(){\n        importPhoto.chooseFile();\n        setFilePathLabel();\n        displayChosenImage();\n    }\n\n    @FXML\n    public void handleImportPhoto() {\n        if(imageTitleField.getText().equals(\"\")||filePathLabel.getText().equals(\"\")){\n            setErrorLabel();\n        }else {\n            collectTitleInput();\n            importPhoto.saveFile(importPhoto.getFile(), title);\n            collectUserInput();\n        }\n    }\n\n    private void setFilePathLabel(){\n        filePathLabel.setText(String.valueOf(importPhoto.getFile()));\n    }\n\n    private void displayChosenImage(){\n        Image importedPhoto = SwingFXUtils.toFXImage(importPhoto.getBufferedImage(),null);\n        imageView.setImage(importedPhoto);\n    }\n\n    private void collectTitleInput(){\n        title = imageTitleField.getText();\n    }\n\n    private void collectUserInput() {\n        String location = imageLocationField.getText();\n        String description = imageDescriptionField.getText();\n        String path = \"file:///\"+System.getProperty(\"user.dir\")+\"/src/res/\"+title+importPhoto.getFileExtension();\n        Image image = new Image(path);\n        PictureBuilder builder = new PictureBuilder();\n        builder.setTitle(title);\n        builder.setExtension(importPhoto.getFileExtension());\n        builder.setDescription(description);\n        builder.setLocation(location);\n        builder.setImageLink(image);\n        Picture newPicture = builder.build();\n        if(imageLocationField.getText().equals(\"\")||imageDescriptionField.getText().equals(\"\")){\n            setErrorLabel();\n        }\n        else {\n            ImageManager imageManager = PictureDataParser.imageManager;\n            imageManager.addImage(newPicture);\n            xmlHandler.XMLWriter();\n            main.showMainWindow();\n        }\n    }\n\n    private void setErrorLabel() {\n        errorLabel.setText(\"You must enter all fields.\");\n    }\n\n    public void displayErrorFileAlreadyExists() {\n        errorLabel.setText(\"Title is already in use.\");\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/controller/ImportDetailsViewController.java	(revision ecaef97f83eede5d1a5e008e5e1e3fe51ae8ec69)
++++ src/controller/ImportDetailsViewController.java	(revision )
+@@ -81,7 +81,7 @@
+         else {
+             ImageManager imageManager = PictureDataParser.imageManager;
+             imageManager.addImage(newPicture);
+-            xmlHandler.XMLWriter();
++            xmlHandler.formatXmlFile("/src/res/PictureData.xml");
+             main.showMainWindow();
+         }
+     }
+Index: src/model/XMLHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\nimport org.w3c.dom.Document;\nimport org.w3c.dom.Element;\n\nimport javax.xml.parsers.DocumentBuilder;\nimport javax.xml.parsers.DocumentBuilderFactory;\nimport javax.xml.parsers.ParserConfigurationException;\nimport javax.xml.transform.Transformer;\nimport javax.xml.transform.TransformerException;\nimport javax.xml.transform.TransformerFactory;\nimport javax.xml.transform.dom.DOMSource;\nimport javax.xml.transform.stream.StreamResult;\nimport java.util.ArrayList;\n\npublic class XMLHandler {\n\n    public void formatXmlFile(String localFileName){\n        \n        ArrayList<Picture> importedPictures = PictureDataParser.imageManager.getImages();\n\n        Document doc = docCreator();\n\n        Element rootElement = doc.createElement(\"pictures\");\n        doc.appendChild(rootElement);\n        for (Picture importedPicture: importedPictures) {\n            Element pictures = doc.createElement(\"picture\");\n            rootElement.appendChild(pictures);\n            pictures.setAttribute(\"pictureName\", importedPicture.getTitle());\n\n            Element fileName = doc.createElement(\"fileName\");\n            fileName.appendChild((doc.createTextNode(\"/res/\" + importedPicture.getTitle() + importedPicture.getFileExtension())));\n            pictures.appendChild(fileName);\n\n            Element location = doc.createElement(\"location\");\n            location.appendChild(doc.createTextNode(importedPicture.getLocation()));\n            pictures.appendChild(location);\n\n            Element description = doc.createElement(\"description\");\n            description.appendChild(doc.createTextNode(importedPicture.getDescription()));\n            pictures.appendChild(description);\n\n            Element positiveRatings = doc.createElement(\"positiveRatings\");\n            positiveRatings.appendChild(doc.createTextNode(importedPicture.getLikes().toString()));\n            pictures.appendChild(positiveRatings);\n\n            Element negativeRatings = doc.createElement(\"negativeRatings\");\n            negativeRatings.appendChild(doc.createTextNode(importedPicture.getDislikes().toString()));\n            pictures.appendChild(negativeRatings);\n\n            for (int i = 0;i<importedPicture.returnComments().size();i++) {\n                Element comments = doc.createElement(\"comments\");\n                pictures.appendChild(comments);\n                Comment currentComment = (Comment) importedPicture.returnComments().get(i);\n                String newUser = currentComment.getUser();\n                String newComment = currentComment.getComment();\n                comments.setAttribute(\"username\", newUser);\n\n                Element comment = doc.createElement(\"comment\");\n                comment.appendChild(doc.createTextNode(newComment));\n                comments.appendChild(comment);\n            }\n        }\n        createXmlFile(doc, localFileName);\n\n    }\n\n    public void createXmlFile(Document doc, String localFileName){\n        try{\n            TransformerFactory transformerFactory = TransformerFactory.newInstance();\n            Transformer transformer = transformerFactory.newTransformer();\n            DOMSource source = new DOMSource(doc);\n            StreamResult result = new StreamResult(localFileName);\n\n            transformer.transform(source, result);\n        }\n        catch(TransformerException e){\n            e.printStackTrace();\n        }\n    }\n\n    public Document docCreator(){\n        Document doc = null;\n        try {\n            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();\n            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();\n\n            doc = docBuilder.newDocument();\n        }\n        catch(ParserConfigurationException e){\n            e.printStackTrace();\n        }\n        return doc;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/model/XMLHandler.java	(revision ecaef97f83eede5d1a5e008e5e1e3fe51ae8ec69)
++++ src/model/XMLHandler.java	(revision )
+@@ -16,7 +16,7 @@
+ public class XMLHandler {
+ 
+     public void formatXmlFile(String localFileName){
+-        
++
+         ArrayList<Picture> importedPictures = PictureDataParser.imageManager.getImages();
+ 
+         Document doc = docCreator();
+Index: src/model/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\nimport controller.ImageViewController;\nimport controller.ImportDetailsViewController;\nimport controller.MainViewController;\nimport javafx.application.Application;\nimport javafx.fxml.FXMLLoader;\nimport javafx.scene.Scene;\nimport javafx.scene.layout.AnchorPane;\nimport javafx.stage.Stage;\n\nimport java.io.IOException;\n\npublic class Main extends Application {\n\n    public static void main(String[] args) {\n        PictureDataParser pictureDataParser= new PictureDataParser();\n        pictureDataParser.parsePictureData();\n        launch(args);\n    }\n\n    private Stage primaryStage;\n    private AnchorPane pane;\n\n    @Override\n    public void start(Stage primaryStage) {\n        this.primaryStage = primaryStage;\n        showMainWindow();\n    }\n\n    private void setSceneDefault(){\n        Scene scene = new Scene(pane);\n        primaryStage.setScene(scene);\n        setStageExtremes();\n        primaryStage.show();\n    }\n\n    private void setStageExtremes(){\n        primaryStage.setMinWidth(860);\n        primaryStage.setMinHeight(580);\n        primaryStage.setMaxHeight(700);\n        primaryStage.setMaxWidth(1000);\n    }\n\n    public void showMainWindow(){\n        try{\n            FXMLLoader loader = new FXMLLoader(Main.class.getResource(\"/view/MainView.fxml\"));\n            pane = loader.load();\n            MainViewController mainViewController = loader.getController();\n            mainViewController.setMain(this);\n            setSceneDefault();\n        }catch (IOException e){\n            e.printStackTrace();\n        }\n    }\n\n    public void showImageWindow(Picture picture){\n        try{\n            FXMLLoader loader = new FXMLLoader(Main.class.getResource(\"/view/ImageView.fxml\"));\n            pane = loader.load();\n            ImageViewController imageViewController = loader.getController();\n            imageViewController.setMain(this);\n            imageViewController.setImage(picture);\n            imageViewController.setText();\n            setSceneDefault();\n        }catch (IOException e){\n            e.printStackTrace();\n        }\n    }\n\n    public void showImportDetailsWindow(){\n        try{\n            FXMLLoader loader = new FXMLLoader(Main.class.getResource(\"/view/ImportDetailsView.fxml\"));\n            pane = loader.load();\n            ImportDetailsViewController importDetailsViewController = loader.getController();\n            importDetailsViewController.setMain(this);\n            setSceneDefault();\n        }catch (IOException e){\n            e.printStackTrace();\n        }\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/model/Main.java	(revision ecaef97f83eede5d1a5e008e5e1e3fe51ae8ec69)
++++ src/model/Main.java	(revision )
+@@ -9,13 +9,15 @@
+ import javafx.scene.layout.AnchorPane;
+ import javafx.stage.Stage;
+ 
++import java.io.File;
+ import java.io.IOException;
+ 
+ public class Main extends Application {
+ 
+     public static void main(String[] args) {
+         PictureDataParser pictureDataParser= new PictureDataParser();
+-        pictureDataParser.parsePictureData();
++        File file = new File(System.getProperty("user.dir")+"/src/res/"+"PictureData.xml");
++        pictureDataParser.parsePictureData(file);
+         launch(args);
+     }
+ 
+Index: src/controller/ImageViewController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\n\nimport javafx.fxml.FXML;\nimport javafx.scene.control.Label;\nimport javafx.scene.control.ListView;\nimport javafx.scene.control.TextArea;\nimport javafx.scene.image.ImageView;\nimport model.Main;\nimport model.Picture;\n\npublic class ImageViewController {\n\n    @FXML private ImageView imageView;\n    @FXML private Label dislike;\n    @FXML private Label like;\n    @FXML private Label imageTitle;\n    @FXML private TextArea inputComment;\n    @FXML private ListView commentsList;\n    @FXML private ListView userList;\n\n    private Main main;\n    private Picture picture;\n\n    public void setMain(Main main){\n        this.main=main;\n    }\n\n    public void setImage(Picture picture){\n        this.picture=picture;\n    }\n\n    public void setText(){\n        imageView.setImage(picture.getImageLink());\n        imageTitle.setText(String.valueOf(picture.getTitle()));\n        setLikesAndDislikes();\n        setComments();\n    }\n\n    private void setLikesAndDislikes(){\n        like.setText(String.valueOf(picture.getLikes()));\n        dislike.setText(String.valueOf(picture.getDislikes()));\n        updateXMLFile();\n    }\n\n    private void setComments(){\n        commentsList.setItems(picture.getCommentsText());\n        userList.setItems(picture.getCommentsUser());\n        updateXMLFile();\n    }\n\n    private void updateXMLFile(){\n        ImportDetailsViewController.xmlHandler.XMLWriter();\n    }\n\n    public void handleBackButton(){\n       main.showMainWindow();\n    }\n\n    public void handleLikeClick(){\n        picture.addLike(1);\n        setLikesAndDislikes();\n    }\n\n    public void handleDislikeClick(){\n        picture.addDislike(1);\n        setLikesAndDislikes();\n    }\n\n    public void handleSubmitButton(){\n        String newComment = inputComment.getText();\n        if(newComment.equals(\"\")){\n        }else {\n            picture.addComment(\"Anonymous\", newComment);\n            inputComment.clear();\n            setComments();\n        }\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/controller/ImageViewController.java	(revision ecaef97f83eede5d1a5e008e5e1e3fe51ae8ec69)
++++ src/controller/ImageViewController.java	(revision )
+@@ -49,7 +49,7 @@
+     }
+ 
+     private void updateXMLFile(){
+-        ImportDetailsViewController.xmlHandler.XMLWriter();
++        ImportDetailsViewController.xmlHandler.formatXmlFile();
+     }
+ 
+     public void handleBackButton(){
